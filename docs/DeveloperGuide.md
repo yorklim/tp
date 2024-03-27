@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# ClientCare
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -67,7 +67,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S2-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -84,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S2-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,9 +116,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S2-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" />
 
 
 The `Model` component,
@@ -139,7 +139,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S2-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -274,56 +274,258 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* insurance agents
+* has a need to manage a significant number of clients for insurance policies
+* has a need to organise schedules with clients and their details in one place
+* has a need for reminders to keep in touch with clients
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:
 
+* conveniently manage client details and schedules faster than a typical mouse/GUI driven app
+* Convenient tracking of when agent last checked up on clients (eg. reminders)
+* Organise client contacts details
+* Optimization by client’s importance (VIP status etc)
+* Monitor client’s insurance policies
+* Scheduler to manage appointment to ensure timely follow-up
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​         | I want to …​                                          | So that I can…​                                                       |
+|----------|-----------------|-------------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | insurance agent | see usage instructions                                | refer to instructions when I forget how to use the App                |
+| `* * *`  | insurance agent | add a new client contact details                      | keep track of the clients I have                                      |
+| `* * *`  | insurance agent | delete a client                                       | remove clients that are leaving                                       |
+| `* * *`  | insurance agent | find a client by name                                 | locate details of client without having to go through the entire list |
+| `* * *`  | insurance agent | list all clients                                      | see all clients at a glance                                           |
+| `* * *`  | insurance agent | view client information                               | know and check client details                                         |
+| `* *`    | insurance agent | check schedules with clients on a date                | keep track of what I have to do in a day                              |
+| `* *`    | insurance agent | add the birthday of my clients                        | wish them happy birthday to keep in contact with them                 |
+| `* *`    | insurance agent | delete policy details for a client                    | remove expired policies of the client                                 |
+| `* *`    | insurance agent | see when I last met a client                          | check in on a client that I have not met for a long time              |
+| `* *`    | insurance agent | mark that a schedule is completed                     | know that i fulfilled the appointment scheduled                       |
+| `* *`    | insurance agent | add policy details of a client                        | keep track of clients and their policies                              |
+| `* *`    | insurance agent | schedule checkup date and time for clients            | know when to follow-up with them                                      |
+| `*`      | insurance agent | set the overdue period for last met                   | be reminded of a follow-up at my own pace                             |
+| `*`      | insurance agent | sort clients by priority                              | deal with client with higher priority status first                    |
+| `*`      | insurance agent | track deals that I have closed                        | track my current progress                                             |
+| `*`      | insurance agent | edit my client's details                              | update my client's details                                            |
+| `*`      | insurance agent | reschedule my appointments                            | change the date and time of appointments with clients                 |
+| `*`      | insurance agent | filter clients by importance                          | decide on who to prioritise on                                        |
+| `*`      | insurance agent | get help                                              | use the app when I am lost or confused                                |
+| `*`      | insurance agent | can sort clients by the expected revenue of the deals | know which clients to prioritise                                      |
+| `*`      | insurance agent | set the policy payment due dates                      | remind my clients.                                                    |
+| `*`      | insurance agent | add the maturity date of my client’s policy           | update them and plan for future policies                              |
+| `*`      | developer       | view list of all bugs reported by users               | conveniently view all reported bugs and fix them                      |
+| `*`      | colleague       | import someone's contact list                         | take over his clients                                                 |
+| `*`      | insurance agent | report issues/bugs                                    | get someone to fix bugs                                               |
+| `*`      | developer	      | get a log list of user activity                       | view user activity to bug fix                                         |
+| `*`      | manager         | view all my subordinates' clients                     | be aware of their progress and client base                            |
+| `*`      | insurance agent | get reminders of client birthday                      | send birthday message                                                 |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ClientCare` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - List all clients**
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
+1.  User requests to view all clients.
+2.  ClientCare shows a list of all clients.<br>
     Use case ends.
 
 **Extensions**
+* 1a. The list is empty as no clients have been added at all.
+  * 1a1. ClientCare lets user know that the list is empty.<br>
+    Use case ends.
+* 1b. Invalid command usage in the request.
+  * 1b1. ClientCare shows command usage.
+  * 1b2. User enters new data.<br>
+    Steps 1b1-1b2 are repeated until the data entered are correct.<br>
+    Use case resumes from step 2.
 
-* 2a. The list is empty.
 
-  Use case ends.
+**Use case: UC02 - View client details and policies**
 
+**MSS**
+1.  User requests to view a client's details and policies.
+2.  ClientCare shows that client's details and policies.<br>
+    Use case ends.
+
+**Extensions**
+* 1a. ClientCare detects that the client does not exist.
+  * 1a1. ClientCare lets user know that client does not exist.
+  * 1a2. User enters new data.<br>
+    Steps 1a1-1a2 are repeated until the data entered are correct.<br>
+    Use case ends.
+* 1b. Invalid command usage in the request.
+  * 1b1. ClientCare shows command usage.
+  * 1b2. User enters new data.<br>
+    Steps 1b1-1b2 are repeated until the data entered are correct.<br>
+    Use case resumes from step 2.
+
+
+**Use case: UC03 - Add a new client**
+
+**MSS**
+1.  User requests to add new client.
+2.  ClientCare adds the new client to the list.
+3.  ClientCare shows a success message and <u>display view of new client details and policies (UC02)</u>.<br>
+    Use case ends.
+
+**Extensions**
+* 1a. ClientCare detects invalid user information.
+  * 1a1. ClientCare shows what is wrong with various invalid user information.
+  * 1a2. User enters new data.<br>
+    Steps 1a1-1a2 are repeated until the data entered are correct.<br>
+    Use case resumes from step 2.
+* 1b. Invalid command usage in the request.
+    * 1b1. ClientCare shows command usage.
+    * 1b2. User enters new data.<br>
+      Steps 1b1-1b2 are repeated until the data entered are correct.<br>
+      Use case resumes from step 2.
+* 1c. Client name already exists.
+  * 1c1. ClientCare lets user know that duplicate names are not allowed.
+  * 1c2. User enters new data.<br>
+    Steps 1c1-1c2 are repeated until the data entered are correct.<br>
+    Use case resumes from step 2.
+
+
+**Use case: UC04 - Find a client by name**
+
+**MSS**
+1.  User requests to find a specific client in the list by name.
+2.  ClientCare shows list of client that matches the name.<br>
+    Use case ends.
+
+**Extensions**
+* 2a. The list is empty as there is no matching name found.<br>
+  * 2a1. ClientCare lets user know that the list is empty.<br>
+    Use case ends.
+* 2b. Invalid command usage in the request.
+  * 2b1. ClientCare shows command usage.
+  * 2b2. User enters new data.<br>
+    Steps 2b1-2b2 are repeated until the data entered are correct.<br>
+    Use case resumes from step 2.
+
+
+**Use case: UC05 - Delete a client**
+
+**MSS**
+1.  User requests to <u>list all clients (UC01)</u> or <u>find client by name (UC04)</u>.
+2.  ClientCare shows a list of clients.
+3.  User requests to delete a specific client in the list by index.
+4.  ClientCare deletes the client.<br>
+    Use case ends.
+
+**Extensions**
+* 2a. The list is empty.<br>
+  * 2a1. ClientCare lets user know that the list is empty.<br>
+    Use case ends.
 * 3a. The given index is invalid.
+  * 3a1. ClientCare lets user know that client index should be a number.
+  * 3a2. User enters new data.<br>
+    Steps 3a1-3a2 are repeated until the data entered are correct.<br>
+    Use case resumes at step 2.
+* 3b. Invalid command usage in the request.
+  * 3b1. ClientCare shows command usage.
+  * 3b2. User enters new data.<br>
+    Steps 3b1-3b2 are repeated until the data entered are correct.<br>
+    Use case resumes from step 4.
+* 3c. Client does not exist.
+  * 3c1. ClientCare lets user know that client does not exist.
+  * 3c2. User enters new data.<br>
+    Steps 3c1-3c2 are repeated until the data entered are correct.<br>
+    Use case ends.
 
-    * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+**Use case: UC06 - Schedule an appointment with client**
+
+**MSS**
+1.  User schedules a date and time to meet with a client.
+2.  ClientCare sets up the appointment.<br>
+    Use case ends.
+
+**Extensions**
+* 1a. Date and time is invalid.
+  * 1a1. ClientCare lets user know of valid date and time format.
+  * 1a2. User enters new data.<br>
+    Steps 1a1-1a2 are repeated until the data entered are correct.<br>
+    Use case ends.
+* 1b. Date and time has past.
+  * 1b1. ClientCare lets user know that it is not possible to schedule an appointment in the past.
+  * 1b2. User enters new data.<br>
+    Steps 1b1-1b2 are repeated until the data entered are correct.<br>
+    Use case ends.
+* 1c. Invalid command usage in the request.
+  * 1c1. ClientCare shows command usage.
+  * 1c2. User enters new data.<br>
+    Steps 1c1-1c2 are repeated until the data entered are correct.<br>
+    Use case ends.
+
+
+**Use case: UC07 - Update client as met**
+
+**MSS**
+1.  User marks a client as met.
+2.  ClientCare updates Last Met date of client.<br>
+    Use case ends.
+
+**Extensions**
+* 1a. Client does not exist.
+  * 1a1. ClientCare lets user know that client does not exist.
+  * 1a2. User enters new data.<br>
+    Steps 1a1-1a2 are repeated until the data entered are correct.<br>
+    Use case ends.
+* 1b. Invalid date and time.
+  * 1b1. ClientCare lets user know of correct date and time format.
+  * 1b2. User enters new data.<br>
+    Steps 1b1-1b2 are repeated until the data entered are correct.<br>
+    Use case ends.
+* 1c. Date and time is before the last met date.
+  * 1c1. ClientCare confirms if user wants to change last met to an earlier date.
+  * 1c2. User confirms or rejects.<br>
+    Use case ends.
+* 1d. Invalid command usage in the request.
+    * 1d1. ClientCare shows command usage.
+    * 1d2. User enters new data.<br>
+        Steps 1d1-1d2 are repeated until the data entered are correct.<br>
+        Use case ends.
+
+
+**Use case: UC08 - Mark appointment**
+
+**MSS**
+1.  User marks an appointment with client as done.
+2.  ClientCare updates appointment has done and updates last met.<br>
+    Use case ends.
+
+**Extensions**
+* 1a. Appointment does not exist or is already marked.
+  * 1a1. ClientCare lets user know that there is no open appointment for this client.<br>
+    Use case ends.
+* 1b. The client does not exist.
+  * 1b1. ClientCare shows an error message.
+  * 1b2. User enters new data.<br>
+    Steps 1b1-1b2 are repeated until the data entered are correct.<br>
+    Use case ends.
+* 1c. Appointment is in the future.
+  * 1c1. ClientCare lets user know that future appointment cannot be marked.
+  * 1c2. User enters new data.<br>
+    Steps 1c1-1c2 are repeated until the data entered are correct.<br>
+    Use case ends.
+* 1d. Invalid command usage in the request.
+    * 1d1. ClientCare shows command usage.
+    * 1d2. User enters new data.<br>
+        Steps 1d1-1d2 are repeated until the data entered are correct.<br>
+        Use case ends.
 
 *{More to be added}*
 
@@ -332,13 +534,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The system should respond to user input within 2 seconds.
+5.  The user interface should be intuitive and easy to use, even for users with limited technical knowledge. This includes providing clear and concise instructions, organizing information logically, and offering helpful error messages and tooltips.
+6.  The codebase should be well-structured, modular, and documented to facilitate future maintenance and enhancements. This includes adhering to coding standards, using version control, and providing comprehensive developer documentation.
 
 *{More to be added}*
 
 ### Glossary
 
+* **Client**: Customers or potential customers the insurance agent wants to keep in contact with
+* **Command Line Interface (CLI)**: A text-based interface to input commands to interact with the system
+* **Graphical User Interface (GUI)**: A visual interface to interact with the system
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **AddressBook**: The underlying system that ClientCare is built on. Interchangeable with ClientCare
+* **Client Priority**: The level of importance or significance assigned to a client, which may influence the order of interactions or services provided
+* **Policy**: An agreement or contract between an insurance company and a client, specifying the terms and conditions of insurance coverage
+* **Scheduler**: A feature of the ClientCare application that allows users to manage and organize appointments and follow-ups with clients
+* **Reminder**: A notification or alert generated by the ClientCare application to remind users of upcoming appointments or follow-ups with clients
+* **Last Met**: The date on which the user last interacted with a client, used for tracking and monitoring client interactions
+* **Refresh**: A command or action that updates the information displayed in the ClientCare application to reflect the most recent data
+* **Help**: A feature of the ClientCare application that provides assistance, guidance, or instructions to users on how to use the application
 
 --------------------------------------------------------------------------------------------------------------------
 

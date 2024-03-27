@@ -1,14 +1,24 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+<<<<<<< HEAD
 import seedu.address.model.person.Remark;
+=======
+import seedu.address.model.person.PolicyList;
+import seedu.address.model.person.Priority;
+import seedu.address.model.person.Schedule;
+>>>>>>> master
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -21,14 +31,27 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+<<<<<<< HEAD
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
+=======
+    public static final String DEFAULT_BIRTHDAY = "1990-01-01";
+    public static final String DEFAULT_PRIORITY = "medium";
+>>>>>>> master
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+<<<<<<< HEAD
     private Remark remark;
+=======
+    private Birthday birthday;
+    private Priority priority;
+    private LastMet lastMet;
+    private Schedule schedule;
+>>>>>>> master
     private Set<Tag> tags;
+    private PolicyList policyList;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -38,8 +61,16 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+<<<<<<< HEAD
         remark = new Remark(DEFAULT_REMARK);
+=======
+        birthday = new Birthday(DEFAULT_BIRTHDAY);
+        priority = new Priority(DEFAULT_PRIORITY);
+        lastMet = null;
+        schedule = null;
+>>>>>>> master
         tags = new HashSet<>();
+        policyList = new PolicyList();
     }
 
     /**
@@ -50,8 +81,14 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+<<<<<<< HEAD
         remark = personToCopy.getRemark();
+=======
+        birthday = personToCopy.getBirthday();
+        priority = personToCopy.getPriority();
+>>>>>>> master
         tags = new HashSet<>(personToCopy.getTags());
+        policyList = personToCopy.getPolicyList();
     }
 
     /**
@@ -79,6 +116,22 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Birthday} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBirthday(String birthday) {
+        this.birthday = new Birthday(birthday);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Priority} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPriority(String priority) {
+        this.priority = new Priority(priority);
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
@@ -95,6 +148,7 @@ public class PersonBuilder {
     }
 
     /**
+<<<<<<< HEAD
      * Sets the {@code Remark} of the {@code Person} that we are building.
      */
     public PersonBuilder withRemark(String remark) {
@@ -104,6 +158,38 @@ public class PersonBuilder {
 
     public Person build() {
         return new Person(name, phone, email, address, remark, tags);
+=======
+     * Sets the {@code LastMet} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLastMet(LocalDate lastMet) {
+        this.lastMet = new LastMet(lastMet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Schedule} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSchedule(LocalDateTime schedule, Boolean isDone) {
+        this.schedule = new Schedule(schedule, isDone);
+        return this;
+    }
+
+    /**
+     * Parses the {@code policies} into a {@code PolicyList} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withPolicies(String... policies) {
+        this.policyList = SampleDataUtil.getPoliciesSet(policies);
+        return this;
+    }
+
+    /**
+     * Builds a person object.
+     * @return the person
+     */
+    public Person build() {
+        return new Person(name, phone, email, address, birthday, priority, lastMet, schedule, tags,
+                policyList);
+>>>>>>> master
     }
 
 }
