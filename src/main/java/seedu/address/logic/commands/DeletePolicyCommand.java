@@ -65,7 +65,7 @@ public class DeletePolicyCommand extends Command {
 
         Person policyDeletedPerson = new Person(personToDeletePolicy.getName(), personToDeletePolicy.getPhone(),
                 personToDeletePolicy.getEmail(), personToDeletePolicy.getAddress(), personToDeletePolicy.getBirthday(),
-                personToDeletePolicy.getPriority(), personToDeletePolicy.getLastMet(),
+                personToDeletePolicy.getPriority(), personToDeletePolicy.getRemark(), personToDeletePolicy.getLastMet(),
                 personToDeletePolicy.getSchedule(), personToDeletePolicy.getTags(), updatedPolicyList);
 
         model.setPerson(personToDeletePolicy, policyDeletedPerson);

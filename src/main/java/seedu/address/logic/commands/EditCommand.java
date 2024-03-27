@@ -117,7 +117,7 @@ public class EditCommand extends Command {
         Schedule currentSchedule = personToEdit.getSchedule();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         PolicyList currentPolicyList = personToEdit.getPolicyList();
-        
+
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday, updatedPriority,
                 updatedRemark, currentLastMet, currentSchedule, updatedTags, currentPolicyList);
     }

@@ -56,11 +56,13 @@ public class RemarkCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), remark, personToEdit.getTags());
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getAddress(),
+                personToEdit.getBirthday(), personToEdit.getPriority(), remark, personToEdit.getLastMet(),
+                personToEdit.getSchedule(), personToEdit.getTags(), personToEdit.getPolicyList());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setDisplayClient(editedPerson);
 
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
@@ -70,9 +72,9 @@ public class RemarkCommand extends Command {
      * the remark is added to or removed from
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
+    private String generateSuccessMessage(Person editedPerson) {
         String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, Messages.format(editedPerson));
     }
 
     @Override

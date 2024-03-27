@@ -37,8 +37,6 @@ public class ClientListCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label remark;
-    @FXML
     private FlowPane tags;
 
     /**
@@ -51,11 +49,6 @@ public class ClientListCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
-<<<<<<< HEAD:src/main/java/seedu/address/ui/PersonCard.java
-        remark.setText(person.getRemark().value);
-=======
-
->>>>>>> master:src/main/java/seedu/address/ui/ClientListCard.java
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

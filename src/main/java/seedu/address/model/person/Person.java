@@ -31,14 +31,13 @@ public class Person {
     private final Remark remark;
     private final LastMet lastMet;
     private final Schedule schedule;
-    
     private final Set<Tag> tags = new HashSet<>();
     private final PolicyList policyList;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Birthday birthday, Priority priority, 
+    public Person(Name name, Phone phone, Email email, Address address, Birthday birthday, Priority priority,
                   Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, birthday, priority, tags);
         this.name = name;
@@ -66,6 +65,7 @@ public class Person {
         this.address = address;
         this.birthday = birthday;
         this.priority = priority;
+        this.remark = remark;
         this.lastMet = checkNullLastMet(lastmet);
         this.schedule = checkNullSchedule(schedule);
         this.tags.addAll(tags);

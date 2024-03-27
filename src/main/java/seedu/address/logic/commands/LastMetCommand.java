@@ -66,7 +66,8 @@ public class LastMetCommand extends Command {
         Person metPerson = new Person(
                 personToMeet.getName(), personToMeet.getPhone(), personToMeet.getEmail(),
                 personToMeet.getAddress(), personToMeet.getBirthday(), personToMeet.getPriority(),
-                this.lastMet, personToMeet.getSchedule(), personToMeet.getTags(), personToMeet.getPolicyList());
+                personToMeet.getRemark(), this.lastMet, personToMeet.getSchedule(), personToMeet.getTags(),
+                personToMeet.getPolicyList());
 
         model.setPerson(personToMeet, metPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

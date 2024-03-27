@@ -30,6 +30,8 @@ public class ClientDetailsCard extends UiPart<Region> {
     @FXML
     private Label priority;
     @FXML
+    private Label remark;
+    @FXML
     private Label lastMet;
     @FXML
     private Label schedule;
@@ -54,8 +56,9 @@ public class ClientDetailsCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        birthday.setText(person.getBirthday().toString());
-        priority.setText(person.getPriority().toString());
+        birthday.setText("Date of Birth: " + person.getBirthday().toString());
+        priority.setText("Priority: " + person.getPriority().toString());
+        remark.setText("Remarks: " + person.getRemark().value);
         lastMet.setText(person.getLastMet().showLastMet());
         schedule.setText(person.getSchedule().showSchedule());
 

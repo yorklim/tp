@@ -36,15 +36,12 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-<<<<<<< HEAD
-    public static final String VALID_REMARK_AMY = "Like skiing.";
-    public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
-=======
     public static final String VALID_BIRTHDAY_AMY = "1990-01-01";
     public static final String VALID_BIRTHDAY_BOB = "1978-11-03";
     public static final String VALID_PRIORITY_AMY = "high";
     public static final String VALID_PRIORITY_BOB = "low";
->>>>>>> master
+    public static final String VALID_REMARK_AMY = "Like skiing.";
+    public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_POLICY_LIFE = "Life,1";
