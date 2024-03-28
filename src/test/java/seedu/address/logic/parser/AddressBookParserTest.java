@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.PersonUtil.getSortPersonsDescriptor;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -26,11 +27,14 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.SortCriteria;
+import seedu.address.model.person.SortOrder;
 import seedu.address.model.policy.Policy;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -124,6 +128,14 @@ public class AddressBookParserTest {
                 DeletePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                         + " i/123");
         assertEquals(new DeletePolicyCommand(INDEX_FIRST_PERSON, "123"), command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + getSortPersonsDescriptor(SortCriteria.NAME, SortOrder.ASC)) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + getSortPersonsDescriptor(SortCriteria.PRIORITY, SortOrder.DESC)) instanceof SortCommand);
     }
 
     @Test
