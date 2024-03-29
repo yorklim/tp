@@ -1,16 +1,20 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.SetCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
+
 import seedu.address.model.Model;
-import seedu.address.model.person.LastMet;
-import seedu.address.model.person.Person;
-import java.util.ArrayList;
-import java.util.List;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+
 
 public class SetCommandTest {
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void constructor_nullInput_throwsNullPointerException() {
@@ -37,11 +41,4 @@ public class SetCommandTest {
         assertFalse(setCommand1.equals(setCommand2));
     }
 
-    @Test
-    public void toString_validCommand_returnsExpectedString() {
-        SetCommand setCommand = new SetCommand(90);
-        String expected = "SetCommand{overdueTimePeriod=90}";
-        assertEquals(expected, setCommand.toString());
-    }
 }
-

@@ -18,10 +18,9 @@ public class SetCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": sets the LastMet overdue time period. "
             + "Parameters: "
-            + "NUMBER OF DAYS "
+            + "NUMBER_OF_DAYS "
             + "Example: " + COMMAND_WORD + " "
-            + "90. "
-            + "Setting 0 days is not allowed. ";
+            + "90. ";
 
     public static final String MESSAGE_SUCCESS = "LastMet Overdue time period has been set to %1$s days.";
     /**
@@ -52,7 +51,7 @@ public class SetCommand extends Command {
             personToCheck.getLastMet().checkOverdue();
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Integer.toString(this.overdueTimePeriod)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.overdueTimePeriod));
     }
 
     @Override

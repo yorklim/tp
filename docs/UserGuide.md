@@ -533,6 +533,19 @@ Rather, you will see him under the Schedule Display.
 <br/>
 <br/>
 
+### Setting last met overdue period: `set`
+
+Feel that 90 days is too short or long of a period? You can set your own desired overdue duration with `set`.
+
+Format: `set NUMBER_OF_DAYS`
+
+* Sets the last met overdue to `NUMBER_OF_DAYS`.
+* The number of days **must be a non-negative integer** 0, 1, 2, 3, …​
+
+Examples:
+* `set 75` updates the last met overdue duration to 75 days. Clients who you have not met in more than 75 days or
+no appointments are scheduled will show up in the Last Met reminder display.
+
 ### Scheduling appointments : `schedule`
 
 Got a new appointment or a postpone is needed?

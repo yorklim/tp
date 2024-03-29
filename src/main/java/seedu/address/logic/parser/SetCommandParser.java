@@ -5,8 +5,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.SetCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -29,14 +27,17 @@ public class SetCommandParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetCommand.MESSAGE_USAGE));
         }
 
-        Index numberOfDays;
+        int numberOfDays;
         try {
-            numberOfDays = ParserUtil.parseIndex(argMultimap.getPreamble());
-            //numberOfDays = Integer.parseInt(args);
-        } catch (IllegalValueException ive) {
+            numberOfDays = Integer.parseInt(argMultimap.getPreamble());
+
+            checkIfNegativeNumber(numberOfDays);
+        } catch (NumberFormatException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetCommand.MESSAGE_USAGE), ive);
+        } catch (ParseException ive) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetCommand.MESSAGE_USAGE));
         }
-        return new SetCommand(numberOfDays.getOneBased());
+        return new SetCommand(numberOfDays);
     }
 
     /**
@@ -45,5 +46,11 @@ public class SetCommandParser {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private void checkIfNegativeNumber(int days) throws ParseException {
+        if (days < 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetCommand.MESSAGE_USAGE));
+        }
     }
 }
