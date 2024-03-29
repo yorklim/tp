@@ -66,6 +66,10 @@ public class ReminderList {
             return false;
         }
 
+        if (!remindersList.equals(otherReminderList.remindersList)) {
+            return false;
+        }
+
         return true;
     }
 }

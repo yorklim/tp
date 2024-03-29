@@ -178,6 +178,11 @@ public class PersonTest {
     }
 
     @Test
+    public void birthdayStringFormat() {
+        assertEquals(ALICE.birthdayStringFormat(), ALICE.getBirthday() + " - " + ALICE.getName());
+    }
+
+    @Test
     public void hasUpcomingBirthday() {
         Person upcomingAlice = new PersonBuilder(ALICE).withBirthday(DateUtil.parseDateToString(
                 LocalDate.now().plusWeeks(1).minusYears(40))).build();
