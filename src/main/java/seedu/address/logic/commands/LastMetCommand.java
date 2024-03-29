@@ -36,7 +36,7 @@ public class LastMetCommand extends Command {
     private final LastMet lastMet;
 
     /**
-     * Creates a LastMetCommand to update last mete date of the specified {@code Person}
+     * Creates a LastMetCommand to update last met date of the specified {@code Person}
      */
     public LastMetCommand(Index index, LastMet lastMet) {
         requireNonNull(index);

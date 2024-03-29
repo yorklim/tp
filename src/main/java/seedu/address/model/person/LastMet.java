@@ -33,11 +33,22 @@ public class LastMet implements Comparable<LastMet> {
         lastMetDuration = days;
     }
 
+    /**
+     * Method updates and set the new LastMetDuration before overdue.
+     * @param days
+     */
+    public static void setLastMetDuration(int days) {
+        lastMetDuration = days;
+    }
+
     public static long getLastMetDuration() {
         return lastMetDuration;
     }
 
-    private void checkOverdue() {
+    /**
+     * Method checks for the number of days since the last meeting has exceeded the LastMet reminder period.
+     */
+    public void checkOverdue() {
         long periodGap = getPeriodGap();
         if (periodGap > lastMetDuration) {
             this.isOverdue = true;

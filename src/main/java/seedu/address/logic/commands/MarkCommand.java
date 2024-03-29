@@ -29,7 +29,7 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Your schedule with %1$s has been marked as done.";
     private final Index index;
     /**
-     * Creates a LastMetCommand to update last mete date of the specified {@code Person}
+     * Creates a MarkCommand to complete the schedule of the specified {@code Person}
      */
     public MarkCommand(Index index) {
         requireNonNull(index);

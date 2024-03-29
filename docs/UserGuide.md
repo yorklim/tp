@@ -27,7 +27,7 @@ Ready to head straight into the action? You can refer to our [Quick Start](#quic
 <div style="page-break-after: always;"></div>
 
 ## Using this guide
-This guide walks you through all the features of ClientCare and can be used as a quick reference whenever you need any help. If you're just getting started with ClientCare, we welcome you to start from our [Introduction](#introduction) section to learn more about the app. For setting up ClientCare, you might find the [Quick Start](#quick-start) section helpful.
+This guide walks you through all the features of ClientCare and can be used as a quick reference whenever you need any help. If you're just getting started with ClientCare, we welcome you to start from our [Introducing ClientCare](#introducing-clientcare) section to learn more about the app. For setting up ClientCare, you might find the [Quick Start](#quick-start) section helpful.
 
 Ready to use ClientCare? You can check out our [Features](#features) section. For ease of reference, the
 [Features](#features) section is divided into subsections corresponding to each main feature:
@@ -79,7 +79,7 @@ You might encounter these call-outs while reading through the guide, which conta
 <div style="page-break-after: always;"></div>
 
 
-## Introduction
+## Introducing ClientCare
 Made for insurance agents and clients, by insurance agents and clients.
 ClientCare is the easiest way to manage your clients and schedules, all in one place.
 Powerful features and intuitive design, all packaged into one neat desktop app. ClientCare is supported on all
