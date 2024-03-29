@@ -209,6 +209,21 @@ The following object diagram illustrates the above:
 The following sequence diagram shows the addpolicy operation:
 <puml src="diagrams/AddPolicySequenceDiagram.puml" width="900" />
 
+### View Client feature
+
+The view client feature allows users to view the details of a client using their `INDEX` on the GUI. This includes information not included in the client list cards, such as their last met and policy list.
+
+#### Implementation
+
+The view client mechanism is facilitated by `DisplayClient` in the model. When any command referring to a client using `INDEX` is executed, this DisplayClient is set to the client that was operated on (or cleared to `null` in the case of `delete` and `clear`). 
+This is done with the `setDisplayClient()` function in the `Model`, that is also implemented in `Logic`.
+
+
+The sequence diagram below shows the execution of `view 1` to view the details of client at index 1.
+<puml src="diagrams/ViewClientSequenceDiagram.puml" width="900" />
+
+`MainWindow` handles most of the UI logic in regard to displaying the viewed client on the GUI, including refreshing the `ClientDetailsPanel` and `ClientPolicyTable`. It also sets `DisplayClient` on startup when there is at least one client in the list.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
