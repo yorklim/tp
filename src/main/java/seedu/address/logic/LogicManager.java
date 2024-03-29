@@ -105,4 +105,9 @@ public class LogicManager implements Logic {
     public ReminderList getSchedules() {
         return model.getSchedules();
     }
+
+    @Override
+    public ReminderList getBirthdayReminders() {
+        return model.getBirthdayReminders();
+    }
 }

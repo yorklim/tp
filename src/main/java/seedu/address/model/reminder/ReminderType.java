@@ -5,7 +5,8 @@ package seedu.address.model.reminder;
  */
 public enum ReminderType {
     LAST_MET,
-    SCHEDULES;
+    SCHEDULES,
+    BIRTHDAYS;
 
     @Override
     public String toString() {
@@ -14,6 +15,8 @@ public enum ReminderType {
             return "Last Met";
         case SCHEDULES:
             return "Schedules";
+        case BIRTHDAYS:
+            return "Birthday Reminders";
         default:
             throw new IllegalArgumentException();
         }

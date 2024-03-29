@@ -116,8 +116,14 @@ public interface Model {
      * Returns the reminder list for the overdue last met to be displayed in RemindersPanel.
      */
     ReminderList getOverDueLastMet();
+
     /**
      * Returns the reminder list for the appointments to be displayed in RemindersPanel.
      */
     ReminderList getSchedules();
+
+    /**
+     * Returns the reminder list for the birthdays reminders to be displayed in RemindersPanel.
+     */
+    ReminderList getBirthdayReminders();
 }

@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -177,5 +178,20 @@ public class UniquePersonList implements Iterable<Person> {
         }
         schedules.sort((p1, p2) -> p1.getSchedule().compareTo(p2.getSchedule()));
         return schedules;
+    }
+
+    /**
+     * Returns the list of persons who have upcoming birthdays, sorted by birthday.
+     * @return list of persons who have upcoming birthdays
+     */
+    public ObservableList<Person> filterHaveUpcomingBirthday() {
+        ObservableList<Person> personsWithUpcomingBirthdays = FXCollections.observableArrayList();
+        for (Person person : internalList) {
+            if (person.hasUpcomingBirthday()) {
+                personsWithUpcomingBirthdays.add(person);
+            }
+        }
+        personsWithUpcomingBirthdays.sort(Comparator.comparing(Person::getBirthday));
+        return personsWithUpcomingBirthdays;
     }
 }

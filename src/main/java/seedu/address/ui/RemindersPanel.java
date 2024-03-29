@@ -10,13 +10,16 @@ import seedu.address.model.reminder.ReminderType;
 public class RemindersPanel {
     private RemindersCard lastMetCard;
     private RemindersCard scheduleCard;
+    private RemindersCard birthdayRemindersCard;
 
     /**
      * Creates a {@code RemindersPanel} with the given {@code }.
      */
-    public RemindersPanel(ReminderList overDueLastMetList, ReminderList appointmentsList) {
+    public RemindersPanel(ReminderList overDueLastMetList, ReminderList appointmentsList,
+                          ReminderList birthdayRemindersList) {
         this.lastMetCard = new RemindersCard(ReminderType.LAST_MET, overDueLastMetList);
         this.scheduleCard = new RemindersCard(ReminderType.SCHEDULES, appointmentsList);
+        this.birthdayRemindersCard = new RemindersCard(ReminderType.BIRTHDAYS, birthdayRemindersList);
     }
 
     public RemindersCard getLastMetCard() {
@@ -25,6 +28,10 @@ public class RemindersPanel {
 
     public RemindersCard getAppointmentsCard() {
         return scheduleCard;
+    }
+
+    public RemindersCard getBirthdayRemindersCard() {
+        return birthdayRemindersCard;
     }
 
     /**
@@ -42,10 +49,19 @@ public class RemindersPanel {
     }
 
     /**
+     * Updates the {@code BirthdayRemindersCard} with new {@code }
+     */
+    public void updateBirthdayRemindersCard(ReminderList updatedBirthdayRemindersList) {
+        birthdayRemindersCard = new RemindersCard(ReminderType.BIRTHDAYS, updatedBirthdayRemindersList);
+    }
+
+    /**
      * Updates the {@code RemindersPanel} with new {@code }.
      */
-    public void updateRemindersPanel(ReminderList updatedOverDueList, ReminderList updatedAppointmentsList) {
+    public void updateRemindersPanel(ReminderList updatedOverDueList, ReminderList updatedAppointmentsList,
+                                     ReminderList updatedBirthdayRemindersList) {
         updateLastMetCard(updatedOverDueList);
         updateAppointmentsCard(updatedAppointmentsList);
+        updateBirthdayRemindersCard(updatedBirthdayRemindersList);
     }
 }

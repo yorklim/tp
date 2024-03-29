@@ -59,6 +59,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane appointmentsCardPlaceholder;
 
     @FXML
+    private StackPane birthdayRemindersCardPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
@@ -134,7 +137,8 @@ public class MainWindow extends UiPart<Stage> {
             clearClientViewPanel();
         }
 
-        remindersPanel = new RemindersPanel(logic.getOverDueLastMet(), logic.getSchedules());
+        remindersPanel = new RemindersPanel(logic.getOverDueLastMet(), logic.getSchedules(),
+                logic.getBirthdayReminders());
         addRemindersPanel();
 
 
@@ -211,6 +215,9 @@ public class MainWindow extends UiPart<Stage> {
 
         RemindersCard appointmentsCard = remindersPanel.getAppointmentsCard();
         appointmentsCardPlaceholder.getChildren().add(appointmentsCard.getRoot());
+
+        RemindersCard birthdayRemindersCard = remindersPanel.getBirthdayRemindersCard();
+        birthdayRemindersCardPlaceholder.getChildren().add(birthdayRemindersCard.getRoot());
     }
 
     /**
@@ -226,7 +233,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void refreshRemindersPanel() {
         clearRemindersPanel();
-        remindersPanel.updateRemindersPanel(logic.getOverDueLastMet(), logic.getSchedules());
+        remindersPanel.updateRemindersPanel(logic.getOverDueLastMet(), logic.getSchedules(),
+                logic.getBirthdayReminders());
         addRemindersPanel();
     }
 

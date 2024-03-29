@@ -105,22 +105,22 @@ public class DateUtilTest {
     }
 
     @Test
-    public void isPastDate() {
+    public void isFutureDate() {
         // null date
-        assertFalse(DateUtil.isPastDate(null));
+        assertFalse(DateUtil.isFutureDate(null));
 
         // future dates
-        assertFalse(DateUtil.isPastDate(LocalDate.now().plusDays(1)));
-        assertFalse(DateUtil.isPastDate(LocalDate.now().plusMonths(1)));
-        assertFalse(DateUtil.isPastDate(LocalDate.now().plusYears(1)));
+        assertTrue(DateUtil.isFutureDate(LocalDate.now().plusDays(1)));
+        assertTrue(DateUtil.isFutureDate(LocalDate.now().plusMonths(1)));
+        assertTrue(DateUtil.isFutureDate(LocalDate.now().plusYears(1)));
 
         // current date
-        assertFalse(DateUtil.isPastDate(LocalDate.now()));
+        assertFalse(DateUtil.isFutureDate(LocalDate.now()));
 
         // past dates
-        assertTrue(DateUtil.isPastDate(LocalDate.now().minusDays(1)));
-        assertTrue(DateUtil.isPastDate(LocalDate.now().minusMonths(1)));
-        assertTrue(DateUtil.isPastDate(LocalDate.now().minusYears(1)));
+        assertFalse(DateUtil.isFutureDate(LocalDate.now().minusDays(1)));
+        assertFalse(DateUtil.isFutureDate(LocalDate.now().minusMonths(1)));
+        assertFalse(DateUtil.isFutureDate(LocalDate.now().minusYears(1)));
     }
 
     @Test

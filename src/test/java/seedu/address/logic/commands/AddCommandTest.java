@@ -91,107 +91,116 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        private static final String MESSAGE_METHOD_SHOULD_NOT_BE_CALLED = "This method should not be called.";
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void sortFilteredPersonList(Comparator<Person> comparator) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public Person getDisplayClient() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public boolean hasDisplayClient() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void clearDisplayClient() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
         @Override
         public void setDisplayClient(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
+
         @Override
         public ReminderList getSchedules() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
+
         @Override
         public ReminderList getOverDueLastMet() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
+        }
+
+        @Override
+        public ReminderList getBirthdayReminders() {
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
     }
 

@@ -9,12 +9,15 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
+import seedu.address.commons.util.DateUtil;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -171,5 +174,24 @@ public class UniquePersonListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
+    }
+
+    @Test
+    public void filterHaveUpcomingBirthday() {
+        Person personWithUpcomingBirthday = new PersonBuilder(ALICE).withBirthday(
+                DateUtil.parseDateToString(LocalDate.now().plusWeeks(1)
+                        .minusYears(40))).build();
+        Person personWithNoUpcomingBirthday = new PersonBuilder(BOB).withBirthday(
+                DateUtil.parseDateToString(LocalDate.now().minusDays(1)
+                        .minusYears(30))).build();
+
+        UniquePersonList newPersonsList = new UniquePersonList();
+        newPersonsList.add(personWithUpcomingBirthday);
+        newPersonsList.add(personWithNoUpcomingBirthday);
+        ObservableList<Person> birthdayList = newPersonsList.filterHaveUpcomingBirthday();
+
+        assertEquals(1, birthdayList.size());
+        assertTrue(birthdayList.contains(personWithUpcomingBirthday));
+        assertFalse(birthdayList.contains(personWithNoUpcomingBirthday));
     }
 }

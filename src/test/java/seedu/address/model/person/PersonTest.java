@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.DateUtil;
 import seedu.address.model.policy.Policy;
 import seedu.address.testutil.PersonBuilder;
 
@@ -174,5 +175,15 @@ public class PersonTest {
                 .build();
         assertEquals(missedAlice.getSchedule().getScheduleDateString() + " - " + ALICE.getName() + " (Missed)",
                 missedAlice.scheduleStringFormat());
+    }
+
+    @Test
+    public void hasUpcomingBirthday() {
+        Person upcomingAlice = new PersonBuilder(ALICE).withBirthday(DateUtil.parseDateToString(
+                LocalDate.now().plusWeeks(1).minusYears(40))).build();
+        assertTrue(upcomingAlice.hasUpcomingBirthday());
+        Person noUpcomingAlice = new PersonBuilder(ALICE).withBirthday(DateUtil.parseDateToString(
+                LocalDate.now().minusDays(1).minusYears(30))).build();
+        assertFalse(noUpcomingAlice.hasUpcomingBirthday());
     }
 }

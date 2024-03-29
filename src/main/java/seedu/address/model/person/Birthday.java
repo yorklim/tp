@@ -34,10 +34,21 @@ public class Birthday implements Comparable<Birthday> {
             return false;
         }
         LocalDate birthdayTest = DateUtil.parseStringToDate(test);
-        if (!DateUtil.isPastDate(birthdayTest)) {
+        if (DateUtil.isFutureDate(birthdayTest)) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns true if the birthday is upcoming within at most 1 week's time and is not in the past.
+     * @return true if the birthday is upcoming
+     */
+    public boolean isUpcoming() {
+        int currentYear = LocalDate.now().getYear();
+        LocalDate birthdayThisYear = date.withYear(currentYear);
+        return !birthdayThisYear.isBefore(LocalDate.now())
+                && !birthdayThisYear.isAfter(LocalDate.now().plusWeeks(1));
     }
 
     @Override

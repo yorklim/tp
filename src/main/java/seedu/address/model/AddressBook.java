@@ -143,4 +143,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Person> getSchedules() {
         return persons.getSchedules();
     }
+
+    /**
+     * Returns the list of persons who have upcoming birthdays.
+     * @return list of persons who have upcoming birthdays
+     */
+    public ObservableList<Person> getPersonsWithUpcomingBirthdays() {
+        return persons.filterHaveUpcomingBirthday();
+    }
 }

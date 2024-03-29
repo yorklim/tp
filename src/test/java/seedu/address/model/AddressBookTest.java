@@ -7,8 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.DateUtil;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -87,6 +90,21 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void getPersonsWithUpcomingBirthdays() {
+        AddressBook addressBook = new AddressBook();
+        Person aliceWithUpcomingBirthday = new PersonBuilder(ALICE).withBirthday(DateUtil.parseDateToString(
+                LocalDate.now().plusWeeks(1).minusYears(40))).build();
+        addressBook.addPerson(aliceWithUpcomingBirthday);
+        Person bobWithNoUpcomingBirthday = new PersonBuilder(BOB).withBirthday(DateUtil.parseDateToString(
+                LocalDate.now().minusDays(1).minusYears(30))).build();
+        addressBook.addPerson(bobWithNoUpcomingBirthday);
+
+        ObservableList<Person> birthdayList = addressBook.getPersonsWithUpcomingBirthdays();
+        assertEquals(1, birthdayList.size());
+        assertTrue(birthdayList.contains(aliceWithUpcomingBirthday));
     }
 
     /**
