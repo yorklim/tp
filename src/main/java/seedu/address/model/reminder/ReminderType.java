@@ -16,7 +16,7 @@ public enum ReminderType {
         case SCHEDULES:
             return "Schedules";
         case BIRTHDAYS:
-            return "Birthday Reminders";
+            return "Birthday";
         default:
             throw new IllegalArgumentException();
         }
