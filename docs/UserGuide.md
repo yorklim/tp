@@ -141,7 +141,7 @@ download ClientCare.
 
 6. Refer to the [Features](#features) below for details of each command.
 
-<br>
+<br/>
 
 <div style="page-break-after: always;"></div>
 
@@ -154,8 +154,8 @@ These are the platforms we currently support ClientCare on:
 1. [Windows](#for-windows)
 2. [macOS](#for-macos)
 
-<br>
-<br>
+<br/>
+<br/>
 
 #### For Windows
 1. To start ClientCare, simply open up the folder where your downloaded `clientcare.jar`.
@@ -163,18 +163,19 @@ These are the platforms we currently support ClientCare on:
 
 ![DoubleClick](images/ug/doubleclick.png =600x)
 
-If you have faced issues opening the app, you can find the alternative solution [here](#known-issues-and-troubleshooting).
+If you are facing issues opening the app, you can find an alternative solution [here](#known-issues-and-troubleshooting).
 
-<br>
+<br/>
 
 #### For macOS
 1. To start ClientCare, simply open up the folder where your downloaded `clientcare.jar`.
 2. Next, double left-click on `clientcare.jar` to start the application.
 ![Starting up app on macOS](images/ug/startUpAppMacOS.png =600x)
 
-If you have faced issues opening the app, you can find the alternative solution [here](#known-issues-and-troubleshooting).
+If you are facing issues opening the app, you can find an alternative solution [here](#known-issues-and-troubleshooting).
 
-<br>
+<br/>
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -198,7 +199,7 @@ ClientCare works through text commands. Instead of clicking buttons, you tell Cl
 These commands must be formatted in a specific way or ClientCare will not understand what you are saying.
 Let's learn the language that ClientCare speaks in.
 
-<br>
+<br/>
 
 ### ClientCare Commands
 A ClientCare command has the following parts:
@@ -323,14 +324,15 @@ details, so you never have to lose a contact again.
 
 ClientCare offers the following commands to help you manage your clients:
 * [Adding a client: `add`](#adding-a-client-add)
+* [Deleting a client: `delete`](#deleting-a-client-delete)
+* [Editing a client: `edit`](#editing-a-client-edit)
 * [Listing all clients: `list`](#listing-all-clients-list)
 * [Viewing a client: `view`](#viewing-a-client-view)
-* [Editing a client: `edit`](#editing-a-client-edit)
-* [Finding a client: `find`](#locating-client-by-name-find)
-* [Deleting a client: `delete`](#deleting-a-client-delete)
+* [Finding a client: `find`](#finding-client-by-name-find)
+* [Adding notes to a client: `remark`](#adding-notes-to-clients-remark)
 * [Clearing all clients: `clear`](#clearing-all-entries-clear)
-<br>
-<br>
+<br/>
+<br/>
 
 ### Adding a client: `add`
 
@@ -340,7 +342,7 @@ Format: `add n/NAME c/PHONE_NUMBER e/EMAIL a/ADDRESS d/BIRTHDAY p/PRIORITY [t/TA
 
 <box type="info">
 
-**Note:** A client can have any number of tags (including 0). For example, `t/owesMoney t/friends` is allowed.<br>
+**Note:** A client can have any number of tags (including 0). For example, `t/owesMoney t/friends` is allowed.<br/>
 All other fields (with the exception of tags) cannot have duplicate parameters. For example, `c/1234567 c/7654321` is **not** allowed.
 </box>
 
@@ -431,7 +433,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-### Locating client by name: `find`
+### Finding client by name: `find`
 
 You can look for a client with `find`.
 Client whose names contain any of the given keywords will show up!
@@ -445,13 +447,30 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find alex david` returns `Alex Yeoh`, `David Li`<br/>
   ![result for 'find alex david'](images/findAlexDavidResult.png =600x)
 
 <box type="tip">
 
 **Tip:** You can use `find` to more easily find the client you want for commands that require a client `INDEX`!
 </box>
+
+<br/>
+<br/>
+
+### Adding notes to clients: `remark`
+
+You can add notes to each client with `remark`.
+
+Format: `remark INDEX r/REMARK`
+
+* Adds a note to the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `remark 2 r/Has 2 school-age children and 1 elderly dependent` adds a remark for the 2nd client in the client list.
+* `remark 1 r/` deletes the remark for the 1st client in the client list.
 
 <br/>
 <br/>
@@ -477,8 +496,8 @@ ClientCare offers the following commands to help you manage your schedule:
 * [Scheduling an appointment: `schedule`](#scheduling-appointments-schedule)
 * [Marking an appointment: `mark`](#marking-appointments-mark)
 
-<br>
-<br>
+<br/>
+<br/>
 
 ### Updating last met : `met`
 
@@ -571,8 +590,8 @@ ClientCare offers the following commands to help you manage your clients' polici
 * [Adding a policy: `addpolicy`](#adding-a-policy-addpolicy)
 * [Deleting a policy: `deletepolicy`](#deleting-a-policy-deletepolicy)
 
-<br>
-<br>
+<br/>
+<br/>
 
 ### Adding a policy : `addpolicy`
 
@@ -650,87 +669,94 @@ ClientCare data is automatically saved as a file `[ClientCare file location]/dat
 
 <box type="warning" theme="danger" icon=":warning:">
 
-**CAUTION**: If your changes to the data file makes its format invalid, ClientCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+**CAUTION**: If your changes to the data file makes its format invalid, ClientCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br/>
 Furthermore, certain edits can cause the ClientCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-<br>
-<br>
+<br/>
+<br/>
 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
 # FAQ
-<br>
+<br/>
 
-**Q** : How do I transfer my data to another computer?<br>
+**Q** : How do I transfer my data to another computer?<br/>
 **A** : Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClientCare home folder.
 
-<br>
+<br/>
 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
 # Known issues and Troubleshooting
-<br>
+<br/>
 
 #### Opening ClientCare app 
 
 **If you are unable to open ClientCare by clicking**, here is another way.
 
-**For Windows:**
-    1. Next, click on the Address Bar as shown below. It should turn !!blue!! upon clicking.
-       ![folder](images/ug/windows%20saveDirectory.png =600x)
+**For Windows:**<br/>
 
-    2. Type 'powershell' into the Address Bar and press ENTER on your keyboard
-   ![bar](images/ug/windows%20powershell.png =600x)
+1. First, click on the Address Bar as shown below. It should turn !!blue!! upon clicking.
+       
+![folder](images/ug/windows%20saveDirectory.png =600x)
 
-    3. Your PowerShell Terminal should be activated. Next, type the following:
-   `java -jar clientcare.jar`
+2. Type `powershell` into the Address Bar and press ENTER on your keyboard
+   
+![bar](images/ug/windows%20powershell.png =600x)
 
-    ![jar](images/ug/windows%20java%20jar.png =600x)
+3. Your PowerShell Terminal should be activated. Next, type the following: `java -jar clientcare.jar`
 
-    4. Hit ENTER and there we go! You should see ClientCare running on your computer! <br> <br>
+![jar](images/ug/windows%20java%20jar.png =600x)
+
+4. Hit ENTER and there we go! You should see ClientCare running on your computer! <br/> <br/>
 
 <div style="page-break-after: always;"></div>
 
 **For macOS:**
-   1. If you see the following prompt, fret not! Simply click on OK and follow the following.
-       ![Unidentified developer prompt on macOS](images/ug/unidentifiedDeveloperMacOS.png =600x)
+1. If you see the following prompt, fret not! Simply click on OK and follow the following.
+
+![Unidentified developer prompt on macOS](images/ug/unidentifiedDeveloperMacOS.png =600x)
 
 
-   2. To bypass the prompt, right-click on the 'clientcare.jar' app and select 'Open'.
-      ![Bypassing the prompt on macOS](images/ug/bypassPromptMacOS.png =600x)
+2. To bypass the prompt, right-click on the 'clientcare.jar' app and select 'Open'.
+
+![Bypassing the prompt on macOS](images/ug/bypassPromptMacOS.png =600x)
 
 
-   3. Select 'Open' to start the application.
-      ![Confirmation to open the app on macOS](images/ug/confirmOpenMacOS.
+3. Select 'Open' to start the application.
 
-<br>
+![Confirmation to open the app on macOS](images/ug/confirmOpenMacOS.png =600x)
+
+<br/>
 
 #### Multiple Screens
 **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the application will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 # Command summary
 
-| Action                                               | Format, Examples                                                                                                                                                                                                |
-|------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add**](#adding-a-client-add)                      | `add n/NAME c/PHONE_NUMBER e/EMAIL a/ADDRESS d/BIRTHDAY p/PRIORITY [t/TAG]…​` <br> e.g.`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/1990-01-01 p/medium t/friend t/colleague` |
-| [**Delete**](#deleting-a-client-delete)              | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                              |
-| [**Edit**](#editing-a-client-edit)                   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDAY] [p/PRIORITY] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                   |
-| [**List**](#listing-all-clients-list)                | `list`                                                                                                                                                                                                          |
-| [**View**](#viewing-a-client-view)                   | `view INDEX`<br> e.g, `view 1`                                                                                                                                                                                  |
-| [**Find**](#finding-a-client-find)                   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                                                                       |
-| [**Clear**](#clearing-all-entries-clear)             | `clear`                                                                                                                                                                                                         |
-| [**LastMet**](#updating-last-met-met)                | `met INDEX [d/DATE]`<br> e.g. `met 2 d/2023-05-07`                                                                                                                                                              |
-| [**Schedule**](#scheduling-appointments-schedule)    | `schedule INDEX [d/DATETIME]`<br> e.g. `schedule 2 d/2023-05-07 22:00`                                                                                                                                          |                                                                                                                               |
-| [**Mark**](#marking-appointments-mark)               | `mark INDEX`<br> e.g. `mark 2`                                                                                                                                                                                  |                                                                                                                               |
-| [**Add Policy**](#adding-a-policy-addpolicy)         | `addpolicy INDEX n/POLICY_NAME i/POLICY_ID` <br/> e.g. `addpolicy 1 n/Life i/1`                                                                                                                                 |
-| [**Delete Policy**](#deleting-a-policy-deletepolicy) | `deletepolicy INDEX i/POLICY_ID` <br/> e.g. `deletepolicy 1 i/1`                                                                                                                                                |
-| [**Help**](#viewing-help-help)                       | `help`                                                                                                                                                                                                          |
-| [**Exit**](#exiting-the-program-exit)                | `exit`                                                                                                                                                                                                          |
+| Action                                               | Format, Examples                                                                                                                                                                                                 |
+|------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-client-add)                      | `add n/NAME c/PHONE_NUMBER e/EMAIL a/ADDRESS d/BIRTHDAY p/PRIORITY [t/TAG]…​` <br/> e.g.`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/1990-01-01 p/medium t/friend t/colleague` |
+| [**Delete**](#deleting-a-client-delete)              | `delete INDEX`<br/> e.g. `delete 3`                                                                                                                                                                              |
+| [**Edit**](#editing-a-client-edit)                   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDAY] [p/PRIORITY] [t/TAG]…​`<br/> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                   |
+| [**List**](#listing-all-clients-list)                | `list`                                                                                                                                                                                                           |
+| [**View**](#viewing-a-client-view)                   | `view INDEX`<br/> e.g, `view 1`                                                                                                                                                                                  |
+| [**Find**](#finding-a-client-find)                   | `find KEYWORD [MORE_KEYWORDS]`<br/> e.g. `find James Jake`                                                                                                                                                       |
+| [**Remark**](#adding-notes-to-clients-remark)        | `remark INDEX r/REMARK`<br/> e.g. `remark 3 r/Has 2 school-age children and 1 elderly dependent`                                                                                                                 |
+| [**Clear**](#clearing-all-entries-clear)             | `clear`                                                                                                                                                                                                          |
+| [**LastMet**](#updating-last-met-met)                | `met INDEX [d/DATE]`<br/> e.g. `met 2 d/2023-05-07`                                                                                                                                                              |
+| [**Schedule**](#scheduling-appointments-schedule)    | `schedule INDEX [d/DATETIME]`<br/> e.g. `schedule 2 d/2023-05-07 22:00`                                                                                                                                          |                                                                                                                               |
+| [**Mark**](#marking-appointments-mark)               | `mark INDEX`<br/> e.g. `mark 2`                                                                                                                                                                                  |                                                                                                                               |
+| [**Add Policy**](#adding-a-policy-addpolicy)         | `addpolicy INDEX n/POLICY_NAME i/POLICY_ID` <br/> e.g. `addpolicy 1 n/Life i/1`                                                                                                                                  |
+| [**Delete Policy**](#deleting-a-policy-deletepolicy) | `deletepolicy INDEX i/POLICY_ID` <br/> e.g. `deletepolicy 1 i/1`                                                                                                                                                 |
+| [**Help**](#viewing-help-help)                       | `help`                                                                                                                                                                                                           |
+| [**Exit**](#exiting-the-program-exit)                | `exit`                                                                                                                                                                                                           |

@@ -21,6 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PolicyList;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
@@ -37,6 +38,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String birthday;
     private final String priority;
+    private final String remark;
     private final String lastmet;
     private final String schedule;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -49,8 +51,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday, @JsonProperty("priority") String priority,
-            @JsonProperty("lastmet") String lastmet, @JsonProperty("schedule") String schedule,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("remark") String remark, @JsonProperty("lastmet") String lastmet,
+            @JsonProperty("schedule") String schedule, @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("policies") List<JsonAdaptedPolicy> policies) {
         this.name = name;
         this.phone = phone;
@@ -58,6 +60,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.birthday = birthday;
         this.priority = priority;
+        this.remark = remark;
         this.lastmet = lastmet;
         this.schedule = schedule;
         if (tags != null) {
@@ -78,6 +81,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         birthday = source.getBirthday().toString();
         priority = source.getPriority().toString();
+        remark = source.getRemark().value;
         lastmet = source.getLastMet().toString();
         schedule = source.getSchedule().toString();
         tags.addAll(source.getTags().stream()
@@ -155,6 +159,11 @@ class JsonAdaptedPerson {
         }
         final Priority modelPriority = new Priority(priority);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
+
         final LastMet modelLastMet = new LastMet(DateUtil.parseStringToDate(lastmet));
 
         String[] scheduleString = schedule.toString().split("/");
@@ -164,7 +173,7 @@ class JsonAdaptedPerson {
                 Schedule.checkIsDoneFromString(isDoneString));
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday, modelPriority,
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday, modelPriority, modelRemark,
                 modelLastMet, modelSchedule, modelTags, personPolicies);
     }
 

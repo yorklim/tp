@@ -14,6 +14,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PolicyList;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -27,8 +28,9 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_REMARK = "Prefers speaking English.";
     public static final String DEFAULT_BIRTHDAY = "1990-01-01";
-    public static final String DEFAULT_PRIORITY = "medium";
+    public static final String DEFAULT_PRIORITY = "MEDIUM";
 
     private Name name;
     private Phone phone;
@@ -36,6 +38,7 @@ public class PersonBuilder {
     private Address address;
     private Birthday birthday;
     private Priority priority;
+    private Remark remark;
     private LastMet lastMet;
     private Schedule schedule;
     private Set<Tag> tags;
@@ -51,6 +54,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         birthday = new Birthday(DEFAULT_BIRTHDAY);
         priority = new Priority(DEFAULT_PRIORITY);
+        remark = new Remark(DEFAULT_REMARK);
         lastMet = null;
         schedule = null;
         tags = new HashSet<>();
@@ -67,6 +71,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         birthday = personToCopy.getBirthday();
         priority = personToCopy.getPriority();
+        remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
         policyList = personToCopy.getPolicyList();
     }
@@ -128,6 +133,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
+    /**
      * Sets the {@code LastMet} of the {@code Person} that we are building.
      */
     public PersonBuilder withLastMet(LocalDate lastMet) {
@@ -156,7 +169,7 @@ public class PersonBuilder {
      * @return the person
      */
     public Person build() {
-        return new Person(name, phone, email, address, birthday, priority, lastMet, schedule, tags,
+        return new Person(name, phone, email, address, birthday, priority, remark, lastMet, schedule, tags,
                 policyList);
     }
 

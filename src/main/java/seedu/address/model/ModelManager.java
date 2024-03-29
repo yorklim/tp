@@ -132,8 +132,8 @@ public class ModelManager implements Model {
         PolicyList newPolicyList = target.getPolicyList();
         newPolicyList.addPolicy(policy);
         setPerson(target, new Person(target.getName(), target.getPhone(), target.getEmail(), target.getAddress(),
-                target.getBirthday(), target.getPriority(), target.getLastMet(), target.getSchedule(), target.getTags(),
-                newPolicyList));
+                target.getBirthday(), target.getPriority(), target.getRemark(),
+                target.getLastMet(), target.getSchedule(), target.getTags(), newPolicyList));
     }
 
     /**
@@ -146,8 +146,8 @@ public class ModelManager implements Model {
         PolicyList newPolicyList = target.getPolicyList();
         newPolicyList.deletePolicy(policyId);
         setPerson(target, new Person(target.getName(), target.getPhone(), target.getEmail(), target.getAddress(),
-                target.getBirthday(), target.getPriority(), target.getLastMet(), target.getSchedule(), target.getTags(),
-                newPolicyList));
+                target.getBirthday(), target.getPriority(), target.getRemark(),
+                target.getLastMet(), target.getSchedule(), target.getTags(), newPolicyList));
     }
 
     //=========== Filtered Person List Accessors =============================================================

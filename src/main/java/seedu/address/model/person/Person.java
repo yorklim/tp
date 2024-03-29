@@ -28,6 +28,7 @@ public class Person {
     private final Address address;
     private final Birthday birthday;
     private final Priority priority;
+    private final Remark remark;
     private final LastMet lastMet;
     private final Schedule schedule;
     private final Set<Tag> tags = new HashSet<>();
@@ -37,7 +38,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Birthday birthday, Priority priority,
-                  Set<Tag> tags) {
+                  Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, birthday, priority, tags);
         this.name = name;
         this.phone = phone;
@@ -45,6 +46,7 @@ public class Person {
         this.address = address;
         this.birthday = birthday;
         this.priority = priority;
+        this.remark = remark;
         this.lastMet = new LastMet(LocalDate.now());
         this.schedule = new Schedule(LocalDateTime.now(), true);
         this.tags.addAll(tags);
@@ -55,7 +57,7 @@ public class Person {
      * Person constructor used for subsequent LastMet, Schedule and Mark Commands.
      */
     public Person(Name name, Phone phone, Email email, Address address, Birthday birthday,
-        Priority priority, LastMet lastmet, Schedule schedule, Set<Tag> tags, PolicyList policyList) {
+        Priority priority, Remark remark, LastMet lastmet, Schedule schedule, Set<Tag> tags, PolicyList policyList) {
         requireAllNonNull(name, phone, email, address, birthday, tags, policyList);
         this.name = name;
         this.phone = phone;
@@ -63,6 +65,7 @@ public class Person {
         this.address = address;
         this.birthday = birthday;
         this.priority = priority;
+        this.remark = remark;
         this.lastMet = checkNullLastMet(lastmet);
         this.schedule = checkNullSchedule(schedule);
         this.tags.addAll(tags);
@@ -91,6 +94,10 @@ public class Person {
 
     public Priority getPriority() {
         return priority;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     public LastMet getLastMet() {
@@ -203,6 +210,7 @@ public class Person {
                 .add("address", address)
                 .add("birthday", birthday)
                 .add("priority", priority)
+                .add("remark", remark)
                 .add("tags", tags)
                 .add("policies", policyList)
                 .toString();

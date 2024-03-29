@@ -66,6 +66,6 @@ public enum PriorityValue { // Already implements Comparable<PriorityValue> in t
 
     @Override
     public String toString() {
-        return this.name().toLowerCase();
+        return this.name().toUpperCase();
     }
 }

@@ -7,6 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "birthday": "1993-09-22",
     "priority": "vip",
+    "remark" : "",
     "lastmet": "2023-01-02",
     "schedule": "2023-02-02 12:14/1",
     "tags" : [ "friends" ]
@@ -17,6 +18,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "birthday": "1998-12-03",
     "priority": "high",
+    "remark" : "",
     "lastmet": "2023-01-02",
     "schedule": "2023-02-02 12:14/0",
     "tags" : [ "owesMoney", "friends" ],
@@ -28,6 +30,7 @@
     "address" : "wall street",
     "birthday": "1978-05-06",
     "priority": "medium",
+    "remark" : "",
     "lastmet": "2023-01-02",
     "schedule": "2023-02-02 12:14/1",
     "tags" : [ ]
@@ -38,6 +41,7 @@
     "address" : "10th street",
     "birthday": "1999-07-23",
     "priority": "medium",
+    "remark" : "",
     "lastmet": "2023-01-02",
     "schedule": "2023-02-02 12:14/1",
     "tags" : [ "friends" ]
@@ -48,6 +52,7 @@
     "address" : "michegan ave",
     "birthday": "1995-09-15",
     "priority": "medium",
+    "remark" : "",
     "lastmet": "2023-01-02",
     "schedule": "2023-02-02 12:14/1",
     "tags" : [ ]
@@ -58,6 +63,7 @@
     "address" : "little tokyo",
     "birthday": "2000-01-01",
     "priority": "medium",
+    "remark" : "",
     "lastmet": "2023-01-02",
     "schedule": "2023-02-02 12:14/1",
     "tags" : [ ]
@@ -68,6 +74,7 @@
     "address" : "4th street",
     "birthday": "1978-11-03",
     "priority": "low",
+    "remark" : "",
     "lastmet": "2023-01-02",
     "schedule": "2023-02-02 12:14/1",
     "tags" : [ ]

@@ -32,6 +32,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.PolicyList;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
@@ -111,13 +112,14 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday());
         Priority updatedPriority = editPersonDescriptor.getPriority().orElse(personToEdit.getPriority());
+        Remark updatedRemark = personToEdit.getRemark(); // edit command does not allow editing remarks
         LastMet currentLastMet = personToEdit.getLastMet();
         Schedule currentSchedule = personToEdit.getSchedule();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         PolicyList currentPolicyList = personToEdit.getPolicyList();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBirthday, updatedPriority,
-                currentLastMet, currentSchedule, updatedTags, currentPolicyList);
+                updatedRemark, currentLastMet, currentSchedule, updatedTags, currentPolicyList);
     }
 
     @Override

@@ -45,10 +45,10 @@ public class PriorityValueTest {
 
     @Test
     public void testToString() {
-        assertEquals("low", PriorityValue.LOW.toString());
-        assertEquals("medium", PriorityValue.MEDIUM.toString());
-        assertEquals("high", PriorityValue.HIGH.toString());
-        assertEquals("vip", PriorityValue.VIP.toString());
+        assertEquals("LOW", PriorityValue.LOW.toString());
+        assertEquals("MEDIUM", PriorityValue.MEDIUM.toString());
+        assertEquals("HIGH", PriorityValue.HIGH.toString());
+        assertEquals("VIP", PriorityValue.VIP.toString());
     }
 
     @Test
