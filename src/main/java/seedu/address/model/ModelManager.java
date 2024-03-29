@@ -222,4 +222,8 @@ public class ModelManager implements Model {
         return new ReminderList(ReminderType.SCHEDULES, addressBook.getSchedules());
     }
 
+    @Override
+    public ReminderList getBirthdayReminders() {
+        return new ReminderList(ReminderType.BIRTHDAYS, addressBook.getPersonsWithUpcomingBirthdays());
+    }
 }

@@ -7,16 +7,24 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.util.DateUtil;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.reminder.ReminderList;
+import seedu.address.model.reminder.ReminderType;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -128,5 +136,30 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void getBirthdayReminders() {
+        ModelManager localModelManager = new ModelManager();
+
+        // No birthday reminders
+        assertEquals(0, localModelManager.getBirthdayReminders().size());
+
+        // Add a person with upcoming birthday
+        Person aliceWithUpcomingBirthday = new PersonBuilder(ALICE).withBirthday(DateUtil.parseDateToString(
+                LocalDate.now().plusWeeks(1).minusYears(40))).build();
+        localModelManager.addPerson(aliceWithUpcomingBirthday);
+        Person bobWithNoUpcomingBirthday = new PersonBuilder(BOB).withBirthday(DateUtil.parseDateToString(
+                LocalDate.now().minusDays(1).minusYears(30))).build();
+        localModelManager.addPerson(bobWithNoUpcomingBirthday);
+
+        AddressBook addressBook = new AddressBook();
+        addressBook.addPerson(aliceWithUpcomingBirthday);
+        ObservableList<Person> expectedBirthdayReminderPersons = addressBook.getPersonsWithUpcomingBirthdays();
+        ReminderList expectedBirthdayReminder = new ReminderList(ReminderType.BIRTHDAYS,
+                expectedBirthdayReminderPersons);
+
+        assertEquals(1, localModelManager.getBirthdayReminders().size());
+        assertEquals(localModelManager.getBirthdayReminders(), expectedBirthdayReminder);
     }
 }

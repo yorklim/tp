@@ -40,10 +40,36 @@ public class ReminderList {
             case SCHEDULES:
                 sb.append(p.scheduleStringFormat()).append("\n");
                 break;
+            case BIRTHDAYS:
+                sb.append(p.birthdayStringFormat()).append("\n");
+                break;
             default:
                 break;
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ReminderList)) {
+            return false;
+        }
+
+        ReminderList otherReminderList = (ReminderList) other;
+        if (otherReminderList.reminderType != reminderType) {
+            return false;
+        }
+
+        if (!remindersList.equals(otherReminderList.remindersList)) {
+            return false;
+        }
+
+        return true;
     }
 }

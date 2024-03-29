@@ -63,8 +63,14 @@ public interface Logic {
      * Returns the reminder list for the overdue last met to be displayed in RemindersPanel.
      */
     ReminderList getOverDueLastMet();
+
     /**
      * Returns the reminder list for the appointments to be displayed in RemindersPanel.
      */
     ReminderList getSchedules();
+
+    /**
+     * Returns the reminder list for the birthday reminders to be displayed in RemindersPanel.
+     */
+    ReminderList getBirthdayReminders();
 }

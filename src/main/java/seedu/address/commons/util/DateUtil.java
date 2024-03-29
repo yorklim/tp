@@ -51,11 +51,11 @@ public class DateUtil {
      * @param date the date to check
      * @return true if the date is in the past
      */
-    public static boolean isPastDate(LocalDate date) {
+    public static boolean isFutureDate(LocalDate date) {
         if (date == null) {
             return false;
         }
-        return date.isBefore(LocalDate.now());
+        return date.isAfter(LocalDate.now());
     }
 
     /**

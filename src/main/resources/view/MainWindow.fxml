@@ -73,6 +73,8 @@
                   <StackPane fx:id="lastMetCardPlaceholder" VBox.vgrow="ALWAYS"/>
                   <Region prefWidth="310" prefHeight="20"/>
                   <StackPane fx:id="appointmentsCardPlaceholder" VBox.vgrow="ALWAYS"/>
+                  <Region prefWidth="310" prefHeight="20"/>
+                  <StackPane fx:id="birthdayRemindersCardPlaceholder" VBox.vgrow="ALWAYS"/>
                 </VBox>
               </content>
             </ScrollPane>

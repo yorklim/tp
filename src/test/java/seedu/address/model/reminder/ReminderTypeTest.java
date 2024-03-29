@@ -9,5 +9,6 @@ public class ReminderTypeTest {
     public void toStringMethod() {
         assertEquals("Last Met", ReminderType.LAST_MET.toString());
         assertEquals("Schedules", ReminderType.SCHEDULES.toString());
+        assertEquals("Birthday", ReminderType.BIRTHDAYS.toString());
     }
 }

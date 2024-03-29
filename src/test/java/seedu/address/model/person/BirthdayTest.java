@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.DateUtil;
+
 public class BirthdayTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -54,7 +56,7 @@ public class BirthdayTest {
         assertFalse(Birthday.isValidBirthday("ABCD-12-31")); // Alphabetic characters in year component
         assertFalse(Birthday.isValidBirthday("2020-12-31ABC")); // Alphabetic characters after the date
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtil.DATE_FORMAT);
         assertFalse(Birthday.isValidBirthday(LocalDate.now().plusDays(1)
                 .format(formatter))); // future date
         assertFalse(Birthday.isValidBirthday(LocalDate.now().plusMonths(1)
@@ -73,6 +75,31 @@ public class BirthdayTest {
         assertTrue(Birthday.isValidBirthday("1999-08-15"));
         assertTrue(Birthday.isValidBirthday("2000-09-25"));
         assertTrue(Birthday.isValidBirthday("2001-10-05"));
+    }
+
+    @Test
+    public void isUpcoming() {
+        // are not upcoming
+        // birthday is yesterday's date 10 years ago
+        assertFalse(new Birthday(LocalDate.now().minusYears(10).minusDays(1)
+                .format(DateTimeFormatter.ofPattern(DateUtil.DATE_FORMAT))).isUpcoming());
+        // birthday is 8 days later, birthdate is 25 years ago
+        assertFalse(new Birthday(LocalDate.now().minusYears(25).plusDays(8)
+                .format(DateTimeFormatter.ofPattern(DateUtil.DATE_FORMAT))).isUpcoming());
+
+        // are upcoming
+        // birthday is today
+        assertTrue(new Birthday(LocalDate.now()
+                .format(DateTimeFormatter.ofPattern(DateUtil.DATE_FORMAT))).isUpcoming());
+        // birthday is tomorrow, birthdate is 30 years ago
+        assertTrue(new Birthday(LocalDate.now().minusYears(30).plusDays(1)
+                .format(DateTimeFormatter.ofPattern(DateUtil.DATE_FORMAT))).isUpcoming());
+        // birthday next week, birthdate is 20 years ago
+        assertTrue(new Birthday(LocalDate.now().minusYears(20).plusDays(7)
+                .format(DateTimeFormatter.ofPattern(DateUtil.DATE_FORMAT))).isUpcoming());
+        // birthday 6 days later, birthdate is 5 years ago
+        assertTrue(new Birthday(LocalDate.now().minusYears(5).plusDays(6)
+                .format(DateTimeFormatter.ofPattern(DateUtil.DATE_FORMAT))).isUpcoming());
     }
 
     @Test
