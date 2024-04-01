@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Person;
+import seedu.address.storage.SetStorage;
 
 /**
  * Sets the LastMet Overdue time period for all Clients.
@@ -51,6 +52,7 @@ public class SetCommand extends Command {
             personToCheck.getLastMet().checkOverdue();
         }
 
+        SetStorage.setData(this.overdueTimePeriod);
         return new CommandResult(String.format(MESSAGE_SUCCESS, this.overdueTimePeriod));
     }
 
