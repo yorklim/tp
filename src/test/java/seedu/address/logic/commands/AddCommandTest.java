@@ -154,7 +154,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Person> getSortedFilteredPersonList() {
             throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
@@ -164,7 +164,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortFilteredPersonList(Comparator<Person> comparator) {
+        public void updateSortPersonComparator(Comparator<Person> comparator) {
             throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 
@@ -185,6 +185,11 @@ public class AddCommandTest {
 
         @Override
         public void setDisplayClient(Person person) {
+            throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
+        }
+
+        @Override
+        public void setDisplayClientAsFirstInSortedFilteredPersonList() {
             throw new AssertionError(MESSAGE_METHOD_SHOULD_NOT_BE_CALLED);
         }
 

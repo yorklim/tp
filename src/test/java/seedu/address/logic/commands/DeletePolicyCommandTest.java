@@ -50,13 +50,13 @@ public class DeletePolicyCommandTest {
         expectedModel.deletePolicy(model.getAddressBook().getPersonList().get(1), policyToDelete);
 
         CommandTestUtil.assertCommandSuccess(deletePolicyCommand, model,
-                String.format(MESSAGE_SUCCESS, policyToDelete, model.getFilteredPersonList().get(1).getName()),
+                String.format(MESSAGE_SUCCESS, policyToDelete, model.getSortedFilteredPersonList().get(1).getName()),
                 expectedModel);
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index invalidIndex = Index.fromOneBased(model.getSortedFilteredPersonList().size() + 1);
         String policyToDelete = "123";
 
         DeletePolicyCommand deletePolicyCommand = new DeletePolicyCommand(invalidIndex, policyToDelete);
@@ -76,7 +76,7 @@ public class DeletePolicyCommandTest {
         DeletePolicyCommand deletePolicyCommand = new DeletePolicyCommand(validIndex, "123");
 
         CommandTestUtil.assertCommandSuccess(deletePolicyCommand, model,
-                String.format(MESSAGE_SUCCESS, policyToDelete, model.getFilteredPersonList().get(1).getName()),
+                String.format(MESSAGE_SUCCESS, policyToDelete, model.getSortedFilteredPersonList().get(1).getName()),
                 expectedModel);
 
         assertThrows(CommandException.class, () -> deletePolicyCommand.execute(model),
@@ -96,7 +96,7 @@ public class DeletePolicyCommandTest {
         expectedModel.deletePolicy(model.getAddressBook().getPersonList().get(1), policyToDelete);
 
         CommandTestUtil.assertCommandSuccess(deletePolicyCommand, model,
-                String.format(MESSAGE_SUCCESS, policyToDelete , model.getFilteredPersonList().get(0).getName()),
+                String.format(MESSAGE_SUCCESS, policyToDelete , model.getSortedFilteredPersonList().get(0).getName()),
                 expectedModel);
     }
 

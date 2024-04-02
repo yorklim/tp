@@ -44,7 +44,8 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.sortFilteredPersonList(PersonComparator.getComparator(sortCriteria, sortOrder));
+        model.updateSortPersonComparator(PersonComparator.getComparator(sortCriteria, sortOrder));
+        model.setDisplayClientAsFirstInSortedFilteredPersonList();
         return new CommandResult(getMessageSuccess(sortCriteria, sortOrder));
     }
 

@@ -36,7 +36,7 @@ public class MarkCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index invalidIndex = Index.fromOneBased(model.getSortedFilteredPersonList().size() + 1);
 
         MarkCommand markCommand = new MarkCommand(invalidIndex);
 
@@ -47,7 +47,7 @@ public class MarkCommandTest {
     @Test
     public void execute_alreadyDoneSchedule_throwsCommandException() {
         Index validIndex = Index.fromOneBased(1);
-        Person personWithDoneSchedule = model.getFilteredPersonList().get(0);
+        Person personWithDoneSchedule = model.getSortedFilteredPersonList().get(0);
         personWithDoneSchedule.getSchedule().markIsDone();
 
         MarkCommand markCommand = new MarkCommand(validIndex);

@@ -54,12 +54,12 @@ public class AddPolicyCommandTest {
         expectedModel.addPolicy(model.getAddressBook().getPersonList().get(0), policyToAdd);
 
         CommandTestUtil.assertCommandSuccess(addPolicyCommand, model,
-                String.format(MESSAGE_SUCCESS, model.getFilteredPersonList().get(0).getName()), expectedModel);
+                String.format(MESSAGE_SUCCESS, model.getSortedFilteredPersonList().get(0).getName()), expectedModel);
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index invalidIndex = Index.fromOneBased(model.getSortedFilteredPersonList().size() + 1);
         Policy policyToAdd = new Policy("Life", "123");
 
         AddPolicyCommand addPolicyCommand = new AddPolicyCommand(invalidIndex, policyToAdd);
@@ -81,7 +81,7 @@ public class AddPolicyCommandTest {
         AddPolicyCommand secondAddPolicyCommand = new AddPolicyCommand(validIndex, conflictingPolicyToAdd);
 
         CommandTestUtil.assertCommandSuccess(firstAddPolicyCommand, model,
-                String.format(MESSAGE_SUCCESS, model.getFilteredPersonList().get(0).getName()), expectedModel);
+                String.format(MESSAGE_SUCCESS, model.getSortedFilteredPersonList().get(0).getName()), expectedModel);
 
         assertThrows(CommandException.class, () -> secondAddPolicyCommand.execute(model),
                 Messages.MESSAGE_DUPLICATE_POLICY);
@@ -100,7 +100,7 @@ public class AddPolicyCommandTest {
         expectedModel.addPolicy(model.getAddressBook().getPersonList().get(0), policyToAdd);
 
         CommandTestUtil.assertCommandSuccess(addPolicyCommand, model,
-                String.format(MESSAGE_SUCCESS, model.getFilteredPersonList().get(0).getName()), expectedModel);
+                String.format(MESSAGE_SUCCESS, model.getSortedFilteredPersonList().get(0).getName()), expectedModel);
     }
 
     @Test

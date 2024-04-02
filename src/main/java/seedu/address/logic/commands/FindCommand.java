@@ -30,13 +30,9 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        if (model.getFilteredPersonList().isEmpty()) {
-            model.setDisplayClient(null);
-        } else {
-            model.setDisplayClient(model.getFilteredPersonList().get(0));
-        }
+        model.setDisplayClientAsFirstInSortedFilteredPersonList();
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getSortedFilteredPersonList().size()));
     }
 
     @Override

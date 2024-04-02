@@ -46,12 +46,12 @@ public class ScheduleCommandTest {
         ScheduleCommand scheduleCommand = new ScheduleCommand(validIndex, new Schedule(validDateTime));
 
         CommandTestUtil.assertCommandSuccess(scheduleCommand, model,
-                String.format(MESSAGE_SUCCESS, model.getFilteredPersonList().get(0).getName()), expectedModel);
+                String.format(MESSAGE_SUCCESS, model.getSortedFilteredPersonList().get(0).getName()), expectedModel);
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index invalidIndex = Index.fromOneBased(model.getSortedFilteredPersonList().size() + 1);
         LocalDateTime validDateTime = LocalDateTime.now().plusDays(1);
 
         ScheduleCommand scheduleCommand = new ScheduleCommand(invalidIndex, new Schedule(validDateTime));
