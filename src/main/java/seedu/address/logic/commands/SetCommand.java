@@ -21,7 +21,8 @@ public class SetCommand extends Command {
             + "Parameters: "
             + "NUMBER_OF_DAYS "
             + "Example: " + COMMAND_WORD + " "
-            + "90. ";
+            + "90.\n "
+            + "NUMBER_OF_DAYS must be an integer and be at least 0.";
 
     public static final String MESSAGE_SUCCESS = "LastMet Overdue time period has been set to %1$s days.";
     /**
@@ -42,7 +43,7 @@ public class SetCommand extends Command {
         requireNonNull(model);
 
         LastMet.setLastMetDuration(this.overdueTimePeriod);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedFilteredPersonList();
 
         int numberOfClients = lastShownList.size();
 
