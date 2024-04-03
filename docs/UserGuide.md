@@ -27,7 +27,7 @@ Ready to head straight into the action? You can refer to our [Quick Start](#quic
 <div style="page-break-after: always;"></div>
 
 ## Using this guide
-This guide walks you through all the features of ClientCare and can be used as a quick reference whenever you need any help. If you're just getting started with ClientCare, we welcome you to start from our [Introduction](#introduction) section to learn more about the app. For setting up ClientCare, you might find the [Quick Start](#quick-start) section helpful.
+This guide walks you through all the features of ClientCare and can be used as a quick reference whenever you need any help. If you're just getting started with ClientCare, we welcome you to start from our [Introducing ClientCare](#introducing-clientcare) section to learn more about the app. For setting up ClientCare, you might find the [Quick Start](#quick-start) section helpful.
 
 Ready to use ClientCare? You can check out our [Features](#features) section. For ease of reference, the
 [Features](#features) section is divided into subsections corresponding to each main feature:
@@ -79,7 +79,7 @@ You might encounter these call-outs while reading through the guide, which conta
 <div style="page-break-after: always;"></div>
 
 
-## Introduction
+## Introducing ClientCare
 Made for insurance agents and clients, by insurance agents and clients.
 ClientCare is the easiest way to manage your clients and schedules, all in one place.
 Powerful features and intuitive design, all packaged into one neat desktop app. ClientCare is supported on all
@@ -532,6 +532,19 @@ Rather, you will see him under the Schedule Display.
 </box>
 <br/>
 <br/>
+
+### Setting last met overdue period: `set`
+
+Feel that 90 days is too short or long of a period? You can set your own desired overdue duration with `set`.
+
+Format: `set NUMBER_OF_DAYS`
+
+* Sets the last met overdue to `NUMBER_OF_DAYS`.
+* The number of days **must be a non-negative integer** 0, 1, 2, 3, …​
+
+Examples:
+* `set 75` updates the last met overdue duration to 75 days. Clients who you have not met in more than 75 days or
+no appointments are scheduled will show up in the Last Met reminder display.
 
 ### Scheduling appointments : `schedule`
 
