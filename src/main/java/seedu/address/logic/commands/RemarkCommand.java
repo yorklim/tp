@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.model.Model.COMPARATOR_SHOW_ORIGINAL_ORDER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class RemarkCommand extends Command {
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -62,6 +63,7 @@ public class RemarkCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateSortPersonComparator(COMPARATOR_SHOW_ORIGINAL_ORDER);
         model.setDisplayClient(editedPerson);
 
         return new CommandResult(generateSuccessMessage(editedPerson));

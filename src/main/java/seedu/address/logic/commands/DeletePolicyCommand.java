@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICYID;
+import static seedu.address.model.Model.COMPARATOR_SHOW_ORIGINAL_ORDER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class DeletePolicyCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -70,6 +71,7 @@ public class DeletePolicyCommand extends Command {
 
         model.setPerson(personToDeletePolicy, policyDeletedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateSortPersonComparator(COMPARATOR_SHOW_ORIGINAL_ORDER);
         model.setDisplayClient(policyDeletedPerson);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, policyId, policyDeletedPerson.getName()));

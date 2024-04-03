@@ -16,6 +16,8 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    Comparator<Person> COMPARATOR_SHOW_ORIGINAL_ORDER = (person1, person2) -> 0;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -79,7 +81,7 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Person> getSortedFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -91,7 +93,7 @@ public interface Model {
      * Sorts the filtered person list by the given {@code comparator}.
      * @throws NullPointerException if {@code comparator} is null.
      */
-    void sortFilteredPersonList(Comparator<Person> comparator);
+    void updateSortPersonComparator(Comparator<Person> comparator);
 
     /**
      * Returns the client to be displayed in ClientViewPanel.
@@ -112,6 +114,9 @@ public interface Model {
      * Replaces the current client to be displayed to {@code person}.
      */
     void setDisplayClient(Person person);
+
+    void setDisplayClientAsFirstInSortedFilteredPersonList();
+
     /**
      * Returns the reminder list for the overdue last met to be displayed in RemindersPanel.
      */

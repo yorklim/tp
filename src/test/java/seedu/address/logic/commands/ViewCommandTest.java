@@ -29,7 +29,7 @@ public class ViewCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToView = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToView = model.getSortedFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_SUCCESS,
@@ -43,7 +43,7 @@ public class ViewCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getSortedFilteredPersonList().size() + 1);
         ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);
 
         assertCommandFailure(viewCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -53,7 +53,7 @@ public class ViewCommandTest {
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToView = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToView = model.getSortedFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_SUCCESS,

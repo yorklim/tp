@@ -95,10 +95,10 @@ public class PersonComparatorTest {
         // sort by invalid or default criteria
         Comparator<Person> invalidAscComparator = PersonComparator.getComparator(SortCriteria.INVALID, SortOrder.ASC);
         // ascending
-        assertTrue(invalidAscComparator.compare(alice, bob) < 0);
+        assertTrue(invalidAscComparator.compare(alice, bob) == 0);
         assertEquals(0, invalidAscComparator.compare(alice, aliceCopy));
         // descending
-        assertTrue(invalidAscComparator.compare(alice, bob) < 0);
+        assertTrue(invalidAscComparator.compare(alice, bob) == 0);
         assertEquals(0, invalidAscComparator.compare(alice, aliceCopy));
     }
 }
