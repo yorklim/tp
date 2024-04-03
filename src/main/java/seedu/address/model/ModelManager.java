@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.DisplayClient;
@@ -28,7 +29,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> filteredPersons;
+    private Comparator<Person> personComparator;
     private final DisplayClient displayClient;
 
     /**
@@ -42,6 +44,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        personComparator = COMPARATOR_SHOW_ORIGINAL_ORDER;
         displayClient = filteredPersons.isEmpty()
                 ? new DisplayClient(null)
                 : new DisplayClient(filteredPersons.get(0));
@@ -113,6 +116,7 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateSortPersonComparator(COMPARATOR_SHOW_ORIGINAL_ORDER);
     }
 
     @Override
@@ -157,8 +161,10 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Person> getSortedFilteredPersonList() {
+        SortedList<Person> sortedPersons = new SortedList<>(filteredPersons);
+        sortedPersons.setComparator(personComparator);
+        return sortedPersons;
     }
 
     @Override
@@ -167,11 +173,16 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     * Updates the comparator used to sort the list of persons.
+     * Comparator is used to sort when {@code getSortedFilteredPersonList()} is called.
+     *
+     * @param comparator Comparator to be used to sort the list of persons
+     */
     @Override
-    public void sortFilteredPersonList(Comparator<Person> comparator) {
+    public void updateSortPersonComparator(Comparator<Person> comparator) {
         requireNonNull(comparator);
-        ObservableList<Person> sortedList = this.addressBook.getPersonList().sorted(comparator);
-        filteredPersons = new FilteredList<>(sortedList);
+        personComparator = comparator;
     }
 
     @Override
@@ -210,6 +221,20 @@ public class ModelManager implements Model {
     @Override
     public void setDisplayClient(Person person) {
         displayClient.setDisplayClient(person);
+    }
+
+    /**
+     * Sets the display client to be the first person in the sorted filtered person list.
+     * If the list is empty, display client is set to null.
+     */
+    @Override
+    public void setDisplayClientAsFirstInSortedFilteredPersonList() {
+        ObservableList<Person> sortedFilteredPersonList = getSortedFilteredPersonList();
+        if (sortedFilteredPersonList.isEmpty()) {
+            displayClient.setDisplayClient(null);
+        } else {
+            displayClient.setDisplayClient(sortedFilteredPersonList.get(0));
+        }
     }
 
     //=========== PolicyList Displayed =====================================================================

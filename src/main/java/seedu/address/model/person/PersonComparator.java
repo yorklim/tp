@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static seedu.address.model.Model.COMPARATOR_SHOW_ORIGINAL_ORDER;
+
 import java.util.Comparator;
 
 /**
@@ -41,7 +43,7 @@ public class PersonComparator {
             comparator = Comparator.comparing(Person::getSchedule);
             break;
         default:
-            return Comparator.comparing(Person::getName);
+            return COMPARATOR_SHOW_ORIGINAL_ORDER;
         }
         if (sortOrder == SortOrder.DESC) {
             return comparator.reversed();

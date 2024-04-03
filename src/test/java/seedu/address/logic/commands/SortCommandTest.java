@@ -33,7 +33,8 @@ public class SortCommandTest {
     @Test
     public void execute_sortNoPersonsModel_sortSuccesstul() {
         ModelManager expectedEmptyModel = new ModelManager(new AddressBook(new AddressBook()), new UserPrefs());
-        expectedEmptyModel.sortFilteredPersonList(PersonComparator.getComparator(SortCriteria.PRIORITY, SortOrder.ASC));
+        expectedEmptyModel.updateSortPersonComparator(
+                PersonComparator.getComparator(SortCriteria.PRIORITY, SortOrder.ASC));
         CommandTestUtil.assertCommandSuccess(new SortCommand(SortCriteria.PRIORITY, SortOrder.ASC),
                 new ModelManager(new AddressBook(new AddressBook()), new UserPrefs()),
                 invalidSortPriorityAsc, expectedEmptyModel);
@@ -42,7 +43,7 @@ public class SortCommandTest {
     @Test
     public void execute_sortPersonsModel_sortSuccessful() {
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.sortFilteredPersonList(PersonComparator.getComparator(SortCriteria.PRIORITY, SortOrder.ASC));
+        expectedModel.updateSortPersonComparator(PersonComparator.getComparator(SortCriteria.PRIORITY, SortOrder.ASC));
         CommandTestUtil.assertCommandSuccess(new SortCommand(SortCriteria.PRIORITY, SortOrder.ASC), model,
                 invalidSortPriorityAsc, expectedModel);
     }
@@ -51,7 +52,7 @@ public class SortCommandTest {
     public void execute_invalidSortCriteria_sortSuccessful() {
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         SortCommand sortCommand = new SortCommand(SortCriteria.INVALID, SortOrder.ASC);
-        expectedModel.sortFilteredPersonList(PersonComparator.getComparator(SortCriteria.INVALID, SortOrder.ASC));
+        expectedModel.updateSortPersonComparator(PersonComparator.getComparator(SortCriteria.INVALID, SortOrder.ASC));
         String expectedMessage = SortCommand.getMessageSuccess(SortCriteria.INVALID, SortOrder.ASC);
         CommandTestUtil.assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
@@ -60,7 +61,8 @@ public class SortCommandTest {
     public void execute_invalidSortOrder_sortSuccessful() {
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         SortCommand sortCommand = new SortCommand(SortCriteria.PRIORITY, SortOrder.INVALID);
-        expectedModel.sortFilteredPersonList(PersonComparator.getComparator(SortCriteria.PRIORITY, SortOrder.INVALID));
+        expectedModel.updateSortPersonComparator(
+                PersonComparator.getComparator(SortCriteria.PRIORITY, SortOrder.INVALID));
         String expectedMessage = SortCommand.getMessageSuccess(SortCriteria.PRIORITY, SortOrder.INVALID);
         CommandTestUtil.assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }

@@ -45,12 +45,12 @@ public class LastMetCommandTest {
         LastMetCommand lastMetCommand = new LastMetCommand(validIndex, new LastMet(validDate));
 
         CommandTestUtil.assertCommandSuccess(lastMetCommand, model,
-                String.format(MESSAGE_SUCCESS, model.getFilteredPersonList().get(0).getName()), expectedModel);
+                String.format(MESSAGE_SUCCESS, model.getSortedFilteredPersonList().get(0).getName()), expectedModel);
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index invalidIndex = Index.fromOneBased(model.getSortedFilteredPersonList().size() + 1);
         LocalDate validDate = LocalDate.now().minusDays(1);
 
         LastMetCommand lastMetCommand = new LastMetCommand(invalidIndex, new LastMet(validDate));
