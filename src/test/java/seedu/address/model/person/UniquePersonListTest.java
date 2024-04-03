@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDate;
@@ -178,6 +179,29 @@ public class UniquePersonListTest {
 
     @Test
     public void filterHaveUpcomingBirthday() {
+        Person personWithUpcomingBirthdaySecond = new PersonBuilder(ALICE).withBirthday(
+                DateUtil.parseDateToString(LocalDate.now().plusWeeks(1)
+                        .minusYears(40))).build();
+        Person personWithNoUpcomingBirthday = new PersonBuilder(BOB).withBirthday(
+                DateUtil.parseDateToString(LocalDate.now().minusDays(1)
+                        .minusYears(30))).build();
+        Person personWithUpcomingBirthdayFirst = new PersonBuilder(BENSON).withBirthday(
+                DateUtil.parseDateToString(LocalDate.now().plusDays(3)
+                        .minusYears(30))).build();
+
+        UniquePersonList newPersonsList = new UniquePersonList();
+        newPersonsList.add(personWithUpcomingBirthdaySecond);
+        newPersonsList.add(personWithNoUpcomingBirthday);
+        newPersonsList.add(personWithUpcomingBirthdayFirst);
+        ObservableList<Person> birthdayList = newPersonsList.sortFilterHaveUpcomingBirthday();
+
+        assertEquals(2, birthdayList.size());
+        assertEquals(personWithUpcomingBirthdayFirst, birthdayList.get(0));
+        assertEquals(personWithUpcomingBirthdaySecond, birthdayList.get(1));
+    }
+
+    @Test
+    public void sortFilterHaveUpcomingBirthday() {
         Person personWithUpcomingBirthday = new PersonBuilder(ALICE).withBirthday(
                 DateUtil.parseDateToString(LocalDate.now().plusWeeks(1)
                         .minusYears(40))).build();
@@ -188,7 +212,7 @@ public class UniquePersonListTest {
         UniquePersonList newPersonsList = new UniquePersonList();
         newPersonsList.add(personWithUpcomingBirthday);
         newPersonsList.add(personWithNoUpcomingBirthday);
-        ObservableList<Person> birthdayList = newPersonsList.filterHaveUpcomingBirthday();
+        ObservableList<Person> birthdayList = newPersonsList.sortFilterHaveUpcomingBirthday();
 
         assertEquals(1, birthdayList.size());
         assertTrue(birthdayList.contains(personWithUpcomingBirthday));

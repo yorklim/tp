@@ -9,6 +9,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -184,14 +186,13 @@ public class UniquePersonList implements Iterable<Person> {
      * Returns the list of persons who have upcoming birthdays, sorted by birthday.
      * @return list of persons who have upcoming birthdays
      */
-    public ObservableList<Person> filterHaveUpcomingBirthday() {
-        ObservableList<Person> personsWithUpcomingBirthdays = FXCollections.observableArrayList();
-        for (Person person : internalList) {
-            if (person.hasUpcomingBirthday()) {
-                personsWithUpcomingBirthdays.add(person);
-            }
-        }
-        personsWithUpcomingBirthdays.sort(Comparator.comparing(Person::getBirthday));
-        return personsWithUpcomingBirthdays;
+    public ObservableList<Person> sortFilterHaveUpcomingBirthday() {
+        FilteredList<Person> filteredPersonsWithUpcomingBirthdays = new FilteredList<>(internalList);
+        filteredPersonsWithUpcomingBirthdays.setPredicate(Person::hasUpcomingBirthday);
+        SortedList<Person> sortedFilteredPersonsWithUpcomingBirthdays =
+                new SortedList<>(filteredPersonsWithUpcomingBirthdays);
+        sortedFilteredPersonsWithUpcomingBirthdays.setComparator(
+                Comparator.comparing(Person::getBirthday, Birthday::compareByBirthdayMonthAndDateOnly));
+        return sortedFilteredPersonsWithUpcomingBirthdays;
     }
 }

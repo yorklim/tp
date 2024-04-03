@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -120,5 +121,25 @@ public class BirthdayTest {
 
         // different values -> returns false
         assertFalse(birthday.equals(new Birthday("1993-09-23")));
+    }
+
+    @Test
+    public void compareByBirthdayMonthAndDateOnly() {
+        Birthday birthday = new Birthday("1993-09-22");
+
+        // same values -> returns 0 regardless of year
+        assertEquals(0, birthday.compareByBirthdayMonthAndDateOnly(new Birthday("1998-09-22")));
+
+        // different month -> returns negative integer regardless of year
+        assertTrue(birthday.compareByBirthdayMonthAndDateOnly(new Birthday("1992-10-22")) < 0);
+
+        // different day -> returns negative integer regardless of year
+        assertTrue(birthday.compareByBirthdayMonthAndDateOnly(new Birthday("1991-09-23")) < 0);
+
+        // different month -> returns positive integer regardless of year
+        assertTrue(birthday.compareByBirthdayMonthAndDateOnly(new Birthday("2023-08-22")) > 0);
+
+        // different day -> returns positive integer regardless of year
+        assertTrue(birthday.compareByBirthdayMonthAndDateOnly(new Birthday("2008-09-01")) > 0);
     }
 }

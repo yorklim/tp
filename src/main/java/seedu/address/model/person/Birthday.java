@@ -80,4 +80,16 @@ public class Birthday implements Comparable<Birthday> {
     public int compareTo(Birthday other) {
         return date.compareTo(other.date);
     }
+
+    /**
+     * Compares the month and date of this birthday with another birthday.
+     * Ignores the year.
+     *
+     * @param other The other birthday to compare with
+     * @return A negative integer, zero, or a positive integer as this birthday is before, at the same time, or after
+     */
+    public int compareByBirthdayMonthAndDateOnly(Birthday other) {
+        int currentYear = LocalDate.now().getYear();
+        return date.withYear(currentYear).compareTo(other.date.withYear(currentYear));
+    }
 }
