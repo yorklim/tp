@@ -53,9 +53,9 @@ public class ClientDetailsCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        phone.setText("Phone Number: " + person.getPhone().value);
+        address.setText("Address: " + person.getAddress().value);
+        email.setText("Email: " + person.getEmail().value);
         birthday.setText("Date of Birth: " + person.getBirthday().toString());
         priority.setText("Priority: " + person.getPriority().toString());
         remark.setText("Remarks: " + person.getRemark().value);

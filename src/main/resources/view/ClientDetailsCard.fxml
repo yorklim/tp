@@ -48,7 +48,7 @@
                 <children>
                     <Label fx:id="lastMet" styleClass="cell_small_label" text="\$lastMet" wrapText="true" />
                     <Label fx:id="schedule" styleClass="cell_small_label" text="\$Schedule" wrapText="true" />
-                    <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+                    <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" wrapText="true" />
                 </children>
             </VBox>
          </children>
