@@ -329,7 +329,7 @@ For easy reference, similar features are grouped into the same subsections as sh
 ClientCare is all about managing your clients. ClientCare will help you keep track of all your clients and their
 details, so you never have to lose a contact again.
 
-[Add Client list & View display highlighted diagram]
+![Client list and client view panels'](images/ug/clientViewAndList.png =600x)
 
 ClientCare offers the following commands to help you manage your clients:
 * [Adding a client: `add`](#adding-a-client-add)
@@ -503,7 +503,7 @@ Not sure what is happening next? Fear not, ClientCare can help manage your sched
 ClientCare reminds you of your upcoming appointments as well as clients you have not met in a while. It also reminds you
 of your clients' birthday!
 
-[Add Reminder highlighted diagram]
+![Reminders panel'](images/ug/reminders.png =600x)
 
 **Last Met Display:** Shows you the list of clients you have not met in a while (that do not have an active schedule). You can set the overdue period using [`set`](#setting-last-met-overdue-period-set), by default is 90 days.
 
@@ -624,7 +624,7 @@ Not sure what policies your clients have? ClientCare got you covered!
 
 ClientCare helps you to manage all your clients' policies and allows you to view what policies your clients have easily.
 
-[Add Policies highlighted diagram]
+![Policies panel'](images/ug/policies.png =600x)
 
 ClientCare offers the following commands to help you manage your clients' policies:
 * [Adding a policy: `addpolicy`](#adding-a-policy-addpolicy)
