@@ -23,9 +23,11 @@ import seedu.address.model.person.Schedule;
 public class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": schedules an appointment with client. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Schedules an appointment with the client identified "
+            + "by the index number used in the displayed client list.\n"
             + "Parameters: "
-            + "INDEX "
+            + "INDEX (must be a positive integer) "
             + PREFIX_SCHEDULE + "DATE\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
