@@ -23,9 +23,10 @@ import seedu.address.model.person.Person;
 public class LastMetCommand extends Command {
     public static final String COMMAND_WORD = "met";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": marks a person as met. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the last met of the client identified "
+            + "by the index number used in the displayed client list.\n"
             + "Parameters: "
-            + "INDEX "
+            + "INDEX (must be a positive integer) "
             + PREFIX_LASTMET + "DATE\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "

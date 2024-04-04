@@ -24,9 +24,10 @@ import seedu.address.model.policy.Policy;
 public class AddPolicyCommand extends Command {
     public static final String COMMAND_WORD = "addpolicy";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": add a new policy to the client's policy list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new policy to the policy list of the client"
+            + " identified by the index number used in the displayed client list.\n"
             + "Parameters: "
-            + "INDEX "
+            + "INDEX (must be a positive integer) "
             + PREFIX_POLICYNAME + "POLICYNAME "
             + PREFIX_POLICYID + "POLICYID\n"
             + "Example: " + COMMAND_WORD + " "

@@ -12,7 +12,8 @@ import seedu.address.commons.util.DateUtil;
  * Guarantees: immutable; is valid as declared in {@link #isValidBirthday(String)}
  */
 public class Birthday implements Comparable<Birthday> {
-    public static final String MESSAGE_CONSTRAINTS = DateUtil.getMessageConstraintsForDateType("Birthday");
+    public static final String MESSAGE_CONSTRAINTS = DateUtil.getMessageConstraintsForDateType("Birthday")
+            + " Birthday should not be in the future.";
     public final LocalDate date;
 
     /**
