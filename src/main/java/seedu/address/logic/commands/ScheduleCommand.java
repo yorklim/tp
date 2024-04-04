@@ -28,7 +28,7 @@ public class ScheduleCommand extends Command {
             + "by the index number used in the displayed client list.\n"
             + "Parameters: "
             + "INDEX (must be a positive integer) "
-            + PREFIX_SCHEDULE + "DATE\n"
+            + PREFIX_SCHEDULE + "DATETIME\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
             + PREFIX_SCHEDULE + "2001-03-02 12:00 "
