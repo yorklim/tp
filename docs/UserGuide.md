@@ -290,7 +290,7 @@ Let's type the following command into the Command Input:
 
 
 
-![success_schedule](images/ug/success_add.png =600x)
+![success_schedule](images/ug/success_schedule.png =600x)
 
 <div style="page-break-after: always;"></div>
 
