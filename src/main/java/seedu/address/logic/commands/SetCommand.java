@@ -18,10 +18,8 @@ public class SetCommand extends Command {
     public static final String COMMAND_WORD = "set";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": sets the LastMet overdue time period. "
-            + "Parameters: "
-            + "NUMBER_OF_DAYS "
-            + "Example: " + COMMAND_WORD + " "
-            + "90.\n "
+            + "Parameters: NUMBER_OF_DAYS\n"
+            + "Example: " + COMMAND_WORD + " 90.\n"
             + "NUMBER_OF_DAYS must be an integer and be at least 0.";
 
     public static final String MESSAGE_SUCCESS = "LastMet Overdue time period has been set to %1$s days.";
