@@ -343,7 +343,7 @@ ClientCare offers the following commands to help you manage your clients:
 * [Finding a client: `find`](#finding-client-by-name-find)
 * [Adding notes to a client: `remark`](#adding-notes-to-clients-remark)
 * [Clearing all clients: `clear`](#clearing-all-entries-clear)
-* [Sorting your clients: `sort`](#sorting-the-client-list--sort)
+* [Sorting your clients: `sort`](#sorting-the-client-list-sort)
 <br/>
 <br/>
 
