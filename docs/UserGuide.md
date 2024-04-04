@@ -343,7 +343,7 @@ ClientCare offers the following commands to help you manage your clients:
 * [Finding a client: `find`](#finding-client-by-name-find)
 * [Adding notes to a client: `remark`](#adding-notes-to-clients-remark)
 * [Clearing all clients: `clear`](#clearing-all-entries-clear)
-* [Sorting your clients: `sort`](#sorting-the-client-list--sort)
+* [Sorting your clients: `sort`](#sorting-the-client-list-sort)
 <br/>
 <br/>
 
@@ -894,11 +894,12 @@ This refers to features or commands in ClientCare that are not related to Client
 | [**Find**](#finding-client-by-name-find)             | `find KEYWORD [MORE_KEYWORDS]`<br/> e.g. `find James Jake`                                                                                                                                                       |
 | [**Remark**](#adding-notes-to-clients-remark)        | `remark INDEX [r/REMARK]`<br/> e.g. `remark 3 r/Has 2 school-age children and 1 elderly dependent`                                                                                                               |
 | [**Clear**](#clearing-all-entries-clear)             | `clear`                                                                                                                                                                                                          |
+| [**Sort**](#sorting-the-client-list-sort)            | `sort CRITERIA o/ORDER` <br/> e.g. `sort priority o/desc`                                                                                                                                                        |
 | [**LastMet**](#updating-last-met-met)                | `met INDEX d/DATE`<br/> e.g. `met 2 d/2023-05-07`                                                                                                                                                                |
+| [**Set**](#setting-last-met-overdue-period-set)      | `set NUMBER_OF_DAYS`<br/> e.g. `set 5`                                                                                                                                                                           |
 | [**Schedule**](#scheduling-appointments-schedule)    | `schedule INDEX d/DATETIME`<br/> e.g. `schedule 2 d/2023-05-07 22:00`                                                                                                                                            |                                                                                                                               |
 | [**Mark**](#marking-appointments-mark)               | `mark INDEX`<br/> e.g. `mark 2`                                                                                                                                                                                  |                                                                                                                               |
 | [**Add Policy**](#adding-a-policy-addpolicy)         | `addpolicy INDEX n/POLICY_NAME i/POLICY_ID` <br/> e.g. `addpolicy 1 n/Life i/1`                                                                                                                                  |
 | [**Delete Policy**](#deleting-a-policy-deletepolicy) | `deletepolicy INDEX i/POLICY_ID` <br/> e.g. `deletepolicy 1 i/1`                                                                                                                                                 |
-| [**Sort**](#sorting-the-client-list-sort)            | `sort CRITERIA o/ORDER` <br/> e.g. `sort priority o/desc`                                                                                                                                                        |
 | [**Help**](#viewing-help-help)                       | `help`                                                                                                                                                                                                           |
 | [**Exit**](#exiting-the-program-exit)                | `exit`                                                                                                                                                                                                           |
