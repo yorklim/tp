@@ -35,6 +35,8 @@ Ready to use ClientCare? You can check out our [Features](#features) section. Fo
 
 Need a quick refresher? You can head to the [Command Summary](#command-summary) for a quick recap!
 
+Unsure of any terms? You can take a look at the [Glossary](#glossary) section.
+
 
 You can also refer to our [Table of Contents](#table-of-contents) to navigate between the different sections of this guide.
 
@@ -185,7 +187,7 @@ You will learn how the different parts of ClientCare look and work in this secti
 
 #### ClientCare's Display Components
 
-ClientCare has **6** components in its GUI. Different commands affect parts of the Display.
+ClientCare has **6** components in its display. Different commands affect parts of the Display.
 You can refer to the [Quick Tutorial](#quick-tutorial) to see how the different parts of the display change when entering commands!
 
 ![Display](images/ug/GUI%20v1.3%20Graphic.png)
@@ -224,7 +226,7 @@ Here are some things to take note of when using them!
 * Fields often have a prefix in front of them. For example, name has `n/` and date has `d/`. The command format will show what field a prefix is referring to in uppercase, like `n/NAME`, in case you forget!
 * Some fields are even optional, and they'll be shown with square brackets: `[a/ADDRESS]`.
 * Fields that have a trailing ellipsis behind them like `[t/TAG]...`, meaning you can use multiple of them, so you can have both `t/friend t/drives` in one command.
-* Not all commands have fields! For example, when clearing your client list, a simple command keyword of `clear` will do! There is no need to have a parameter such as `clear 1` or `clear 2`.
+* Not all commands have fields! For example, when clearing your client list, a simple command keyword of `clear` will do! There is no need to have a field such as `clear 1` or `clear 2`.
 
 The full list of commands and their formats can be found under the [Features](#features) section.
 Alternatively, [Command Summary](#command-summary) has all of them under one page for a quick reference.
@@ -340,6 +342,7 @@ ClientCare offers the following commands to help you manage your clients:
 * [Finding a client: `find`](#finding-client-by-name-find)
 * [Adding notes to a client: `remark`](#adding-notes-to-clients-remark)
 * [Clearing all clients: `clear`](#clearing-all-entries-clear)
+* [Sorting your clients: `sort`](#sorting-the-client-list--sort)
 <br/>
 <br/>
 
@@ -352,7 +355,7 @@ Format: `add n/NAME c/PHONE_NUMBER e/EMAIL a/ADDRESS d/BIRTHDAY p/PRIORITY [t/TA
 <box type="info">
 
 **Note:** A client can have any number of tags (including 0). For example, `t/owesMoney t/friends` is allowed.<br/>
-All other fields (with the exception of tags) cannot have duplicate parameters. For example, `c/1234567 c/7654321` is **not** allowed.
+All other fields (with the exception of tags) cannot have duplicate fields. For example, `c/1234567 c/7654321` is **not** allowed.
 </box>
 
 Fields usage for client details:
@@ -397,7 +400,7 @@ Examples:
 
 You can edit an existing client with `edit`.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDAY] [p/PRIORITY] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [c/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDAY] [p/PRIORITY] [t/TAG]…​`
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -405,7 +408,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDAY] [p/PRI
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
 * You can remove all the client’s tags by typing `t/` without
   specifying any tags after it.
-* Refer to the [Adding a client](#adding-a-client-add) section for the usage of the parameters.
+* Refer to the [Adding a client](#adding-a-client-add) section for the usage of the fields.
 
 Examples:
 *  `edit 1 c/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
@@ -497,6 +500,23 @@ Format: `clear`
 
 <div style="page-break-after: always;"></div>
 
+### Sorting the client list : `sort`
+
+You can sort the client list with `sort`:
+
+Format: `sort CRITERIA o/ORDER`
+
+* Sorts the client list by the specified `CRITERIA`. Sorting `CRITERIA` is *case-insensitive*.
+* Sortng `CRITERIA` can be `name`, `phone`, `email`, `address`, `birthday`, `priority`, `lastmet`, `schedule`.
+* Sorting `ORDER` is specified by `ORDER` and can be `asc` for ascending or `desc` for descending. Sorting `ORDER` is *case-insensitive*
+
+Examples:
+* `sort name o/asc` sorts the client list by name in ascending order.
+* `sort priority o/desc` sorts the client list by priority in descending order.
+* `sort lastmet o/asc` sorts the client list by last met date in ascending order.
+
+<div style="page-break-after: always;"></div>
+
 ## Schedule related commands
 Not sure what is happening next? Fear not, ClientCare can help manage your schedule too!
 
@@ -562,6 +582,8 @@ Examples:
 * `set 75` updates the last met overdue duration to 75 days. Clients who you have not met in more than 75 days or
 no appointments are scheduled will show up in the Last Met reminder display.
 
+<div style="page-break-after: always;"></div>
+
 ### Scheduling appointments : `schedule`
 
 Got a new appointment or a postpone is needed?
@@ -585,7 +607,6 @@ Examples:
 **Note:** ClientCare will not allow you to schedule with someone from a past date.
 </box>
 
-<div style="page-break-after: always;"></div>
 
 ### Marking appointments : `mark`
 
@@ -667,21 +688,6 @@ Examples:
 <div style="page-break-after: always;"></div>
 
 ## Miscellaneous
-
-### Sorting the client list : `sort`
-
-You can sort the client list with `sort`:
-
-Format: `sort CRITERIA o/ORDER`
-
-* Sorts the client list by the specified `CRITERIA`. Sorting `CRITERIA` is *case-insensitive*.
-* Sortng `CRITERIA` can be `name`, `phone`, `email`, `address`, `birthday`, `priority`, `lastmet`, `schedule`.
-* Sorting `ORDER` is specified by `ORDER` and can be `asc` for ascending or `desc` for descending. Sorting `ORDER` is *case-insensitive*
-
-Examples:
-* `sort name o/asc` sorts the client list by name in ascending order.
-* `sort priority o/desc` sorts the client list by priority in descending order.
-* `sort lastmet o/asc` sorts the client list by last met date in ascending order.
 
 ### Viewing help : `help`
 
@@ -792,25 +798,101 @@ Furthermore, certain edits can cause the ClientCare to behave in unexpected ways
 
 # Glossary
 
+1. **Desktop Application**
+
+This refers to electronic devices that ClientCare can run on. This includes devices such as computers and laptops. 
+Mobile devices such as phones and tablets are not supported by ClientCare.
+
+2. **Features**
+
+These are things ClientCare can do!
+
+3. **Command**
+
+This is the text you type to tell ClientCare what to do!
+
+4. **Hyperlinks**
+
+These are texts that you can click on. They will either bring you to another section in the User Guide or open up
+the relevant website link. Not to worry, all external website links are from official distributors and are safe!
+
+5. **Fields**
+
+These are inputs that you can choose! For example: `name`, `phone number`, `date` are all fields you can type into ClientCare.
+
+6. **Java 11**
+
+Java is the programming language that ClientCare is built on! The number 11 refers to Java version. Not to worry!
+You do not need to know programming to use ClientCare.
+
+7. **Index**
+
+This is the number which is assigned to a particular Client. For example, the 3rd client in the list will have the index `3`.
+
+8. **Integer**
+
+This is a whole number. No decimal or fractions is allowed.
+-7 , -1, 0, 7, 14 are all integers. 3.14 or 5/8 are not integers.
+
+9. **Address**
+
+This is the place your client lives at.
+
+10. **Prefix**
+
+These are characters that you need to put in front of certain fields. For example, phone numbers have the prefix `c/` and
+names have the prefix `n/`. Indexes do not have any prefix in front.
+
+For more information, you can visit our [**Text Command Introduction**](#text-commands-introduction) for a more comprehensive explanation.
+
+11. **Email**
+
+Emails have 2 components. The `local-part` and the `domain`. The `local-part` often refers to the username while `domain` is where
+the email was created from. 
+
+For example: mike@gmail.com
+
+`mike` will be the `local-part` while `gmail.com` will be the `domain`.
+
+12. **Not Cumulative**
+
+This means that the new value added will not be added on top of the existing information. This is especially so for Tags.
+For example, if a Client currently has 2 tags `friend` and `important`, editing the tags with `high` will override the previous 2 tags.
+The Client will only have the high `high` tag upon a success edit. To preserve all the tags, users must key in all previous tags in addition
+to their new tag they wish to add.
+
+<div style="page-break-after: always;"></div>
+
+13. **Last Met Overdue Period**
+
+This refers to the number of days users can wait and not meet up with the Client before the Client shows up in the Last Met Display.
+
+The default period is 90 days. You can change this value using the `set` command.
+
+14. **Miscellaneous**
+
+This refers to features or commands in ClientCare that are not related to Client, Schedules or Policies.
+
+
 <div style="page-break-after: always;"></div>
 
 # Command summary
 
-| Action                                                | Format, Examples                                                                                                                                                                                                 |
-|-------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add**](#adding-a-client-add)                       | `add n/NAME c/PHONE_NUMBER e/EMAIL a/ADDRESS d/BIRTHDAY p/PRIORITY [t/TAG]…​` <br/> e.g.`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/1990-01-01 p/medium t/friend t/colleague` |
-| [**Delete**](#deleting-a-client-delete)               | `delete INDEX`<br/> e.g. `delete 3`                                                                                                                                                                              |
-| [**Edit**](#editing-a-client-edit)                    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDAY] [p/PRIORITY] [t/TAG]…​`<br/> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                   |
-| [**List**](#listing-all-clients-list)                 | `list`                                                                                                                                                                                                           |
-| [**View**](#viewing-a-client-view)                    | `view INDEX`<br/> e.g, `view 1`                                                                                                                                                                                  |
-| [**Find**](#finding-a-client-find)                    | `find KEYWORD [MORE_KEYWORDS]`<br/> e.g. `find James Jake`                                                                                                                                                       |
-| [**Remark**](#adding-notes-to-clients-remark)         | `remark INDEX r/REMARK`<br/> e.g. `remark 3 r/Has 2 school-age children and 1 elderly dependent`                                                                                                                 |
-| [**Clear**](#clearing-all-entries-clear)              | `clear`                                                                                                                                                                                                          |
-| [**LastMet**](#updating-last-met-met)                 | `met INDEX [d/DATE]`<br/> e.g. `met 2 d/2023-05-07`                                                                                                                                                              |
-| [**Schedule**](#scheduling-appointments-schedule)     | `schedule INDEX [d/DATETIME]`<br/> e.g. `schedule 2 d/2023-05-07 22:00`                                                                                                                                          |                                                                                                                               |
-| [**Mark**](#marking-appointments-mark)                | `mark INDEX`<br/> e.g. `mark 2`                                                                                                                                                                                  |                                                                                                                               |
-| [**Add Policy**](#adding-a-policy-addpolicy)          | `addpolicy INDEX n/POLICY_NAME i/POLICY_ID` <br/> e.g. `addpolicy 1 n/Life i/1`                                                                                                                                  |
-| [**Delete Policy**](#deleting-a-policy-deletepolicy)  | `deletepolicy INDEX i/POLICY_ID` <br/> e.g. `deletepolicy 1 i/1`                                                                                                                                                 |
-| [**Sort**](#sorting-the-client-list)                  | `sort CRITERIA o/ORDER` <br/> e.g. `sort priority o/desc`                                                                                                                                                        |
-| [**Help**](#viewing-help-help)                        | `help`                                                                                                                                                                                                           |
-| [**Exit**](#exiting-the-program-exit)                 | `exit`                                                                                                                                                                                                           |
+| Action                                               | Format, Examples                                                                                                                                                                                                 |
+|------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-client-add)                      | `add n/NAME c/PHONE_NUMBER e/EMAIL a/ADDRESS d/BIRTHDAY p/PRIORITY [t/TAG]…​` <br/> e.g.`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/1990-01-01 p/medium t/friend t/colleague` |
+| [**Delete**](#deleting-a-client-delete)              | `delete INDEX`<br/> e.g. `delete 3`                                                                                                                                                                              |
+| [**Edit**](#editing-a-client-edit)                   | `edit INDEX [n/NAME] [c/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDAY] [p/PRIORITY] [t/TAG]…​`<br/> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                   |
+| [**List**](#listing-all-clients-list)                | `list`                                                                                                                                                                                                           |
+| [**View**](#viewing-a-client-view)                   | `view INDEX`<br/> e.g, `view 1`                                                                                                                                                                                  |
+| [**Find**](#finding-client-by-name-find)             | `find KEYWORD [MORE_KEYWORDS]`<br/> e.g. `find James Jake`                                                                                                                                                       |
+| [**Remark**](#adding-notes-to-clients-remark)        | `remark INDEX r/REMARK`<br/> e.g. `remark 3 r/Has 2 school-age children and 1 elderly dependent`                                                                                                                 |
+| [**Clear**](#clearing-all-entries-clear)             | `clear`                                                                                                                                                                                                          |
+| [**LastMet**](#updating-last-met-met)                | `met INDEX [d/DATE]`<br/> e.g. `met 2 d/2023-05-07`                                                                                                                                                              |
+| [**Schedule**](#scheduling-appointments-schedule)    | `schedule INDEX [d/DATETIME]`<br/> e.g. `schedule 2 d/2023-05-07 22:00`                                                                                                                                          |                                                                                                                               |
+| [**Mark**](#marking-appointments-mark)               | `mark INDEX`<br/> e.g. `mark 2`                                                                                                                                                                                  |                                                                                                                               |
+| [**Add Policy**](#adding-a-policy-addpolicy)         | `addpolicy INDEX n/POLICY_NAME i/POLICY_ID` <br/> e.g. `addpolicy 1 n/Life i/1`                                                                                                                                  |
+| [**Delete Policy**](#deleting-a-policy-deletepolicy) | `deletepolicy INDEX i/POLICY_ID` <br/> e.g. `deletepolicy 1 i/1`                                                                                                                                                 |
+| [**Sort**](#sorting-the-client-list-sort)            | `sort CRITERIA o/ORDER` <br/> e.g. `sort priority o/desc`                                                                                                                                                        |
+| [**Help**](#viewing-help-help)                       | `help`                                                                                                                                                                                                           |
+| [**Exit**](#exiting-the-program-exit)                | `exit`                                                                                                                                                                                                           |
