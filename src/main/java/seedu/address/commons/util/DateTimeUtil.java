@@ -38,12 +38,24 @@ public class DateTimeUtil {
             return false;
         }
 
+        LocalDateTime dateTime;
+
         try {
-            LocalDateTime.parse(test, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            return true;
+            dateTime = LocalDateTime.parse(test, DateTimeFormatter.ofPattern(DATE_FORMAT));
         } catch (DateTimeParseException e) {
             return false;
         }
+
+        // Date is not parsable if truncation needed, eg. 29 Feb on non leap years will be truncated by parser
+        if (!DateTimeUtil.parseDateToString(dateTime).equals(test)) {
+            return false;
+        }
+
+        if (dateTime == null) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

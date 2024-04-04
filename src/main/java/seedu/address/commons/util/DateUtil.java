@@ -9,7 +9,8 @@ import java.time.format.DateTimeParseException;
  * Helper functions for handling dates and times.
  */
 public class DateUtil {
-    public static final String MESSAGE_CONSTRAINTS = "should be in the format YYYY-MM-DD and must be an actual date";
+    public static final String MESSAGE_CONSTRAINTS =
+            "date should be in the format YYYY-MM-DD and must be an actual date.";
     public static final String DATE_FORMAT = "yyyy-MM-dd";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}";
 
@@ -37,12 +38,24 @@ public class DateUtil {
             return false;
         }
 
+        LocalDate date;
+
         try {
-            LocalDate.parse(test, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            return true;
+            date = LocalDate.parse(test, DateTimeFormatter.ofPattern(DATE_FORMAT));
         } catch (DateTimeParseException e) {
             return false;
         }
+
+        // Date is not parsable if truncation needed, eg. 29 Feb on non leap years will be truncated by parser
+        if (!DateUtil.parseDateToString(date).equals(test)) {
+            return false;
+        }
+
+        if (date == null) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

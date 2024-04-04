@@ -20,6 +20,7 @@ import seedu.address.model.person.LastMet;
  * Parses input arguments and creates a new LastMetCommand object
  */
 public class LastMetCommandParser {
+    public static final String DATE_MESSAGE_CONSTRAINTS = DateUtil.getMessageConstraintsForDateType("LastMet");
 
     /**
      * Parses the given {@code String} of arguments in the context of the LastMetCommand
@@ -46,6 +47,9 @@ public class LastMetCommandParser {
 
         String lastMetString = argMultimap.getValue(PREFIX_LASTMET).orElse("");
 
+        if (!DateUtil.isValidDateString(lastMetString)) {
+            throw new ParseException(DATE_MESSAGE_CONSTRAINTS);
+        }
         try {
             LastMet lastMet = convertStringToLastMet(lastMetString);
             return new LastMetCommand(index, lastMet);
@@ -62,7 +66,10 @@ public class LastMetCommandParser {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private LastMet convertStringToLastMet(String input) {
+    private LastMet convertStringToLastMet(String input) throws DateTimeParseException {
+        if (!DateUtil.isValidDateString(input)) {
+            throw new DateTimeParseException(DATE_MESSAGE_CONSTRAINTS, input, 0);
+        }
         LocalDate formattedInput = DateUtil.parseStringToDate(input);
         return new LastMet(formattedInput);
     }
