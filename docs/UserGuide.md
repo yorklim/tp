@@ -500,11 +500,18 @@ Format: `clear`
 ## Schedule related commands
 Not sure what is happening next? Fear not, ClientCare can help manage your schedule too!
 
-### Reminders
 ClientCare reminds you of your upcoming appointments as well as clients you have not met in a while. It also reminds you
 of your clients' birthday!
 
 [Add Reminder highlighted diagram]
+
+**Last Met Display:** Shows you the list of clients you have not met in a while (that do not have an active schedule). You can set the overdue period using [`set`](#setting-last-met-overdue-period-set), by default is 90 days.
+
+**Schedule Display:** Shows you the list of clients you have an appointment with.
+
+**Birthday Display:** Shows you the list of clients whose birthday is within the next 7 days.
+
+<br/>
 
 ClientCare offers the following commands to help you manage your schedule:
 * [Updating last met: `met`](#updating-last-met-met)
@@ -615,7 +622,6 @@ Examples:
 ## Policy related commands
 Not sure what policies your clients have? ClientCare got you covered!
 
-### Policy List
 ClientCare helps you to manage all your clients' policies and allows you to view what policies your clients have easily.
 
 [Add Policies highlighted diagram]
