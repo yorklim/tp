@@ -18,7 +18,7 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": sorts the client list in the address book. "
+            + ": Sorts the client list in the address book.\n"
             + "Parameters: "
             + "CRITERIA "
             + PREFIX_SORT_ORDER + "ORDER\n"

@@ -14,17 +14,17 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_LASTMET_FUTURE = "You cannot meet someone from the future.";
-    public static final String MESSAGE_SCHEDULE_PAST = "You cannot schedule an appointment in the past.";
-    public static final String MESSAGE_SCHEDULE_DONE = "This schedule has already been completed.";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The client index provided is not on the list!";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d clients listed!";
+    public static final String MESSAGE_LASTMET_FUTURE = "You cannot meet someone from the future!";
+    public static final String MESSAGE_SCHEDULE_PAST = "You cannot schedule an appointment in the past!";
+    public static final String MESSAGE_SCHEDULE_DONE = "This schedule has already been completed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_DUPLICATE_POLICY =
-            "You cannot add a policy with the same Policy ID as an existing policy";
+            "You cannot add a policy with the same Policy ID as an existing policy!";
     public static final String MESSAGE_POLICY_NOT_FOUND =
-            "You cannot delete a policy that does not exist";
+            "You cannot delete a policy that does not exist!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

@@ -21,9 +21,10 @@ import seedu.address.model.person.Schedule;
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": marks a schedule as done. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the schedule of the client identified "
+            + "by the index number used in the displayed client list.\n"
             + "Parameters: "
-            + "INDEX "
+            + "INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 ";
 

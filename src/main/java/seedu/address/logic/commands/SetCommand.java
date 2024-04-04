@@ -17,13 +17,13 @@ import seedu.address.storage.SetStorage;
 public class SetCommand extends Command {
     public static final String COMMAND_WORD = "set";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the LastMet overdue time period. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets the LastMet overdue time period.\n"
             + "Parameters: "
-            + "NUMBER_OF_DAYS (must be an integer and be at least 0.)\n"
+            + "NUMBER_OF_DAYS (must be an integer and be at least 0)\n"
             + "Example: " + COMMAND_WORD + " "
             + "90.";
 
-    public static final String MESSAGE_SUCCESS = "LastMet Overdue time period has been set to %1$s days.";
+    public static final String MESSAGE_SUCCESS = "LastMet overdue time period has been set to %1$s days.";
     /**
      * Creates a LastMetCommand to update last mete date of the specified {@code Person}
      */
