@@ -647,6 +647,21 @@ Examples:
 
 ## Miscellaneous
 
+### Sorting the client list : `sort`
+
+You can sort the client list with `sort`:
+
+Format: `sort CRITERIA o/ORDER`
+
+* Sorts the client list by the specified `CRITERIA`. Sorting `CRITERIA` is *case-insensitive*.
+* Sortng `CRITERIA` can be `name`, `phone`, `email`, `address`, `birthday`, `priority`, `lastmet`, `schedule`.
+* Sorting `ORDER` is specified by `ORDER` and can be `asc` for ascending or `desc` for descending. Sorting `ORDER` is *case-insensitive*
+
+Examples:
+* `sort name o/asc` sorts the client list by name in ascending order.
+* `sort priority o/desc` sorts the client list by priority in descending order.
+* `sort lastmet o/asc` sorts the client list by last met date in ascending order.
+
 ### Viewing help : `help`
 
 You can look for help by typing `help`.
