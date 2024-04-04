@@ -322,6 +322,8 @@ For easy reference, similar features are grouped into the same subsections as sh
 ClientCare is all about managing your clients. ClientCare will help you keep track of all your clients and their
 details, so you never have to lose a contact again.
 
+[Add Client list & View display highlighted diagram]
+
 ClientCare offers the following commands to help you manage your clients:
 * [Adding a client: `add`](#adding-a-client-add)
 * [Deleting a client: `delete`](#deleting-a-client-delete)
@@ -491,8 +493,15 @@ Format: `clear`
 ## Schedule related commands
 Not sure what is happening next? Fear not, ClientCare can help manage your schedule too!
 
+### Reminders
+ClientCare reminds you of your upcoming appointments as well as clients you have not met in a while. It also reminds you
+of your clients' birthday!
+
+[Add Reminder highlighted diagram]
+
 ClientCare offers the following commands to help you manage your schedule:
 * [Updating last met: `met`](#updating-last-met-met)
+* [Setting last met overdue period: `set`](#setting-last-met-overdue-period-set)
 * [Scheduling an appointment: `schedule`](#scheduling-appointments-schedule)
 * [Marking an appointment: `mark`](#marking-appointments-mark)
 
@@ -533,7 +542,7 @@ Rather, you will see him under the Schedule Display.
 <br/>
 <br/>
 
-### Setting last met overdue period: `set`
+### Setting last met overdue period : `set`
 
 Feel that 90 days is too short or long of a period? You can set your own desired overdue duration with `set`.
 
@@ -598,6 +607,11 @@ Examples:
 
 ## Policy related commands
 Not sure what policies your clients have? ClientCare got you covered!
+
+### Policy List
+ClientCare helps you to manage all your clients' policies and allows you to view what policies your clients have easily.
+
+[Add Policies highlighted diagram]
 
 ClientCare offers the following commands to help you manage your clients' policies:
 * [Adding a policy: `addpolicy`](#adding-a-policy-addpolicy)
