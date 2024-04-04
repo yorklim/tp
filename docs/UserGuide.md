@@ -474,7 +474,7 @@ Examples:
 
 You can add notes to each client with `remark`.
 
-Format: `remark INDEX r/REMARK`
+Format: `remark INDEX [r/REMARK]`
 
 * Adds a note to the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
@@ -482,7 +482,7 @@ Format: `remark INDEX r/REMARK`
 
 Examples:
 * `remark 2 r/Has 2 school-age children and 1 elderly dependent` adds a remark for the 2nd client in the client list.
-* `remark 1 r/` deletes the remark for the 1st client in the client list.
+* `remark 1` deletes the remark for the 1st client in the client list.
 
 <br/>
 <br/>
@@ -573,8 +573,8 @@ Rather, you will see him under the Schedule Display.
 **Note:** ClientCare will not allow you to meet someone from a future date.
 
 </box>
-<br/>
-<br/>
+
+<div style="page-break-after: always;"></div>
 
 ### Setting last met overdue period : `set`
 
@@ -589,7 +589,6 @@ Examples:
 * `set 75` updates the last met overdue duration to 75 days. Clients who you have not met in more than 75 days or
 no appointments are scheduled will show up in the Last Met reminder display.
 
-<div style="page-break-after: always;"></div>
 
 ### Scheduling appointments : `schedule`
 
@@ -892,10 +891,10 @@ This refers to features or commands in ClientCare that are not related to Client
 | [**List**](#listing-all-clients-list)                | `list`                                                                                                                                                                                                           |
 | [**View**](#viewing-a-client-view)                   | `view INDEX`<br/> e.g, `view 1`                                                                                                                                                                                  |
 | [**Find**](#finding-client-by-name-find)             | `find KEYWORD [MORE_KEYWORDS]`<br/> e.g. `find James Jake`                                                                                                                                                       |
-| [**Remark**](#adding-notes-to-clients-remark)        | `remark INDEX r/REMARK`<br/> e.g. `remark 3 r/Has 2 school-age children and 1 elderly dependent`                                                                                                                 |
+| [**Remark**](#adding-notes-to-clients-remark)        | `remark INDEX [r/REMARK]`<br/> e.g. `remark 3 r/Has 2 school-age children and 1 elderly dependent`                                                                                                               |
 | [**Clear**](#clearing-all-entries-clear)             | `clear`                                                                                                                                                                                                          |
-| [**LastMet**](#updating-last-met-met)                | `met INDEX [d/DATE]`<br/> e.g. `met 2 d/2023-05-07`                                                                                                                                                              |
-| [**Schedule**](#scheduling-appointments-schedule)    | `schedule INDEX [d/DATETIME]`<br/> e.g. `schedule 2 d/2023-05-07 22:00`                                                                                                                                          |                                                                                                                               |
+| [**LastMet**](#updating-last-met-met)                | `met INDEX d/DATE`<br/> e.g. `met 2 d/2023-05-07`                                                                                                                                                                |
+| [**Schedule**](#scheduling-appointments-schedule)    | `schedule INDEX d/DATETIME`<br/> e.g. `schedule 2 d/2023-05-07 22:00`                                                                                                                                            |                                                                                                                               |
 | [**Mark**](#marking-appointments-mark)               | `mark INDEX`<br/> e.g. `mark 2`                                                                                                                                                                                  |                                                                                                                               |
 | [**Add Policy**](#adding-a-policy-addpolicy)         | `addpolicy INDEX n/POLICY_NAME i/POLICY_ID` <br/> e.g. `addpolicy 1 n/Life i/1`                                                                                                                                  |
 | [**Delete Policy**](#deleting-a-policy-deletepolicy) | `deletepolicy INDEX i/POLICY_ID` <br/> e.g. `deletepolicy 1 i/1`                                                                                                                                                 |
