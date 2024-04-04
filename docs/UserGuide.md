@@ -188,7 +188,7 @@ You will learn how the different parts of ClientCare look and work in this secti
 ClientCare has **6** components in its GUI. Different commands affect parts of the Display.
 You can refer to the [Quick Tutorial](#quick-tutorial) to see how the different parts of the display change when entering commands!
 
-![Display](images/ug/GUI%20v1.2%20Graphic.png)
+![Display](images/ug/GUI%20v1.3%20Graphic.png)
 
 
 <div style="page-break-after: always;"></div>
@@ -269,14 +269,14 @@ Type the following into the Command Input:
 
 ![success_add](images/ug/success_add.png =600x)
 
-
+<div style="page-break-after: always;"></div>
 
 3. Now let's schedule an appointment with James Wee 7 days from now. From the Client List, James has an index of `7`.
-When this guide was released, today was 27 March 2024. Hence, let's set the appointment at 3 April 2024 2pm.
+When this guide was released, today was 4 April 2024. Hence, let's set the appointment at 11 April 2024 2pm.
 Let's type the following command into the Command Input:
 
 
-`schedule 7 d/2024-04-03 14:00`
+`schedule 7 d/2024-04-11 14:00`
 
 ![schedule](images/ug/schedule.png =600x)
 
@@ -300,6 +300,13 @@ ClientCare will show us the error along with the correct command format in the F
 
 
 ![error](images/ug/error.png =600x)
+
+<box type="info">
+
+**Note:** The Feedback Display may be unable to show the entire error message at once. You can scroll down in the
+Feedback Display to see the whole message. All error messages due to invalid formatting will end with an example.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -780,6 +787,10 @@ Furthermore, certain edits can cause the ClientCare to behave in unexpected ways
 **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the application will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+# Glossary
 
 <div style="page-break-after: always;"></div>
 
