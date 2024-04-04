@@ -3,6 +3,7 @@
   title: "User Guide"
   pageNav: 3
 ---
+![ClientCareLogo](images/ClientCareLogo.png =250x)
 
 # ClientCare User Guide
 This user guide is meant for ClientCare Version `v1.3`.
