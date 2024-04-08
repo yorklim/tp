@@ -16,7 +16,7 @@ public class Policy {
      * The constant MESSAGE_CONSTRAINTS_ID.
      */
     public static final String MESSAGE_CONSTRAINTS_ID =
-            "Policy ID should only contain numbers, and it should be at least 1 digits long";
+            "Policy ID should only contain numbers, and it should be at least 1 digit long";
     /**
      * The constant VALIDATION_NAME_REGEX.
      */

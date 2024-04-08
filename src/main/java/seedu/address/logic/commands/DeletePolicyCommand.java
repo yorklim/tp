@@ -23,7 +23,7 @@ public class DeletePolicyCommand extends Command {
     public static final String COMMAND_WORD = "deletepolicy";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a policy from the policy list of the client"
-            + "identified by the index number used in the displayed client list.\n"
+            + " identified by the index number used in the displayed client list.\n"
             + "Parameters: "
             + "INDEX (must be a positive integer) "
             + PREFIX_POLICYID + "POLICYID\n"
