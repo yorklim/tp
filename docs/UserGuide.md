@@ -227,7 +227,8 @@ Here are some things to take note of when using them!
 * Fields often have a prefix in front of them. For example, name has `n/` and date has `d/`. The command format will show what field a prefix is referring to in uppercase, like `n/NAME`, in case you forget!
 * Some fields are even optional, and they'll be shown with square brackets: `[a/ADDRESS]`.
 * Fields that have a trailing ellipsis behind them like `[t/TAG]...`, meaning you can use multiple of them, so you can have both `t/friend t/drives` in one command.
-* Not all commands have fields! For example, when clearing your client list, a simple command keyword of `clear` will do! There is no need to have a field such as `clear 1` or `clear 2`.
+* Not all commands take in fields! For example, when clearing your client list, a simple command keyword of `clear` will do! If any extraneous fields are present for these commands, they will be ignored. 
+For example, `clear 1` and `clear all` will both be interpreted as `clear`.
 
 The full list of commands and their formats can be found under the [Features](#features) section.
 Alternatively, [Command Summary](#command-summary) has all of them under one page for a quick reference.
@@ -261,7 +262,7 @@ Let's boot up ClientCare and get started!
 
 Type the following into the Command Input:
 
-`add n/James Wee c/98765432 e/james@hotmail.com a/East Coat Blk 112 d/1998-05-25 p/vip`
+`add n/James Wee c/98765432 e/james@hotmail.com a/East Coast Blk 112 d/1998-05-25 p/vip`
 
 ![addclient](images/ug/addclient.png =600x)
 
@@ -285,7 +286,8 @@ Let's type the following command into the Command Input:
 
 <box type="info">
 
-**Note:** Since you cannot schedule an appointment on a date that has passed, do change the date field as needed.
+**Note:** Since you cannot schedule an appointment for a date and time that has passed or that exact moment, 
+do change the date field as needed.
 
 </box>
 
@@ -361,15 +363,15 @@ All other fields (with the exception of tags) cannot have duplicate fields. For 
 
 Fields usage for client details:
 
-| Field            | Usage                                                                              | Example                          |
-|------------------|------------------------------------------------------------------------------------|----------------------------------|
-| 'n/NAME'         | All names in the system must be unique                                             | `n/John Doe`                     |
-| 'c/PHONE_NUMBER' | Phone numbers should only contain numbers, and it should be at least 3 digits long | `c/98765432`                     |
-| 'e/EMAIL'        | Email should be in the format of `local-part@domain`                               | `e/johndoe@email.com`            |
-| 'a/ADDRESS'      | Address can take any text value                                                    | `a/311, Clementi Ave 2, #02-25`  |
-| 'd/BIRTHDAY'     | Birthday should be in the format of `YYYY-MM-DD`                                   | `d/1990-01-01`                   |
-| 'p/PRIORITY'     | Priority can be `low`, `medium`, `high`, `vip`, or `l`, `m`, `h`, `v`              | `p/medium`, `p/h`                |
-| 't/TAG'          | Tags can be any text value                                                         | `t/friends`                      |
+| Field            | Usage                                                                                    | Example                         |
+|------------------|------------------------------------------------------------------------------------------|---------------------------------|
+| 'n/NAME'         | All names in the system must be unique                                                   | `n/John Doe`                    |
+| 'c/PHONE_NUMBER' | Phone numbers should only contain numbers, and it should be at least 3 digits long       | `c/98765432`                    |
+| 'e/EMAIL'        | Email should be in the format of `local-part@domain`                                     | `e/johndoe@email.com`           |
+| 'a/ADDRESS'      | Address can take any text value                                                          | `a/311, Clementi Ave 2, #02-25` |
+| 'd/BIRTHDAY'     | Birthday should be in the format of `YYYY-MM-DD`                                         | `d/1990-01-01`                  |
+| 'p/PRIORITY'     | Priority can be `low`, `medium`, `high`, `vip`, or `l`, `m`, `h`, `v` <br/>(Case Insensitive) | `p/medium`, `p/mEdIuM` ,`p/m`   |
+| 't/TAG'          | Tags can be any text value                                                               | `t/friends`                     |
 
 Examples:
 * `add n/John Doe c/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/1990-01-01 p/low t/friends t/owesMoney`
@@ -451,7 +453,7 @@ Examples:
 You can look for a client with `find`.
 Client whose names contain any of the given keywords will show up!
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
@@ -473,7 +475,7 @@ Examples:
 
 ### Adding notes to clients: `remark`
 
-You can add notes to each client with `remark`.
+You can add notes to each client with `remark`. If a current remark exists, it will be replaced with the new remark.
 
 Format: `remark INDEX [r/REMARK]`
 
@@ -484,6 +486,11 @@ Format: `remark INDEX [r/REMARK]`
 Examples:
 * `remark 2 r/Has 2 school-age children and 1 elderly dependent` adds a remark for the 2nd client in the client list.
 * `remark 1` deletes the remark for the 1st client in the client list.
+
+<box type="tip">
+
+**Tip:** To remove a remark, you can use either `remark INDEX` or `remark INDEX r/`!
+</box>
 
 <br/>
 <br/>
@@ -593,7 +600,7 @@ no appointments are scheduled will show up in the Last Met reminder display.
 
 ### Scheduling appointments : `schedule`
 
-Got a new appointment or a postpone is needed?
+Got a new appointment or a reschedule is needed?
 You can schedule an appointment date and time you have with your client with `schedule`.
 
 Format: `schedule INDEX d/DATETIME`
@@ -611,7 +618,14 @@ Examples:
 
 <box type="info">
 
-**Note:** ClientCare will not allow you to schedule with someone from a past date.
+**Note:** ClientCare will only allow you to create a schedule with someone with a valid future date and time.
+</box>
+
+<box type="tip">
+
+**Tip:** ClientCare currently only keeps track of a single schedule with a client at a time. 
+If you have multiple appointments, you can use the `schedule` command to update the appointment date and time to the 
+next appointment after the most recent one is done.
 </box>
 
 
@@ -647,6 +661,13 @@ ClientCare helps you to manage all your clients' policies and allows you to view
 
 ![Policies panel'](images/ug/policies.png =600x)
 
+You can click on "Policy ID" and "Policy Name" to sort the policies by their respective field. Clicking once will sort 
+in ascending order, and clicking again will sort in descending order.
+
+**Note:** Sorting for both "Policy ID" and "Policy Name" will follow lexigraphical order.
+</box>
+
+
 ClientCare offers the following commands to help you manage your clients' policies:
 * [Adding a policy: `addpolicy`](#adding-a-policy-addpolicy)
 * [Deleting a policy: `deletepolicy`](#deleting-a-policy-deletepolicy)
@@ -669,6 +690,11 @@ Format: `addpolicy INDEX n/POLICY_NAME i/POLICY_ID`
 Examples:
 * `addpolicy 1 n/Life i/1` adds a policy named `Life` with policy ID `1` to the 1st client in the client list.
 * `addpolicy 3 n/Health i/2` adds a policy named `Health` with policy ID `2` to the 3rd client in the client list.
+  <box type="info">
+
+**Note:** "001" and "1" are not considered duplicated policy IDs as different insurance companies have different 
+numbering schemes.
+</box>
 
 <br/>
 <br/>
@@ -726,7 +752,7 @@ ClientCare data are saved in the hard disk automatically after any command that 
 
 ### Editing the data file
 
-ClientCare data is automatically saved as a file `[ClientCare file location]/data/clientcare.json`. Advanced users are welcome to update data directly by editing that data file.
+ClientCare data is automatically saved as a file `[ClientCare file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" theme="danger" icon=":warning:">
 
