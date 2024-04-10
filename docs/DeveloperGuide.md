@@ -400,7 +400,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ClientCare` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - List all clients**
+**Use case: UC01 - Add new client**
+
+**MSS**
+1.  User requests to view all clients.
+2.  ClientCare shows a list of all clients.<br>
+    Use case ends.
+
+**Extensions**
+* 1a. The list is empty as no clients have been added at all.
+    * 1a1. ClientCare lets user know that the list is empty.<br>
+      Use case ends.
+* 1b. Invalid command usage in the request.
+    * 1b1. ClientCare shows command usage.
+    * 1b2. User enters new data.<br>
+      Steps 1b1-1b2 are repeated until the data entered are correct.<br>
+      Use case resumes from step 2.
+
+**Use case: UC02 - Delete client**
+
+**MSS**
+1.  User requests to view all clients.
+2.  ClientCare shows a list of all clients.<br>
+    Use case ends.
+
+**Extensions**
+* 1a. The list is empty as no clients have been added at all.
+    * 1a1. ClientCare lets user know that the list is empty.<br>
+      Use case ends.
+* 1b. Invalid command usage in the request.
+    * 1b1. ClientCare shows command usage.
+    * 1b2. User enters new data.<br>
+      Steps 1b1-1b2 are repeated until the data entered are correct.<br>
+      Use case resumes from step 2.
+
+
+**Use case: UC03 - Edit client**
+
+**MSS**
+1.  User requests to view all clients.
+2.  ClientCare shows a list of all clients.<br>
+    Use case ends.
+
+**Extensions**
+* 1a. The list is empty as no clients have been added at all.
+    * 1a1. ClientCare lets user know that the list is empty.<br>
+      Use case ends.
+* 1b. Invalid command usage in the request.
+    * 1b1. ClientCare shows command usage.
+    * 1b2. User enters new data.<br>
+      Steps 1b1-1b2 are repeated until the data entered are correct.<br>
+      Use case resumes from step 2.
+
+
+**Use case: UC04 - List all clients**
 
 **MSS**
 1.  User requests to view all clients.
