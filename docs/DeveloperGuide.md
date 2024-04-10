@@ -158,6 +158,30 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### View Client feature
+
+The view client feature allows users to view the details of a client using their `INDEX` on the GUI. This includes information not included in the client list cards, such as their last met and policy list.
+
+#### Implementation
+
+The view client mechanism is facilitated by `DisplayClient` in the model. When any command referring to a client using `INDEX` is executed, this DisplayClient is set to the client that was operated on (or cleared to `null` in the case of `delete` and `clear`).
+This is done with the `setDisplayClient()` function in the `Model`, that is also implemented in `Logic`.
+
+
+The sequence diagram below shows the execution of `view 1` to view the details of client at index 1.
+<puml src="diagrams/ViewClientSequenceDiagram.puml" width="900" />
+
+`MainWindow` handles most of the UI logic in regard to displaying the viewed client on the GUI, including refreshing the `ClientDetailsPanel` and `ClientPolicyTable`. It also sets `DisplayClient` on startup when there is at least one client in the list.
+
+
+
+### Adding notes to client feature
+
+
+### Sorting clients feature
+
+
 ### Updating last met feature
 The last met feature allows users to keep track and update their last interaction with their clients.
 
@@ -182,6 +206,16 @@ The following object diagram illustrates the above:
 
 The following sequence diagram shows the lastmet operation:
 <puml src="diagrams/LastMetSequenceDiagram.puml" width="900" />
+
+
+### Setting last met overdue duration feature
+
+
+### Adding schedule feature
+
+
+### Marking schedule feature
+
 
 ### Add policy feature
 The add policy feature allows users to add a policy to a client. The policy is stored in the `Policy` class, which contains the policy details such as policy name, policy id. The `Policy` class is then added to the `PolicyList` object stored within the `Person` object in the `Model` component.
@@ -209,20 +243,9 @@ The following object diagram illustrates the above:
 The following sequence diagram shows the addpolicy operation:
 <puml src="diagrams/AddPolicySequenceDiagram.puml" width="900" />
 
-### View Client feature
 
-The view client feature allows users to view the details of a client using their `INDEX` on the GUI. This includes information not included in the client list cards, such as their last met and policy list.
+### Deleting policy feature
 
-#### Implementation
-
-The view client mechanism is facilitated by `DisplayClient` in the model. When any command referring to a client using `INDEX` is executed, this DisplayClient is set to the client that was operated on (or cleared to `null` in the case of `delete` and `clear`). 
-This is done with the `setDisplayClient()` function in the `Model`, that is also implemented in `Logic`.
-
-
-The sequence diagram below shows the execution of `view 1` to view the details of client at index 1.
-<puml src="diagrams/ViewClientSequenceDiagram.puml" width="900" />
-
-`MainWindow` handles most of the UI logic in regard to displaying the viewed client on the GUI, including refreshing the `ClientDetailsPanel` and `ClientPolicyTable`. It also sets `DisplayClient` on startup when there is at least one client in the list.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -567,17 +590,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a2. User enters new data.<br>
       Steps 1a1-1a2 are repeated until the data entered are correct.<br>
       Use case ends.
-* 1b. Invalid date and time.
+* 1b. Invalid date format.
     * 1b1. ClientCare lets user know of correct date and time format.
     * 1b2. User enters new data.<br>
       Steps 1b1-1b2 are repeated until the data entered are correct.<br>
       Use case ends.
-* 1c. Date and time is before the last met date.
-    * 1c1. ClientCare confirms if user wants to change last met to an earlier date.
-    * 1c2. User confirms or rejects.<br>
+* 1c. Invalid command usage in the request.
+    * 1c1. ClientCare shows command usage.
+    * 1c2. User enters new data.<br>
+      Steps 1d1-1d2 are repeated until the data entered are correct.<br>
       Use case ends.
-* 1d. Invalid command usage in the request.
-    * 1d1. ClientCare shows command usage.
+* 1d. Future date.
+    * 1d1. ClientCare lets user know he cannot meet someone in the future.
     * 1d2. User enters new data.<br>
       Steps 1d1-1d2 are repeated until the data entered are correct.<br>
       Use case ends.
@@ -586,29 +610,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC11 - Update last met overdue duration**
 
 **MSS**
-1.  User marks a client as met.
-2.  ClientCare updates Last Met date of client.<br>
+1.  User enters the last met overdue duration to the new desired value.
+2.  ClientCare updates the new last met overdue duration.<br>
     Use case ends.
 
 **Extensions**
-* 1a. Client does not exist.
-    * 1a1. ClientCare lets user know that client does not exist.
+* 1a. The input entered is not a non-negative integer.
+    * 1a1. ClientCare lets user know that the input is not accepted.
     * 1a2. User enters new data.<br>
       Steps 1a1-1a2 are repeated until the data entered are correct.<br>
       Use case ends.
-* 1b. Invalid date and time.
-    * 1b1. ClientCare lets user know of correct date and time format.
+* 1b. Invalid command usage in the request.
+    * 1b1. ClientCare shows command usage.
     * 1b2. User enters new data.<br>
       Steps 1b1-1b2 are repeated until the data entered are correct.<br>
-      Use case ends.
-* 1c. Date and time is before the last met date.
-    * 1c1. ClientCare confirms if user wants to change last met to an earlier date.
-    * 1c2. User confirms or rejects.<br>
-      Use case ends.
-* 1d. Invalid command usage in the request.
-    * 1d1. ClientCare shows command usage.
-    * 1d2. User enters new data.<br>
-      Steps 1d1-1d2 are repeated until the data entered are correct.<br>
       Use case ends.
 
       
@@ -653,14 +668,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b2. User enters new data.<br>
     Steps 1b1-1b2 are repeated until the data entered are correct.<br>
     Use case ends.
-* 1c. Appointment is in the future.
-  * 1c1. ClientCare lets user know that future appointment cannot be marked.
-  * 1c2. User enters new data.<br>
-    Steps 1c1-1c2 are repeated until the data entered are correct.<br>
-    Use case ends.
-* 1d. Invalid command usage in the request.
-    * 1d1. ClientCare shows command usage.
-    * 1d2. User enters new data.<br>
+* 1c. Invalid command usage in the request.
+    * 1c1. ClientCare shows command usage.
+    * 1c2. User enters new data.<br>
         Steps 1d1-1d2 are repeated until the data entered are correct.<br>
         Use case ends.
 
