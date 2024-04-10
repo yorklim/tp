@@ -1052,6 +1052,10 @@ You can easily change the dates to a future or past date to suit your needs.
 ClientCare will regard it as data corruption and reset the data by to default state. This means you can lose all your work and data!
 
 
+**Q** : I am not an insurance agent. Is ClientCare still relevant for me?<br/>
+**A** : Sure! You can still use ClientCare to manage all your contact details and personal scheduling affairs. The only features that will be less relevant are those under policies.
+
+
 **Q** : Can someone steal my data on ClientCare?<br/>
 **A** : All data in ClientCare is stored only in your own device. Unless you give someone the data folder or has access to your computer, no one can steal your data.
 <br/>
