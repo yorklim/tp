@@ -1036,7 +1036,7 @@ Furthermore, certain edits can cause the ClientCare to behave in unexpected ways
 
 
 **Q** : Why is ClientCare saying my date format is wrong?<br/>
-**A** : Ensure that your date format is in YYYY-MM-DD instead of MM-DD-YYYY.
+**A** : Ensure that your date format is in YYYY-MM-DD instead of DD-MM-YYYY.
 
 
 **Q** : Why is my client not showing up in Last Met Display?<br/>
