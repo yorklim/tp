@@ -6,7 +6,7 @@
 ![ClientCareLogo](images/ClientCareLogo.png =250x)
 
 # ClientCare User Guide
-This user guide is meant for ClientCare Version `v1.3`.
+This user guide is meant for ClientCare Version `v1.4`.
 
 Too many clients to keep track off? Not sure when is your next appointment?
 Fret not! ClientCare is a **desktop application for assisting insurance agents in managing their client relationships and follow-ups effectively.**
@@ -283,6 +283,8 @@ Let's type the following command into the Command Input:
 `schedule 7 d/2024-04-11 14:00`
 
 ![schedule](images/ug/schedule.png =600x)
+<br/>
+<br/>
 
 <box type="info">
 
@@ -328,7 +330,6 @@ For easy reference, similar features are grouped into the same subsections as sh
 <br/>
 <br/>
 
-<div style="page-break-after: always;"></div>
 
 ## Client related commands
 ClientCare is all about managing your clients. ClientCare will help you keep track of all your clients and their
@@ -349,9 +350,11 @@ ClientCare offers the following commands to help you manage your clients:
 <br/>
 <br/>
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a client: `add`
 
-Got a new client? You can add a client to the client list with `add`.
+The first step for any insurance agent is to find clients! You can add your new client to the client list with `add`.
 
 Format: `add n/NAME c/PHONE_NUMBER e/EMAIL a/ADDRESS d/BIRTHDAY p/PRIORITY [t/TAG]…​`
 
@@ -359,6 +362,11 @@ Format: `add n/NAME c/PHONE_NUMBER e/EMAIL a/ADDRESS d/BIRTHDAY p/PRIORITY [t/TA
 
 **Note:** A client can have any number of tags (including 0). For example, `t/owesMoney t/friends` is allowed.<br/>
 All other fields (with the exception of tags) cannot have duplicate fields. For example, `c/1234567 c/7654321` is **not** allowed.
+</box>
+
+<box type="info">
+
+**Note:** The name of the client is case-sensitive. `John` and `john` will be regarded as different people.
 </box>
 
 Fields usage for client details:
@@ -375,8 +383,28 @@ Fields usage for client details:
 
 Examples:
 * `add n/John Doe c/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/1990-01-01 p/low t/friends t/owesMoney`
-* `add n/Betsy Crowe t/friend p/vip e/betsycrowe@example.com a/Newgate Prison c/1234567 t/criminal d/1979-03-04`
+* `add n/Betsy Crowe t/friend p/vip e/betsycrowe@example.com a/Hougang Road 12 c/1234567 t/buddy d/1979-03-04`
 
+**Before Command:**
+
+Suppose you just met a new client! Let's add James Wee to your client list and his following details:
+* Phone Number: 98765432
+* Email: james@hotmail.com
+* Address: East Coast Blk 112
+* Birthday: 25 May 1998
+* Priority: VIP
+
+Type the following into the Command Input: 
+
+`add n/James Wee c/98765432 e/james@hotmail.com a/East Coast Blk 112 d/1998-05-25 p/vip`
+
+![addclient](images/ug/addclient.png =600x)
+
+**After Command:**
+
+You have now added James Wee to our Client List! ClientCare shows a success message in the Feedback Display too.
+
+![success_add](images/ug/success_add.png =600x)
 <br/>
 <br/>
 
@@ -384,6 +412,7 @@ Examples:
 
 ### Deleting a client : `delete`
 
+While you can have new clients, it is also possible to lose existing clients. Hopefully, that does not happen often!
 You can delete a specified client from the client list with `delete`.
 
 Format: `delete INDEX`
@@ -396,12 +425,27 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd client in the client list.
 * `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
+**Before Command:**
+
+Suppose David Li is no longer your client. He is number 4 on our client list as seen on the left.
+
+Type the following into the Command Input: `delete 4`
+
+![deleteclient](images/ug/delete.png =600x)
+
+**After Command:**
+
+You have now removed David Li from our client list! ClientCare shows a success message in the Feedback Display too.
+
+![success_delete](images/ug/success_delete.png =600x)
 <br/>
 <br/>
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a client : `edit`
 
-You can edit an existing client with `edit`.
+Client information is always changing! If you ever need to update your client's particulars, you can edit an existing client with `edit`.
 
 Format: `edit INDEX [n/NAME] [c/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDAY] [p/PRIORITY] [t/TAG]…​`
 
@@ -417,24 +461,49 @@ Examples:
 *  `edit 1 c/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
-<br/>
-<br/>
+**Before Command:**
+
+Suppose you want to edit James Wee's name. He is number 7 on our client list as seen on the left.
+
+Type the following into the Command Input: `edit 7 n/James Wee Tan Pi`
+
+![editclient](images/ug/edit.png =600x)
+
+**After Command:**
+
+You have updated James' name! ClientCare shows a success message in the Feedback Display too.
+
+![success_edit](images/ug/success_edit.png =600x)
+
+<div style="page-break-after: always;"></div>
 
 ### Listing all clients : `list`
 
-Want to see all your clients?
-`list` shows a list of all your clients in the client list.
+After applying certain filter or finding commands, you can see all your clients again with `list`.
 
 Format: `list`
 
+**Before Command:**
+
+Suppose after finding or filtering clients, you want to see all our clients again.
+
+Type the following into the Command Input: `list`
+
+![list](images/ug/list.png =600x)
+
+**After Command:**
+
+All your clients are now listed on the client list! ClientCare shows a success message in the Feedback Display too.
+
+![success_edit](images/ug/success_list.png =600x)
 <br/>
 <br/>
 
+<div style="page-break-after: always;"></div>
 
 ### Viewing a client : `view`
 
-You can view a client's details and his policies with `view`.
-The `view` command shows the particulars and policies of a client.
+There are times when you would want to view a client's details and his policies in detail. You can do so with `view`.
 
 Format: `view INDEX`
 
@@ -446,11 +515,26 @@ Examples:
 * `list` followed by `view 2` views the 2nd client in the client list.
 * `find Betsy` followed by `view 1` view the 1st client in the results of the `find` command.
 
+**Before Command:**
+
+Suppose you want to see Bernice Yu's particulars in greater detail. Bernice Yu is number 2 on the client list.
+
+Type the following into the Command Input: `view 2`
+
+![list](images/ug/view.png =600x)
+
+**After Command:**
+
+You can now see Bernice Yu's particulars appearing in the Client Display window! 
+ClientCare shows a success message in the Feedback Display too.
+
+![success_edit](images/ug/success_view.png =600x)
+
 <div style="page-break-after: always;"></div>
 
 ### Finding client by name: `find`
 
-You can look for a client with `find`.
+Is your client list too long? You can look for a client with `find`.
 Client whose names contain any of the given keywords will show up!
 
 Format: `find KEYWORD [MORE_KEYWORDS]...`
@@ -463,18 +547,31 @@ Format: `find KEYWORD [MORE_KEYWORDS]...`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br/>
-  ![result for 'find alex david'](images/findAlexDavidResult.png =600x)
 
 <box type="tip">
 
 **Tip:** You can use `find` to more easily find the client you want for commands that require a client `INDEX`!
 </box>
 
-<br/>
-<br/>
+**Before Command:**
+
+Suppose you want to find James in your client list.
+
+Type the following into the Command Input: `find james`
+
+![list](images/ug/find.png =600x)
+
+**After Command:**
+
+All clients with the name "james" will now show up in the client list.
+ClientCare shows a success message in the Feedback Display too.
+
+![success_edit](images/ug/success_find.png =600x)
+
+<div style="page-break-after: always;"></div>
 
 ### Adding notes to clients: `remark`
-
+Need to remember certain information about a client such as his preference or health conditions?
 You can add notes to each client with `remark`. If a current remark exists, it will be replaced with the new remark.
 
 Format: `remark INDEX [r/REMARK]`
@@ -487,17 +584,38 @@ Examples:
 * `remark 2 r/Has 2 school-age children and 1 elderly dependent` adds a remark for the 2nd client in the client list.
 * `remark 1` deletes the remark for the 1st client in the client list.
 
+
 <box type="tip">
 
 **Tip:** To remove a remark, you can use either `remark INDEX` or `remark INDEX r/`!
 </box>
 
-<br/>
-<br/>
+<box type="info">
+
+**Note:** ClientCare allows you to put up to 550 characters long for remark before characters are truncated in fullscreen.
+</box>
+
+**Before Command:**
+
+Suppose you want to add a note about James that he has diabetes. James is number 6 on the client list.
+
+Type the following into the Command Input: `remark 6 r/has diabetes`
+
+![list](images/ug/remark.png =600x)
+
+**After Command:**
+
+Your new remark about James can now be seen at the Client Display window!
+ClientCare shows a success message in the Feedback Display too.
+
+![success_edit](images/ug/success_remark.png =600x)
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
-You can clear all your clients from the client list with `clear`.
+Do you want to clear the sample clients from ClientCare or start from scratch?
+You can clear all the clients from the client list with `clear`.
 
 Format: `clear`
 
@@ -506,11 +624,27 @@ Format: `clear`
 **CAUTION**: Clearing is irreversible and will NOT have a confirmation screen
 </box>
 
+
+**Before Command:**
+
+Suppose you want to remove all the sample client data from ClientCare.
+
+Type the following into the Command Input: `clear`
+
+![list](images/ug/clear.png =600x)
+
+**After Command:**
+
+ClientCare has been cleared!
+ClientCare shows a success message in the Feedback Display too.
+
+![success_edit](images/ug/success_clear.png =600x)
+
 <div style="page-break-after: always;"></div>
 
 ### Sorting the client list : `sort`
 
-You can sort the client list with `sort`:
+Want to see all your VIP clients first? You can sort the client list with `sort`:
 
 Format: `sort CRITERIA o/ORDER`
 
@@ -522,6 +656,21 @@ Examples:
 * `sort name o/asc` sorts the client list by name in ascending order.
 * `sort priority o/desc` sorts the client list by priority in descending order.
 * `sort lastmet o/asc` sorts the client list by last met date in ascending order.
+
+**Before Command:**
+
+Suppose you want to sort the client list by priority where the most important clients appear first.
+
+Type the following into the Command Input: `sort priority o/desc`
+
+![list](images/ug/sort.png =600x)
+
+**After Command:**
+
+Clients of a higher priority will now show up first!
+ClientCare shows a success message in the Feedback Display too.
+
+![success_edit](images/ug/success_sort.png =600x)
 
 <div style="page-break-after: always;"></div>
 
@@ -550,9 +699,11 @@ ClientCare offers the following commands to help you manage your schedule:
 <br/>
 <br/>
 
+<div style="page-break-after: always;"></div>
+
 ### Updating last met : `met`
 
-You can update the last met date you had with your client with `met`.
+Just met up with a client? You can update the last met date you had with your client with `met`.
 
 Format: `met INDEX d/DATE`
 
@@ -582,6 +733,23 @@ Rather, you will see him under the Schedule Display.
 
 </box>
 
+**Before Command:**
+
+Suppose you just met up with David Li today! David Li is number 4 on the client list.
+As of this guide, today is `2024-04-10`, 10 April 2024.
+Do change the date as required.
+
+Type the following into the Command Input: `met 4 d/2024-04-10`
+
+![list](images/ug/met.png =600x)
+
+**After Command:**
+
+David Li's last met date has been updated to 10 April 2024!
+ClientCare shows a success message in the Feedback Display too.
+
+![success_edit](images/ug/success_met.png =600x)
+
 <div style="page-break-after: always;"></div>
 
 ### Setting last met overdue period : `set`
@@ -597,6 +765,23 @@ Examples:
 * `set 75` updates the last met overdue duration to 75 days. Clients who you have not met in more than 75 days or
 no appointments are scheduled will show up in the Last Met reminder display.
 
+**Before Command:**
+
+Suppose you feel that 90 days is too long, and we want to be reminded to meet all your clients every 30 days.
+
+Type the following into the Command Input: `set 30`
+
+
+![list](images/ug/set.png =600x)
+
+**After Command:**
+
+All clients which you have not met in 30 days will be shown in the Last Met Display!
+ClientCare shows a success message in the Feedback Display too.
+
+![success_edit](images/ug/success_set.png =600x)
+
+<div style="page-break-after: always;"></div>
 
 ### Scheduling appointments : `schedule`
 
@@ -628,6 +813,26 @@ If you have multiple appointments, you can use the `schedule` command to update 
 next appointment after the most recent one is done.
 </box>
 
+**Before Command:**
+
+Suppose you want to set an appointment with Roy at 4 June 2024 2pm. 
+Roy is number 6 on the client list. As of this guide, today is 10 April 2024.
+Hence, you are able to set the appointment on 4 June 2024 2pm.
+
+Remember that you are only able to set a schedule in the future. Do change the appointment data to a future date as required.
+
+Type the following into the Command Input: `schedule 6 d/2024-06-04 14:00`
+
+![list](images/ug/scheduleA.png =600x)
+
+**After Command:**
+
+An appointment with Roy has been made! Notice how Roy's name is removed from Last Met Display and added to Schedule Display.
+ClientCare shows a success message in the Feedback Display too.
+
+![success_edit](images/ug/success_scheduleA.png =600x)
+
+<div style="page-break-after: always;"></div>
 
 ### Marking appointments : `mark`
 
@@ -649,9 +854,23 @@ Examples:
 **Tip:** If you have successfully met up with your client, do remember to update the last met date with `met`!
 </box>
 
-<br/>
-<br/>
+**Before Command:**
 
+Suppose you have met up with Roy in the appointment.
+Roy is number 6 on the client list. 
+
+Type the following into the Command Input: `mark 6`
+![list](images/ug/mark.png =600x)
+
+**After Command:**
+
+Your appointment with Roy has been marked as done! ClientCare shows a success message in the Feedback Display too.
+Notice how Roy's name is removed from Schedule Display and added to Last Met Display. This is because you need to use 'met' 
+to update your Last Met date with Roy.
+
+![list](images/ug/success_mark.png =600x)
+
+If your appointment has been cancelled or postponed, you can still use `mark`. You can leave the Last Met date with Roy unchanged.
 <div style="page-break-after: always;"></div>
 
 ## Policy related commands
@@ -664,6 +883,8 @@ ClientCare helps you to manage all your clients' policies and allows you to view
 You can click on "Policy ID" and "Policy Name" to sort the policies by their respective field. Clicking once will sort 
 in ascending order, and clicking again will sort in descending order.
 
+<box type="info">
+
 **Note:** Sorting for both "Policy ID" and "Policy Name" will follow lexigraphical order.
 </box>
 
@@ -674,6 +895,7 @@ ClientCare offers the following commands to help you manage your clients' polici
 
 <br/>
 <br/>
+<div style="page-break-after: always;"></div>
 
 ### Adding a policy : `addpolicy`
 
@@ -690,14 +912,35 @@ Format: `addpolicy INDEX n/POLICY_NAME i/POLICY_ID`
 Examples:
 * `addpolicy 1 n/Life i/1` adds a policy named `Life` with policy ID `1` to the 1st client in the client list.
 * `addpolicy 3 n/Health i/2` adds a policy named `Health` with policy ID `2` to the 3rd client in the client list.
-  <box type="info">
+  
+<box type="info">
 
 **Note:** "001" and "1" are not considered duplicated policy IDs as different insurance companies have different 
 numbering schemes.
 </box>
 
-<br/>
-<br/>
+<box type="info">
+
+**Note:** Although most policy IDs will be up to 25 digits, 
+ClientCare allows you to put up to 40 digits long before values are truncated in fullscreen.
+</box>
+
+**Before Command:**
+
+Suppose you have closed a new policy with Roy. His new policy name is Travel and policy ID is 4123.
+Roy is number 6 on the client list.
+
+Type the following into the Command Input: `addpolicy 6 n/Travel i/4123`
+
+![list](images/ug/addpolicyA.png =600x)
+
+**After Command:**
+
+Roy's new policy has been added! ClientCare shows a success message in the Feedback Display too.
+
+![list](images/ug/success_addpolicyA.png =600x)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a policy : `deletepolicy`
 
@@ -714,9 +957,20 @@ Examples:
 * `deletepolicy 1 i/1` deletes the policy with policy ID `1` from the 1st client in the client list.
 * `deletepolicy 3 i/2` deletes the policy with policy ID `2` from the 3rd client in the client list.
 
-<br/>
-<br/>
+**Before Command:**
 
+Suppose Roy's policy has matured. His policy name is Travel and policy ID is 4123.
+Roy is number 6 on the client list.
+
+Type the following into the Command Input: `deletepolicy 6 i/4123`
+
+![list](images/ug/deletepolicyA.png =600x)
+
+**After Command:**
+
+Roy's policy with ID 4123 has been deleted! ClientCare shows a success message in the Feedback Display too.
+
+![list](images/ug/success_deletepolicyA.png =600x)
 <div style="page-break-after: always;"></div>
 
 ## Miscellaneous
@@ -773,6 +1027,52 @@ Furthermore, certain edits can cause the ClientCare to behave in unexpected ways
 **Q** : How do I transfer my data to another computer?<br/>
 **A** : Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClientCare home folder.
 
+
+**Q** : Why is ClientCare saying my date format is wrong?<br/>
+**A** : Ensure that your date format is in YYYY-MM-DD instead of MM-DD-YYYY.
+
+
+**Q** : Why is my client not showing up in Last Met Display?<br/>
+**A** : Check if your client already has an open appointment scheduled. In addition, the default number of days before a client shows up in Last Met Display is 90 days.
+This means the last met duration must be 91 days or more.
+
+
+**Q** : Where is my 2nd schedule I made for my client?<br/>
+**A** : Currently, ClientCare only allows users to have 1 schedule per client. Scheduling another appointment will overwrite the previous one.
+
+
+**Q** : Can I use ClientCare on my tablets or mobile devices?<br/>
+**A** : As of now, no. ClientCare is only supported on Desktop devices that can run Java. Not to worry, mobile device support is currently in development!
+
+
+**Q** : Why can ClientCare only be found on Github?<br/>
+**A** : Github allows ClientCare to be vetted by other users and programmers too. This ensures ClientCare to be up for public scrutiny, so you know ClientCare can be trusted.
+
+
+**Q** : I tried following the guides for `schedule` and `met`. I encountered errors telling me that the dates are invalid.<br/>
+**A** : The `schedule` and `met` commands are time-sensitive. The dates provided in the examples may no longer be relevant.
+You can easily change the dates to a future or past date to suit your needs.
+
+
+**Q** : I accidentally cleared my data in ClientCare. Can I get my data back?<br/>
+**A** : Unfortunately, you cannot get back your data which has been cleared. In the future, you can consider copying the data folder to save as backup.
+
+
+**Q** : A new ClientCare version has been released. Can I use my existing my data on the new version?<br/>
+**A** : Certainly! You just need to copy and overwrite the data folder.
+
+
+**Q** : What happens if I edit the data files directly?<br/>
+**A** : If you have edited the data file and have used valid values and formatting, ClientCare will load with the updated data. However, if invalid values or formatting is detected,
+ClientCare will regard it as data corruption and reset the data by to default state. This means you can lose all your work and data!
+
+
+**Q** : I am not an insurance agent. Is ClientCare still relevant for me?<br/>
+**A** : Sure! You can still use ClientCare to manage all your contact details and personal scheduling affairs. The only features that will be less relevant are those under policies.
+
+
+**Q** : Can someone steal my data on ClientCare?<br/>
+**A** : All data in ClientCare is stored only in your own device. Unless you give someone the data folder or has access to your computer, no one can steal your data.
 <br/>
 
 --------------------------------------------------------------------------------------------------------------------
