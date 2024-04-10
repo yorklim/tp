@@ -369,6 +369,7 @@ All other fields (with the exception of tags) cannot have duplicate fields. For 
 **Note:** The name of the client is case-sensitive. `John` and `john` will be regarded as different people.
 </box>
 
+
 Fields usage for client details:
 
 | Field            | Usage                                                                                    | Example                         |
@@ -593,6 +594,11 @@ Examples:
 <box type="info">
 
 **Note:** ClientCare allows you to put up to 550 characters long for remark before characters are truncated in fullscreen.
+</box>
+
+<box type="warning" theme="danger" icon=":warning:">
+
+**CAUTION**: Avoid using the `r/` prefix again in your remark, as it won't capture anything before it. `remark 1 r/Speaks English r/Prefers email` will only save `Prefers email`!
 </box>
 
 **Before Command:**
