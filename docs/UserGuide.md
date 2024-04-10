@@ -1197,7 +1197,7 @@ For example: mike@gmail.com
 
 This means that the new value added will not be added on top of the existing information. This is especially so for Tags.
 For example, if a Client currently has 2 tags `friend` and `important`, editing the tags with `high` will override the previous 2 tags.
-The Client will only have the high `high` tag upon a success edit. To preserve all the tags, users must key in all previous tags in addition
+The Client will only have the `high` tag upon a success edit. To preserve all the tags, users must key in all previous tags in addition
 to their new tag they wish to add.
 
 <div style="page-break-after: always;"></div>
