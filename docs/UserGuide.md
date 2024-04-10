@@ -386,6 +386,11 @@ Examples:
 * `add n/John Doe c/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/1990-01-01 p/low t/friends t/owesMoney`
 * `add n/Betsy Crowe t/friend p/vip e/betsycrowe@example.com a/Hougang Road 12 c/1234567 t/buddy d/1979-03-04`
 
+<box type="tip">
+
+**Tip:** If you are missing information for some fields, you can enter placeholder values like `e/placeholder@email.com`!
+</box>
+
 **Before Command:**
 
 Suppose you just met a new client! Let's add James Wee to your client list and his following details:
@@ -580,25 +585,21 @@ Format: `remark INDEX [r/REMARK]`
 * Adds a note to the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* If `r/REMARK` is not present, or if nothing is typed after `r/`, the current remark for the client will be removed. 
 
 Examples:
 * `remark 2 r/Has 2 school-age children and 1 elderly dependent` adds a remark for the 2nd client in the client list.
-* `remark 1` deletes the remark for the 1st client in the client list.
+* `remark 1` or `remark 1 r/` deletes the remark for the 1st client in the client list.
 
 
 <box type="tip">
 
-**Tip:** To remove a remark, you can use either `remark INDEX` or `remark INDEX r/`!
+**Tip:** If you make a typo in your remark, you don't have to delete everything again! Just add a second prefix, for example: `remark 1 r/Speeks Enngliish r/Speaks English` will only save `Speaks English`.
 </box>
 
 <box type="info">
 
-**Note:** ClientCare allows you to put up to 550 characters long for remark before characters are truncated in fullscreen.
-</box>
-
-<box type="warning" theme="danger" icon=":warning:">
-
-**CAUTION**: Avoid using the `r/` prefix again in your remark, as it won't capture anything before it. `remark 1 r/Speaks English r/Prefers email` will only save `Prefers email`!
+**Note:** ClientCare allows you to put up to 550 characters for `REMARK` before characters are truncated in fullscreen.
 </box>
 
 **Before Command:**
@@ -1211,6 +1212,9 @@ The default period is 90 days. You can change this value using the `set` command
 
 This refers to features or commands in ClientCare that are not related to Client, Schedules or Policies.
 
+15. **Truncated**
+
+If a text is truncated in the display, this means that the full text has been shortened, with an ellipsis `...` at the end.
 
 <div style="page-break-after: always;"></div>
 
