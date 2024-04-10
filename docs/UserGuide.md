@@ -191,7 +191,7 @@ You will learn how the different parts of ClientCare look and work in this secti
 ClientCare has **6** components in its display. Different commands affect parts of the Display.
 You can refer to the [Quick Tutorial](#quick-tutorial) to see how the different parts of the display change when entering commands!
 
-![Display](images/ug/GUI%20v1.3%20Graphic.png)
+![Display](images/ug/GUI%20v1.3.2%20Graphic.png)
 
 
 <div style="page-break-after: always;"></div>
@@ -276,11 +276,11 @@ Type the following into the Command Input:
 <div style="page-break-after: always;"></div>
 
 3. Now let's schedule an appointment with James Wee 7 days from now. From the Client List, James has an index of `7`.
-When this guide was released, today was 4 April 2024. Hence, let's set the appointment at 11 April 2024 2pm.
+When this guide was released, today was 11 April 2024. Hence, let's set the appointment at 18 April 2024 2pm.
 Let's type the following command into the Command Input:
 
 
-`schedule 7 d/2024-04-11 14:00`
+`schedule 7 d/2024-04-18 14:00`
 
 ![schedule](images/ug/schedule.png =600x)
 <br/>
