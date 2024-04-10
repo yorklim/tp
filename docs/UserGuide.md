@@ -364,6 +364,11 @@ Format: `add n/NAME c/PHONE_NUMBER e/EMAIL a/ADDRESS d/BIRTHDAY p/PRIORITY [t/TA
 All other fields (with the exception of tags) cannot have duplicate fields. For example, `c/1234567 c/7654321` is **not** allowed.
 </box>
 
+<box type="info">
+
+**Note:** The name of the client is case-sensitive. `John` and `john` will be regarded as different people.
+</box>
+
 Fields usage for client details:
 
 | Field            | Usage                                                                                    | Example                         |
