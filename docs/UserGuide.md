@@ -590,6 +590,10 @@ Examples:
 **Tip:** To remove a remark, you can use either `remark INDEX` or `remark INDEX r/`!
 </box>
 
+<box type="info">
+
+**Note:** ClientCare allows you to put up to 550 characters long for remark before characters are truncated in fullscreen.
+</box>
 
 **Before Command:**
 
@@ -913,6 +917,12 @@ Examples:
 
 **Note:** "001" and "1" are not considered duplicated policy IDs as different insurance companies have different 
 numbering schemes.
+</box>
+
+<box type="info">
+
+**Note:** Although most policy IDs will be up to 25 digits, 
+ClientCare allows you to put up to 40 digits long before values are truncated in fullscreen.
 </box>
 
 **Before Command:**
