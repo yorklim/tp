@@ -1013,7 +1013,7 @@ ClientCare data are saved in the hard disk automatically after any command that 
 
 ### Editing the data file
 
-ClientCare data is automatically saved as a file `[ClientCare file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ClientCare data is automatically saved as a file `[ClientCare file location]/data/clientcare.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" theme="danger" icon=":warning:">
 
