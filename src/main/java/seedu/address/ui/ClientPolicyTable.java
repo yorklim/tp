@@ -22,8 +22,6 @@ public class ClientPolicyTable extends UiPart<Region> {
     private TableColumn<Policy, String> policyId;
     @FXML
     private TableColumn<Policy, String> policyName;
-    // @FXML
-    // private TableColumn<Policy, String> policyType;
 
     /**
      * Creates an empty {@code ClientPolicyTable}.
@@ -39,7 +37,6 @@ public class ClientPolicyTable extends UiPart<Region> {
         super(FXML);
         policyId.setCellValueFactory(new PropertyValueFactory<Policy, String>("policyId"));
         policyName.setCellValueFactory(new PropertyValueFactory<Policy, String>("policyName"));
-        // policyType.setCellValueFactory(new PropertyValueFactory<Policy, String>("policyType"));
         policyTableView.setItems(policyList.policyList);
     }
 

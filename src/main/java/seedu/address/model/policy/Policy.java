@@ -33,8 +33,6 @@ public class Policy {
      * The Policy id.
      */
     public final String policyId;
-    private final PolicyType policyType;
-
 
     /**
      * Instantiates a new Policy.
@@ -48,7 +46,6 @@ public class Policy {
         checkArgument(isValidId(policyId), MESSAGE_CONSTRAINTS_ID);
         this.policyName = policyName;
         this.policyId = policyId;
-        this.policyType = PolicyType.DEFAULT;
     }
 
     public String getPolicyId() {
@@ -57,10 +54,6 @@ public class Policy {
 
     public String getPolicyName() {
         return policyName;
-    }
-
-    public PolicyType getPolicyType() {
-        return policyType;
     }
 
     /**
@@ -104,7 +97,7 @@ public class Policy {
     }
     @Override
     public String toString() {
-        return "Name:" + policyName + ", Type:" + policyType + ", Policy ID:" + policyId;
+        return "Name:" + policyName + ", Policy ID:" + policyId;
     }
 
     @Override

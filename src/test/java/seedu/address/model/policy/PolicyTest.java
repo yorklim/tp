@@ -25,11 +25,6 @@ public class PolicyTest {
     }
 
     @Test
-    public void getPolicyType() {
-        assertEquals(policy.getPolicyType(), PolicyType.DEFAULT);
-    }
-
-    @Test
     public void isIdTestTrue() {
         assertTrue(policy.isID(VALID_ID));
     }
@@ -70,7 +65,7 @@ public class PolicyTest {
 
     @Test
     public void toStringMethod() {
-        assertEquals(policy.toString(), "Name:" + VALID_NAME + ", Type:DEFAULT, Policy ID:" + VALID_ID);
+        assertEquals("Name:" + VALID_NAME + ", Policy ID:" + VALID_ID, policy.toString());
     }
 
     @Test
