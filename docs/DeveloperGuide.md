@@ -209,12 +209,63 @@ The following sequence diagram shows the lastmet operation:
 
 
 ### Setting last met overdue duration feature
+The setting last met overdue duration feature allows users to choose the number of days before clients show up in the Last Met Display.
+
+#### Implementation
+
+The updating of last met command is facilitated by the `SetCommandParser` class which is created by the `AddressBookParser`.
+
+The `SetCommandParser#parse()` overrides `Parser#parse()` in the `Parser` interface.
+- `SetCommandParser#parse()` - Parses the input arguments by storing the prefixes of it respective values in a `ArgumentMultimap` object.
+- It will then convert the String input into an Integer object before creating a new `SetCommand` object with the formatted integer.
+
+The `SetCommand` object is then executed by the `Logic` component.
+
+The `SetCommand` object then communicates with the `Model` component to update the static lastMetDuration value in the Last Met class.
+Upon updating the new lastMetDuration value, the `SetCommand` object then calls the `checkOverdue` function in all the `Person` objects in the addressbook
+to update the `isOverdue` boolean in all the `Person` objects. The Last Met Display then shows all the updated `Person` objects with `isOverdue` equals to `true`.
+
+The method `SetCommand#execute()` returns a CommandResult object which contains the success message to be displayed to the user.
 
 
 ### Adding schedule feature
+The adding schedule feature allows users to make appointments to track all their upcoming appointments with clients.
+
+#### Implementation
+
+The updating of schedule command is facilitated by the `ScheduleCommandParser` class which is created by the `AddressBookParser`.
+
+The `ScheduleCommandParser#parse()` overrides `Parser#parse()` in the `Parser` interface.
+- `ScheduleCommandParser#parse()` - Parses the input arguments by storing the prefixes of it respective values in a `ArgumentMultimap` object.
+- It will then convert the String input into a DateTime object before creating a new `ScheduleCommand` object with the formatted dateTime.
+
+The `ScheduleCommand` object is then executed by the `Logic` component.
+
+The `ScheduleCommand` object then communicates with the `Model` component to update the Schedule to the client. The `Model` component then updates the `Person` object with the new Schedule.
+- `Model#setPerson(Person, Person)` - Sets the client in the existing client list to the new `Person` object which has been edited by the `ScheduleCommand#execute()` which contains the new Schedule.
+- `Model#setDisplayClient(Person)` - Updates the displayed client in the UI to the client that has been edited with the new Schedule.
+
+The method `ScheduleCommand#execute()` returns a CommandResult object which contains the success message to be displayed to the user.
 
 
 ### Marking schedule feature
+The marking schedule feature allows users to close upcoming appointments to track all their upcoming appointments with clients.
+
+#### Implementation
+
+The marking of schedule command is facilitated by the `MarkCommandParser` class which is created by the `AddressBookParser`.
+
+The `MarkCommandParser#parse()` overrides `Parser#parse()` in the `Parser` interface.
+- `MarkCommandParser#parse()` - Parses the input arguments by storing the prefixes of it respective values in a `ArgumentMultimap` object.
+- It will then convert the String input into a DateTime object before creating a new `MarkCommand` object with the formatted dateTime.
+
+The `MarkCommand` object is then executed by the `Logic` component.
+
+The `MarkCommand` object then communicates with the `Model` component to update the Schedule to the client. The `Model` component then updates the `Person` object with the new Schedule with `isDone` set to `true`.
+- `Model#setPerson(Person, Person)` - Sets the client in the existing client list to the new `Person` object which has been edited by the `MarkCommand#execute()` which contains the new Schedule.
+- `Model#setDisplayClient(Person)` - Updates the displayed client in the UI to the client that has been edited with the new Schedule.
+
+The method `MarkCommand#execute()` returns a CommandResult object which contains the success message to be displayed to the user.
 
 
 ### Add policy feature
@@ -598,7 +649,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. Invalid command usage in the request.
     * 1c1. ClientCare shows command usage.
     * 1c2. User enters new data.<br>
-      Steps 1d1-1d2 are repeated until the data entered are correct.<br>
+      Steps 1c1-1c2 are repeated until the data entered are correct.<br>
       Use case ends.
 * 1d. Future date.
     * 1d1. ClientCare lets user know he cannot meet someone in the future.
@@ -611,7 +662,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1.  User enters the last met overdue duration to the new desired value.
-2.  ClientCare updates the new last met overdue duration.<br>
+2.  ClientCare updates the new last met overdue duration.
+3.  ClientCare refreshes the Last Met Display for all clients that meets the new last met overdue duration.<br>
     Use case ends.
 
 **Extensions**
@@ -631,7 +683,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1.  User schedules a date and time to meet with a client.
-2.  ClientCare sets up the appointment.<br>
+2.  ClientCare sets up the appointment.
+3.  ClientCare shifts a client from the Last Met Display to the Schedule Display if he exists in the Last Met Display.<br>
     Use case ends.
 
 **Extensions**
@@ -645,9 +698,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b2. User enters new data.<br>
     Steps 1b1-1b2 are repeated until the data entered are correct.<br>
     Use case ends.
-* 1c. Invalid command usage in the request.
-  * 1c1. ClientCare shows command usage.
-  * 1c2. User enters new data.<br>
+* 1c. The client does not exist.
+    * 1c1. ClientCare shows an error message.
+    * 1c2. User enters new data.<br>
+      Steps 1c1-1c2 are repeated until the data entered are correct.<br>
+      Use case ends.
+* 1d. Invalid command usage in the request.
+  * 1d1. ClientCare shows command usage.
+  * 1d2. User enters new data.<br>
     Steps 1c1-1c2 are repeated until the data entered are correct.<br>
     Use case ends.
 
@@ -656,7 +714,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1.  User marks an appointment with client as done.
-2.  ClientCare updates appointment has done and updates last met.<br>
+2.  ClientCare updates appointment has done.
+3.  ClientCare shifts the client from the Schedule Display to Last Met Display if his last met date is still overdue.<br>
     Use case ends.
 
 **Extensions**
@@ -671,7 +730,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. Invalid command usage in the request.
     * 1c1. ClientCare shows command usage.
     * 1c2. User enters new data.<br>
-        Steps 1d1-1d2 are repeated until the data entered are correct.<br>
+        Steps 1c1-1c2 are repeated until the data entered are correct.<br>
         Use case ends.
 
 
@@ -791,6 +850,15 @@ testers are expected to do more *exploratory* testing.
 
 
 ## **Appendix: Planned Enhancements**
+
+1. **Feature Flaw** - Currently, users can only schedule one appointment per client. In future versions, we will support multiple appointments per client.
+2. **Feature Flaw** - Currently, names are case-sensitive. `John` and `john` are regarded as different clients. In future versions, names will be case-insensitive.
+3. **Feature Flaw** - Currently, tags only allow alphanumeric values. Spaces and special characters are not allowed. In future versions, we will support the use of spaces and special characters for tags.
+4. **Feature Flaw** - Currently, users are not allowed to use special characters like `/` when adding or editing the client name. In future versions, we will support the use of special characters like `/` for names.
+5. **Feature Flaw** - Currently, users must fulfill all compulsory parameters to add a person. In future versions, we will make more parameters optional.
+6. **Feature Flaw** - Currently, users must re-sort the client list after adding, editing or updating clients. Client List does not auto update or re-sort itself upon adding/editing or updating. In future versions, we will support the auto sorting when clients are updated.
+7. **UI Bug** - Currently, the policy name and policy id may get truncated if there are too many characters. In future versions, we will support the wrapping of fields in the Policy Display.
+8. **UI Bug** - Currently, the phone number and remark may get truncated if they are too long. In future versions, we will support the wrapping of all fields in the Client View Display.
 
 --------------------------------------------------------------------------------------------------------------------
 
