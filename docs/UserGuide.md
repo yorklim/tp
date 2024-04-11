@@ -127,14 +127,14 @@ download ClientCare.
 
 2. Download the latest version of ClientCare by downloading the `clientcare.jar` file found [here](https://github.com/AY2324S2-CS2103T-W12-1/tp/releases).
 
-![Tag](images/ug/ReleaseTag%20v1.2.jpg =600x)
+![Tag](images/ug/ReleaseTag%20v1.2.png =600x)
 
 <box type="info">
 
 **Note:** The ClientCare application file can be found at the bottom of the release notes, under Assets!
 </box>
 
-![jar](images/ug/clientcare%20jar%20file%20v1.2.jpg =600x)
+![jar](images/ug/clientcare%20jar%20file%20v1.2.png =600x)
 
 3. Create a new empty folder (with any name you like) in your computer where you'd like to store ClientCare.
 
@@ -207,7 +207,7 @@ Let's learn the language that ClientCare speaks in.
 ### ClientCare Commands
 A ClientCare command has the following parts:
 
-![Command Structure](images/ug/commandStructure.jpg =450x)
+![Command Structure](images/ug/commandStructure.png =450x)
 
 ##### 1) Command Keyword
 This keyword tells ClientCare what you want to do. If you want to add a new client, then `add` will be the keyword.
@@ -656,13 +656,13 @@ Want to see all your VIP clients first? You can sort the client list with `sort`
 Format: `sort CRITERIA o/ORDER`
 
 * Sorts the client list by the specified `CRITERIA`. Sorting `CRITERIA` is *case-insensitive*.
-* Sortng `CRITERIA` can be `name`, `phone`, `email`, `address`, `birthday`, `priority`, `lastmet`, `schedule`.
+* Sortng `CRITERIA` can be `name`, `birthday`, `priority`.
 * Sorting `ORDER` is specified by `ORDER` and can be `asc` for ascending or `desc` for descending. Sorting `ORDER` is *case-insensitive*
 
 Examples:
 * `sort name o/asc` sorts the client list by name in ascending order.
 * `sort priority o/desc` sorts the client list by priority in descending order.
-* `sort lastmet o/asc` sorts the client list by last met date in ascending order.
+* `sort birthday o/asc` sorts the client list by birthday date in ascending order.
 
 **Before Command:**
 

@@ -5,24 +5,14 @@ package seedu.address.model.person;
  */
 public enum SortCriteria {
     NAME,
-    PHONE,
-    EMAIL,
-    ADDRESS,
     BIRTHDAY,
     PRIORITY,
-    LASTMET,
-    SCHEDULE,
     INVALID;
 
     public static final String MESSAGE_CONSTRAINTS = "Sort criteria should be either "
             + SortCriteria.NAME + ", "
-            + SortCriteria.PHONE + ", "
-            + SortCriteria.EMAIL + ", "
-            + SortCriteria.ADDRESS + ", "
-            + SortCriteria.BIRTHDAY + ", "
             + SortCriteria.PRIORITY + ", "
-            + SortCriteria.LASTMET + " or "
-            + SortCriteria.SCHEDULE + ".";
+            + SortCriteria.BIRTHDAY + ".";
 
     /**
      * Returns the sort criteria given the string.

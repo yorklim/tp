@@ -25,45 +25,6 @@ public class PersonComparatorTest {
         assertTrue(nameDescComparator.compare(alice, bob) > 0);
         assertEquals(0, nameDescComparator.compare(alice, aliceCopy));
 
-        // sort by phone
-        Person phone1 = new PersonBuilder().withPhone("12345678").build();
-        Person phone1Copy = new PersonBuilder().withPhone("12345678").build();
-        Person phone2 = new PersonBuilder().withPhone("87654321").build();
-        // ascending
-        Comparator<Person> phoneAscComparator = PersonComparator.getComparator(SortCriteria.PHONE, SortOrder.ASC);
-        assertTrue(phoneAscComparator.compare(phone1, phone2) < 0);
-        assertEquals(0, phoneAscComparator.compare(phone1, phone1Copy));
-        // descending
-        Comparator<Person> phoneDescComparator = PersonComparator.getComparator(SortCriteria.PHONE, SortOrder.DESC);
-        assertTrue(phoneDescComparator.compare(phone1, phone2) > 0);
-        assertEquals(0, phoneDescComparator.compare(phone1, phone1Copy));
-
-        // sort by email
-        Person email1 = new PersonBuilder().withEmail("abc@email.com").build();
-        Person email1Copy = new PersonBuilder().withEmail("abc@email.com").build();
-        Person email2 = new PersonBuilder().withEmail("bcd@email.com").build();
-        // ascending
-        Comparator<Person> emailAscComparator = PersonComparator.getComparator(SortCriteria.EMAIL, SortOrder.ASC);
-        assertTrue(emailAscComparator.compare(email1, email2) < 0);
-        assertEquals(0, emailAscComparator.compare(email1, email1Copy));
-        // descending
-        Comparator<Person> emailDescComparator = PersonComparator.getComparator(SortCriteria.EMAIL, SortOrder.DESC);
-        assertTrue(emailDescComparator.compare(email1, email2) > 0);
-        assertEquals(0, emailDescComparator.compare(email1, email1Copy));
-
-        // sort by address
-        Person address1 = new PersonBuilder().withAddress("123, Clementi Ave 3").build();
-        Person address1Copy = new PersonBuilder().withAddress("123, Clementi Ave 3").build();
-        Person address2 = new PersonBuilder().withAddress("456, Clementi Ave 4").build();
-        // ascending
-        Comparator<Person> addressAscComparator = PersonComparator.getComparator(SortCriteria.ADDRESS, SortOrder.ASC);
-        assertTrue(addressAscComparator.compare(address1, address2) < 0);
-        assertEquals(0, addressAscComparator.compare(address1, address1Copy));
-        // descending
-        Comparator<Person> addressDescComparator = PersonComparator.getComparator(SortCriteria.ADDRESS, SortOrder.DESC);
-        assertTrue(addressDescComparator.compare(address1, address2) > 0);
-        assertEquals(0, addressDescComparator.compare(address1, address1Copy));
-
         // sort by priority
         Person priority1 = new PersonBuilder().withPriority("low").build();
         Person priority1Copy = new PersonBuilder().withPriority("low").build();

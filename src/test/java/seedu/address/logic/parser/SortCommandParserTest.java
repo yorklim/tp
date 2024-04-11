@@ -15,13 +15,6 @@ import seedu.address.model.person.SortOrder;
 public class SortCommandParserTest {
     public static final String VALID_SORT_NAME_ASC = SortCriteria.NAME + " " + PREFIX_SORT_ORDER + SortOrder.ASC;
     public static final String VALID_SORT_NAME_DESC = SortCriteria.NAME + " " + PREFIX_SORT_ORDER + SortOrder.DESC;
-    public static final String VALID_SORT_PHONE_ASC = SortCriteria.PHONE + " " + PREFIX_SORT_ORDER + SortOrder.ASC;
-    public static final String VALID_SORT_PHONE_DESC = SortCriteria.PHONE + " " + PREFIX_SORT_ORDER + SortOrder.DESC;
-    public static final String VALID_SORT_EMAIL_ASC = SortCriteria.EMAIL + " " + PREFIX_SORT_ORDER + SortOrder.ASC;
-    public static final String VALID_SORT_EMAIL_DESC = SortCriteria.EMAIL + " " + PREFIX_SORT_ORDER + SortOrder.DESC;
-    public static final String VALID_SORT_ADDRESS_ASC = SortCriteria.ADDRESS + " " + PREFIX_SORT_ORDER + SortOrder.ASC;
-    public static final String VALID_SORT_ADDRESS_DESC = SortCriteria.ADDRESS + " " + PREFIX_SORT_ORDER
-            + SortOrder.DESC;
     public static final String VALID_SORT_PRIORITY_ASC = SortCriteria.PRIORITY + " " + PREFIX_SORT_ORDER
             + SortOrder.ASC;
     public static final String VALID_SORT_PRIORITY_DESC = SortCriteria.PRIORITY + " " + PREFIX_SORT_ORDER
@@ -29,13 +22,6 @@ public class SortCommandParserTest {
     public static final String VALID_SORT_BIRTHDAY_ASC = SortCriteria.BIRTHDAY + " " + PREFIX_SORT_ORDER
             + SortOrder.ASC;
     public static final String VALID_SORT_BIRTHDAY_DESC = SortCriteria.BIRTHDAY + " " + PREFIX_SORT_ORDER
-            + SortOrder.DESC;
-    public static final String VALID_SORT_LASTMET_ASC = SortCriteria.LASTMET + " " + PREFIX_SORT_ORDER + SortOrder.ASC;
-    public static final String VALID_SORT_LASTMET_DESC = SortCriteria.LASTMET + " " + PREFIX_SORT_ORDER
-            + SortOrder.DESC;
-    public static final String VALID_SORT_SCHEDULE_ASC = SortCriteria.SCHEDULE + " " + PREFIX_SORT_ORDER
-            + SortOrder.ASC;
-    public static final String VALID_SORT_SCHEDULE_DESC = SortCriteria.SCHEDULE + " " + PREFIX_SORT_ORDER
             + SortOrder.DESC;
 
     private final SortCommandParser parser = new SortCommandParser();
@@ -47,18 +33,6 @@ public class SortCommandParserTest {
                 new SortCommand(SortCriteria.NAME, SortOrder.ASC));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_NAME_DESC,
                 new SortCommand(SortCriteria.NAME, SortOrder.DESC));
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_PHONE_ASC,
-                new SortCommand(SortCriteria.PHONE, SortOrder.ASC));
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_PHONE_DESC,
-                new SortCommand(SortCriteria.PHONE, SortOrder.DESC));
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_EMAIL_ASC,
-                new SortCommand(SortCriteria.EMAIL, SortOrder.ASC));
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_EMAIL_DESC,
-                new SortCommand(SortCriteria.EMAIL, SortOrder.DESC));
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_ADDRESS_ASC,
-                new SortCommand(SortCriteria.ADDRESS, SortOrder.ASC));
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_ADDRESS_DESC,
-                new SortCommand(SortCriteria.ADDRESS, SortOrder.DESC));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_PRIORITY_ASC,
                 new SortCommand(SortCriteria.PRIORITY, SortOrder.ASC));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_PRIORITY_DESC,
@@ -67,32 +41,14 @@ public class SortCommandParserTest {
                 new SortCommand(SortCriteria.BIRTHDAY, SortOrder.ASC));
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_BIRTHDAY_DESC,
                 new SortCommand(SortCriteria.BIRTHDAY, SortOrder.DESC));
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_LASTMET_ASC,
-                new SortCommand(SortCriteria.LASTMET, SortOrder.ASC));
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_LASTMET_DESC,
-                new SortCommand(SortCriteria.LASTMET, SortOrder.DESC));
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_SCHEDULE_ASC,
-                new SortCommand(SortCriteria.SCHEDULE, SortOrder.ASC));
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_SORT_SCHEDULE_DESC,
-                new SortCommand(SortCriteria.SCHEDULE, SortOrder.DESC));
 
         // without whitespace preamble
         assertParseSuccess(parser, VALID_SORT_NAME_ASC, new SortCommand(SortCriteria.NAME, SortOrder.ASC));
         assertParseSuccess(parser, VALID_SORT_NAME_DESC, new SortCommand(SortCriteria.NAME, SortOrder.DESC));
-        assertParseSuccess(parser, VALID_SORT_PHONE_ASC, new SortCommand(SortCriteria.PHONE, SortOrder.ASC));
-        assertParseSuccess(parser, VALID_SORT_PHONE_DESC, new SortCommand(SortCriteria.PHONE, SortOrder.DESC));
-        assertParseSuccess(parser, VALID_SORT_EMAIL_ASC, new SortCommand(SortCriteria.EMAIL, SortOrder.ASC));
-        assertParseSuccess(parser, VALID_SORT_EMAIL_DESC, new SortCommand(SortCriteria.EMAIL, SortOrder.DESC));
-        assertParseSuccess(parser, VALID_SORT_ADDRESS_ASC, new SortCommand(SortCriteria.ADDRESS, SortOrder.ASC));
-        assertParseSuccess(parser, VALID_SORT_ADDRESS_DESC, new SortCommand(SortCriteria.ADDRESS, SortOrder.DESC));
         assertParseSuccess(parser, VALID_SORT_PRIORITY_ASC, new SortCommand(SortCriteria.PRIORITY, SortOrder.ASC));
         assertParseSuccess(parser, VALID_SORT_PRIORITY_DESC, new SortCommand(SortCriteria.PRIORITY, SortOrder.DESC));
         assertParseSuccess(parser, VALID_SORT_BIRTHDAY_ASC, new SortCommand(SortCriteria.BIRTHDAY, SortOrder.ASC));
         assertParseSuccess(parser, VALID_SORT_BIRTHDAY_DESC, new SortCommand(SortCriteria.BIRTHDAY, SortOrder.DESC));
-        assertParseSuccess(parser, VALID_SORT_LASTMET_ASC, new SortCommand(SortCriteria.LASTMET, SortOrder.ASC));
-        assertParseSuccess(parser, VALID_SORT_LASTMET_DESC, new SortCommand(SortCriteria.LASTMET, SortOrder.DESC));
-        assertParseSuccess(parser, VALID_SORT_SCHEDULE_ASC, new SortCommand(SortCriteria.SCHEDULE, SortOrder.ASC));
-        assertParseSuccess(parser, VALID_SORT_SCHEDULE_DESC, new SortCommand(SortCriteria.SCHEDULE, SortOrder.DESC));
     }
 
     @Test
