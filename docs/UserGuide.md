@@ -238,6 +238,64 @@ Alternatively, [Command Summary](#command-summary) has all of them under one pag
 **CAUTION**: If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as the command format may be copied over incorrectly.
 </box>
 
+<div style="page-break-after: always;"></div>
+
+### Handling ClientCare Error Messages
+While using ClientCare, you may encounter errors when you mistype or missed something out in your commands.
+Not to worry, you will learn how to handle these error messages with ease in this section. 
+
+There are **4** types of error messages you may encounter in the Feedback Display.
+
+##### 1) Invalid Command
+This occurs when you have mis-spelt the command keyword or the keyword does not exist. If you do not remember what are the command keywords available, you can easily refer them again under [Command Summary](#command-summary).
+
+
+![Invalid Command](images/ug/error_command.png =450x)
+
+##### 2) Invalid Command Format
+This occurs when you have missed certain required fields or prefixes in the commands.
+
+For example: adding a policy to a client requires an index, policy name and policy ID. Missing any one of these will throw an invalid command format error.
+`addpolicy 1 i/02141` will cause an error as you have missed out the `n/` prefix and its input value.
+
+
+![Invalid Command Format](images/ug/error_commandformat.png =450x)
+
+<div style="page-break-after: always;"></div>
+
+##### 3) Invalid Fields
+This occurs when you have all the prefixes required in a command but may have typed an invalid value. 
+There are 2 possible situations where this is possible.
+
+* Invalid field format:
+For example: A phone number can only accept numbers. Putting alphabets in a phone number is not allowed.
+Typing `edit 2 c/123vad43` causes invalid field format error.
+
+
+![Invalid Phone](images/ug/error_phone.png =450x)
+
+* Invalid field value:
+For example: You are not allowed to type a future date when using the command `met` even though your date format is correct.
+If today is 5 Jan 2024, typing `met 2 d/2024-10-08` which is 8 Oct 2024 will cause an invalid field value error.
+
+
+![Future met](images/ug/error_futuremet.png =450x)
+
+##### 4) Invalid Index
+This occurs when you gave ClientCare an index value that is larger than your current client list.
+
+For example: If you only have 7 clients, then your index should be a value from 1 to 7.
+`edit 27 n/Bob` will cause an error as you have less than 27 clients.
+
+
+![Invalid Index](images/ug/error_index.png =450x)
+
+<box type="info">
+
+**Note:** ClientCare will only show you **one** error message at a time. If you have multiple errors, not to worry!
+ClientCare will be with you to correct each error!
+</box>
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
