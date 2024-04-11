@@ -854,7 +854,7 @@ testers are expected to do more *exploratory* testing.
 1. **Feature Flaw** - Currently, users can only schedule one appointment per client. In future versions, we will support multiple appointments per client.
 2. **Feature Flaw** - Currently, names are case-sensitive. `John` and `john` are regarded as different clients. In future versions, names will be case-insensitive.
 3. **Feature Flaw** - Currently, tags only allow alphanumeric values. Spaces and special characters are not allowed. In future versions, we will support the use of spaces and special characters for tags.
-4. **Feature Flaw** - Currently, users are not allowed to use special characters like `/` when adding or editing the client name. In future versions, we will support the use of `/` for names.
+4. **Feature Flaw** - Currently, users are not allowed to use special characters like `/` when adding or editing the client name. In future versions, we will support the use of special characters like `/` for names.
 5. **Feature Flaw** - Currently, users must fulfill all compulsory parameters to add a person. In future versions, we will make more parameters optional.
 6. **Feature Flaw** - Currently, users must re-sort the client list after adding, editing or updating clients. Client List does not auto update or re-sort itself upon adding/editing or updating. In future versions, we will support the auto sorting when clients are updated.
 7. **UI Bug** - Currently, the policy name and policy id may get truncated if there are too many characters. In future versions, we will support the wrapping of fields in the Policy Display.
