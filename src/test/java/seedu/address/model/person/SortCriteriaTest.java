@@ -31,10 +31,10 @@ public class SortCriteriaTest {
     public void constructor_validPriority_success() {
         assertEquals(SortCriteria.getSortCriteria("name"), SortCriteria.NAME); // lowercase
         assertEquals(SortCriteria.getSortCriteria("priority"), SortCriteria.PRIORITY); // lowercase
-        assertEquals(SortCriteria.getSortCriteria("lastmet"), SortCriteria.LASTMET); // lowercase
+        assertEquals(SortCriteria.getSortCriteria("birthday"), SortCriteria.BIRTHDAY); // lowercase
         assertEquals(SortCriteria.getSortCriteria("NAME"), SortCriteria.NAME); // uppercase
         assertEquals(SortCriteria.getSortCriteria("PRIORITY"), SortCriteria.PRIORITY); // uppercase
-        assertEquals(SortCriteria.getSortCriteria("LASTMET"), SortCriteria.LASTMET); // uppercase
+        assertEquals(SortCriteria.getSortCriteria("BIRTHDAY"), SortCriteria.BIRTHDAY); // uppercase
     }
 
     @Test
@@ -54,10 +54,10 @@ public class SortCriteriaTest {
         // valid sort criteria
         assertTrue(SortCriteria.isValidSortCriteria("name")); // lowercase
         assertTrue(SortCriteria.isValidSortCriteria("priority")); // lowercase
-        assertTrue(SortCriteria.isValidSortCriteria("lastmet")); // lowercase
+        assertTrue(SortCriteria.isValidSortCriteria("birthday")); // lowercase
         assertTrue(SortCriteria.isValidSortCriteria("NAME")); // uppercase
         assertTrue(SortCriteria.isValidSortCriteria("PRIORITY")); // uppercase
-        assertTrue(SortCriteria.isValidSortCriteria("LASTMET")); // uppercase
+        assertTrue(SortCriteria.isValidSortCriteria("BIRTHDAY")); // uppercase
     }
 
     @Test

@@ -21,26 +21,11 @@ public class PersonComparator {
         case NAME:
             comparator = Comparator.comparing(Person::getName);
             break;
-        case PHONE:
-            comparator = Comparator.comparing(Person::getPhone);
-            break;
-        case EMAIL:
-            comparator = Comparator.comparing(Person::getEmail);
-            break;
-        case ADDRESS:
-            comparator = Comparator.comparing(Person::getAddress);
-            break;
         case PRIORITY:
             comparator = Comparator.comparing(Person::getPriority);
             break;
         case BIRTHDAY:
             comparator = Comparator.comparing(Person::getBirthday);
-            break;
-        case LASTMET:
-            comparator = Comparator.comparing(Person::getLastMet);
-            break;
-        case SCHEDULE:
-            comparator = Comparator.comparing(Person::getSchedule);
             break;
         default:
             return COMPARATOR_SHOW_ORIGINAL_ORDER;
