@@ -13,7 +13,8 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This project was based on the [AddressBook-Level3 (AB3](https://se-education.org/addressbook-level3/) from [SE-EDU](https://se-education.org/).
+* The `remark` command in this project was implemented with reference to the CS2103T AB3 [Tutorial: Adding a command](https://nus-cs2103-ay2324s2.github.io/tp/tutorials/AddRemark.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
