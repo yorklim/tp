@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S2-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S2-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -72,9 +72,9 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
 
 The `UI` component,
 
@@ -151,7 +151,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -162,23 +162,55 @@ This section describes some noteworthy details on how certain features are imple
 
 ### View Client feature
 
-The view client feature allows users to view the details of a client using their `INDEX` on the GUI. This includes information not included in the client list cards, such as their last met and policy list.
+The `view` command allows users to view the details of a client on the GUI using their `INDEX`. Other commands will also affect the client display in the GUI. This includes information not included in the client list cards, such as their last met and policy list.
 
 #### Implementation
 
-The view client mechanism is facilitated by `DisplayClient` in the model. When any command referring to a client using `INDEX` is executed, this DisplayClient is set to the client that was operated on (or cleared to `null` in the case of `delete` and `clear`).
+The view client mechanism is facilitated by `DisplayClient` in the model. There are three possible outcomes when a command is executed:
+1. When a command adding a client (e.g. `add`) or referring to a client using `INDEX` (e.g. `view`, `met`,`deletepolicy`) is executed, the `DisplayClient` is set to the client that was operated on. 
+2. When a command that changes the client list is executed (e.g. `list`, `sort`, `find`), the `DisplayClient` is set to the first client in the new list.
+3. When `delete` or `clear` is executed, the `DisplayClient` is set to `null`. 
 This is done with the `setDisplayClient()` function in the `Model`, that is also implemented in `Logic`.
-
 
 The sequence diagram below shows the execution of `view 1` to view the details of client at index 1.
 <puml src="diagrams/ViewClientSequenceDiagram.puml" width="900" />
 
-`MainWindow` handles most of the UI logic in regard to displaying the viewed client on the GUI, including refreshing the `ClientDetailsPanel` and `ClientPolicyTable`. It also sets `DisplayClient` on startup when there is at least one client in the list.
+`MainWindow` handles most of the UI logic in regard to displaying the viewed client on the GUI, including refreshing the `ClientDetailsPanel` and `ClientPolicyTable`. It also sets `DisplayClient` on startup to the first client in the list when there is at least one client, otherwise it sets `DisplayClient` to `null`.
 
+#### Design Considerations
 
+**Aspect: Where `DisplayClient` should be stored or handled.**
+
+* Current: `DisplayClient` is stored and handled in `Model`, with relevant functions in `Logic`.
+  * The functions in `Model` and `Logic` are similar to those for `AddressBook` to get and set the `DisplayClient`. 
+  * It follows the current design, where the viewable `ObservableList<Person>` for the GUI is separate from the `AddressBook`.
+  * This allows for `DisplayClient` to be used even when there is no command executed. For example, when the application starts up, it displays the first client in the list, despite no command execution.
+* Alternative (not taken): `DisplayClient` is handled in `CommandResult`.
+  * In this implementation, `DisplayClient` would simply be a `Person` set by `CommandResult`, similar to the current `feedbackToUser` implementation.
+  * However, this means `DisplayClient` can only be set after a command, which does not allow us to set `DisplayClient` on application startup.
 
 ### Adding notes to client feature
 
+The `remark` command allows users to add an optional note to a client.
+
+#### Implementation
+
+The `remark` command was implemented according to [Tutorial: Adding a command](https://nus-cs2103-ay2324s2.github.io/tp/tutorials/AddRemark.html) from CS2103T and AB3. The mechanism is similar to `edit`, and is facilitated by `RemarkCommand`. It creates and returns a `personToEdit`, where only the `Remark` is updated to the new remark entered by the user. Changes are made using `Model#setPerson(Person, Person)`.
+
+#### Design Considerations
+
+**Aspect: Behaviour of `r/` prefix if more than one is used.
+
+* Current: Only the last one is used to update `Remark`.
+  * For example, `remark 1 r/typo r/corrected` will only capture `corrected`.
+  * This is to allow users to quickly correct typos by simply typing a new remark rather than move their cursor and backspace to fix the typo.
+* Alternative (not taken): Disallow duplicate `r/` prefixes.
+  * The example above will give the user a command error instead.
+  * This might cause minor convenience to users since they will have to ensure they do not use `r/` in their remarks. It also means fixing typos will be slower, like mentioned above.
+* Alternative (not taken): Remove `r/` prefix.
+  * With this, the command format will be `remark INDEX REMARK` instead.
+  * While this might make it easier to type, it will also make fixing typos slower, like mentioned in the current behaviour.
+  * It also means that a separate way of parsing has to be used, instead of `ArgumentMultimap`, deviating from other commands.
 
 ### Sorting clients feature
 
@@ -389,13 +421,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -808,16 +833,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -825,16 +850,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -842,7 +867,7 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 
 ## **Appendix: Planned Enhancements**
