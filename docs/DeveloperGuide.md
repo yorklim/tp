@@ -887,7 +887,7 @@ Team Size: 4
 
 ## **Appendix: Effort**
 
-1. Scheduling
+1. Scheduling Features
 `met`, `schedule`, `mark` and `set` commands help the user manage his scheduling matters. As these 4 commands directly affect each other, the difficulty comes in thinking what and how
 their respective class methods should interact with each other, especially with what date format to choose as this directly affects our auto-sort implemented for scheduling. It is also difficult to test for extreme cases that may cause these commands to misbehave.
 We decided to simplify the process by restricting the user to 1 appointment per client as our initial beta version faced multiple bugs due to higher number of classes and functions when supporting multiple appointments per client.
@@ -895,9 +895,9 @@ We decided to simplify the process by restricting the user to 1 appointment per 
 `set` is also saved in a separate txt file as it is not related to client traits. Hence, additional testing is needed to ensure the value that `set` updates is saved correctly and is able to handle
 invalid values if the txt file is edited wrongly.
 
-2. Policies
+2. Policies Features
 
-3. Additional Client Traits
+3. Additional Client Traits and Features
 
 4. GUI
 
