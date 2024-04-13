@@ -15,7 +15,7 @@
 
 * This project was based on the [AddressBook-Level3 (AB3](https://se-education.org/addressbook-level3/) from [SE-EDU](https://se-education.org/).
 * The `remark` command in this project was implemented with reference to the CS2103T AB3 [Tutorial: Adding a command](https://nus-cs2103-ay2324s2.github.io/tp/tutorials/AddRemark.html).
-
+* The user guide approach in breakdown in sections and header styling was inspired by [ArtBuddy](https://ay2223s1-cs2103t-w11-3.github.io/tp/UserGuide.html)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -872,6 +872,8 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
+Team Size: 4
+
 1. **Feature Flaw** - Currently, users can only schedule one appointment per client. In future versions, we will support multiple appointments per client.
 2. **Feature Flaw** - Currently, names are case-sensitive. `John` and `john` are regarded as different clients. In future versions, names will be case-insensitive.
 3. **Feature Flaw** - Currently, tags only allow alphanumeric values. Spaces and special characters are not allowed. In future versions, we will support the use of spaces and special characters for tags.
@@ -884,5 +886,19 @@ testers are expected to do more *exploratory* testing.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
+
+1. Scheduling
+`met`, `schedule`, `mark` and `set` commands help the user manage his scheduling matters. As these 4 commands directly affect each other, the difficulty comes in thinking what and how
+their respective class methods should interact with each other, especially with what date format to choose as this directly affects our auto-sort implemented for scheduling. It is also difficult to test for extreme cases that may cause these commands to misbehave.
+We decided to simplify the process by restricting the user to 1 appointment per client as our initial beta version faced multiple bugs due to higher number of classes and functions when supporting multiple appointments per client.
+
+`set` is also saved in a separate txt file as it is not related to client traits. Hence, additional testing is needed to ensure the value that `set` updates is saved correctly and is able to handle
+invalid values if the txt file is edited wrongly.
+
+2. Policies
+
+3. Additional Client Traits
+
+4. GUI
 
 --------------------------------------------------------------------------------------------------------------------
