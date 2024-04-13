@@ -32,7 +32,7 @@ This guide walks you through all the features of ClientCare and can be used as a
 
 Ready to use ClientCare? You can check out our [Features](#features) section. For ease of reference, the
 [Features](#features) section is divided into subsections corresponding to each main feature:
-[Clients](#client-related-commands), [Schedules](#schedule-related-commands) and [Policies](#schedule-related-commands). Feel free to jump around as you explore ClientCare's amazing features!
+[Clients](#client-related-commands), [Schedules](#schedule-related-commands) and [Policies](#policy-related-commands). Feel free to jump around as you explore ClientCare's amazing features!
 
 Need a quick refresher? You can head to the [Command Summary](#command-summary) for a quick recap!
 
@@ -204,7 +204,7 @@ Let's learn the language that ClientCare speaks in.
 
 <br/>
 
-### ClientCare Commands
+### ClientCare commands
 A ClientCare command has the following parts:
 
 ![Command Structure](images/ug/commandStructure.png =450x)
@@ -240,7 +240,7 @@ Alternatively, [Command Summary](#command-summary) has all of them under one pag
 
 <div style="page-break-after: always;"></div>
 
-### Handling ClientCare Error Messages
+### Handling ClientCare error messages
 While using ClientCare, you may encounter errors when you mistype or missed something out in your commands.
 Not to worry, you will learn how to handle these error messages with ease in this section. 
 
@@ -299,7 +299,7 @@ ClientCare will be with you to correct each error!
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## Quick Tutorial
+## Quick tutorial
 Excited to play around with ClientCare?
 Let’s run you through some simple commands to get you warmed up before you dive right into ClientCare’s full feature list!
 
@@ -634,7 +634,7 @@ ClientCare shows a success message in the Feedback Display too.
 
 <div style="page-break-after: always;"></div>
 
-### Adding notes to clients: `remark`
+### Adding notes to a client: `remark`
 Need to remember certain information about a client such as his preference or health conditions?
 You can add notes to each client with `remark`. If a current remark exists, it will be replaced with the new remark.
 
@@ -759,8 +759,8 @@ of your clients' birthday!
 ClientCare offers the following commands to help you manage your schedule:
 * [Updating last met: `met`](#updating-last-met-met)
 * [Setting last met overdue period: `set`](#setting-last-met-overdue-period-set)
-* [Scheduling an appointment: `schedule`](#scheduling-appointments-schedule)
-* [Marking an appointment: `mark`](#marking-appointments-mark)
+* [Scheduling appointments: `schedule`](#scheduling-appointments-schedule)
+* [Marking appointments: `mark`](#marking-appointments-mark)
 
 <br/>
 <br/>
@@ -988,7 +988,7 @@ numbering schemes.
 <box type="info">
 
 **Note:** Although most policy IDs will be up to 25 digits, 
-ClientCare allows you to put up to about 40 digits long before values are truncated in fullscreen. The limit might vary depending on your screen size, so do check if the remark is fully displayed.
+ClientCare allows you to put up to about 40 digits long before values are truncated in fullscreen. The limit might vary depending on your screen size, so do check if the policy ID is fully displayed.
 </box>
 
 **Before Command:**
