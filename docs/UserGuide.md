@@ -8,7 +8,7 @@
 # ClientCare User Guide
 This user guide is meant for ClientCare Version `v1.4`.
 
-Too many clients to keep track off? Not sure when is your next appointment?
+Too many clients to keep track of? Not sure when is your next appointment?
 Fret not! ClientCare is a **desktop application for assisting insurance agents in managing their client relationships and follow-ups effectively.**
 Built with your needs in mind, ClientCare is here to help you manage all your clients, appointments and policies, **all in one place**!
 
@@ -346,7 +346,7 @@ Let's type the following command into the Command Input:
 
 <box type="info">
 
-**Note:** Since you cannot schedule an appointment for a date and time that has passed or that exact moment, 
+**Note:** Since you cannot schedule an appointment for a date and time that has passed for that exact moment, 
 do change the date field as needed.
 
 </box>
@@ -419,7 +419,7 @@ Format: `add n/NAME c/PHONE_NUMBER e/EMAIL a/ADDRESS d/BIRTHDAY p/PRIORITY [t/TA
 <box type="info">
 
 **Note:** A client can have any number of tags (including 0). For example, `t/owesMoney t/friends` is allowed.<br/>
-All other fields (with the exception of tags) cannot have duplicate fields. For example, `c/1234567 c/7654321` is **not** allowed.
+All other fields (except for tags) cannot have duplicate fields. For example, `c/1234567 c/7654321` is **not** allowed.
 </box>
 
 <box type="info">
@@ -430,15 +430,15 @@ All other fields (with the exception of tags) cannot have duplicate fields. For 
 
 Fields usage for client details:
 
-| Field            | Usage                                                                                    | Example                         |
-|------------------|------------------------------------------------------------------------------------------|---------------------------------|
-| 'n/NAME'         | All names in the system must be unique                                                   | `n/John Doe`                    |
-| 'c/PHONE_NUMBER' | Phone numbers should only contain numbers, and it should be at least 3 digits long       | `c/98765432`                    |
-| 'e/EMAIL'        | Email should be in the format of `local-part@domain`                                     | `e/johndoe@email.com`           |
-| 'a/ADDRESS'      | Address can take any text value                                                          | `a/311, Clementi Ave 2, #02-25` |
-| 'd/BIRTHDAY'     | Birthday should be in the format of `YYYY-MM-DD`                                         | `d/1990-01-01`                  |
-| 'p/PRIORITY'     | Priority can be `low`, `medium`, `high`, `vip`, or `l`, `m`, `h`, `v` <br/>(Case Insensitive) | `p/medium`, `p/mEdIuM` ,`p/m`   |
-| 't/TAG'          | Tags can be any text value                                                               | `t/friends`                     |
+| Field            | Usage                                                                                         | Example                               |
+|------------------|-----------------------------------------------------------------------------------------------|---------------------------------------|
+| 'n/NAME'         | All names in the system must be unique and names are case sensitive                           | `n/John Doe`                          |
+| 'c/PHONE_NUMBER' | Phone numbers should only contain numbers, and it should be at least 3 digits long            | `c/98765432`                          |
+| 'e/EMAIL'        | Email should be in the format of `local-part@domain`                                          | `e/johndoe@email.com`                 |
+| 'a/ADDRESS'      | Address can take any text value                                                               | `a/311, Clementi Ave 2, #02-25`       |
+| 'd/BIRTHDAY'     | Birthday should be in the format of `YYYY-MM-DD`                                              | `d/1990-01-01`                        |
+| 'p/PRIORITY'     | Priority can be `low`, `medium`, `high`, `vip`, or `l`, `m`, `h`, `v` <br/>(Case Insensitive) | `p/medium`, `p/MEDIUM` ,`p/m`, `p/M`  |
+| 't/TAG'          | Tags can be any text value                                                                    | `t/friends`                           |
 
 Examples:
 * `add n/John Doe c/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/1990-01-01 p/low t/friends t/owesMoney`
@@ -516,7 +516,7 @@ Format: `edit INDEX [n/NAME] [c/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDAY] [p/PRI
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
 * You can remove all the client’s tags by typing `t/` without
   specifying any tags after it.
 * Refer to the [Adding a client](#adding-a-client-add) section for the usage of the fields.
@@ -546,6 +546,7 @@ You have updated James' name! ClientCare shows a success message in the Feedback
 After applying certain filter or finding commands, you can see all your clients again with `list`.
 
 Format: `list`
+* Extraneous fields will be ignored. For example, `list all` will be interpreted as `list`.
 
 **Before Command:**
 
@@ -577,7 +578,7 @@ Format: `view INDEX`
 
 Examples:
 * `list` followed by `view 2` views the 2nd client in the client list.
-* `find Betsy` followed by `view 1` view the 1st client in the results of the `find` command.
+* `find Betsy` followed by `view 1` views the 1st client in the results of the `find` command.
 
 **Before Command:**
 
@@ -627,7 +628,7 @@ Type the following into the Command Input: `find james`
 
 **After Command:**
 
-All clients with the name "james" will now show up in the client list.
+All clients whose name contains the word "james" will now show up in the client list.
 ClientCare shows a success message in the Feedback Display too.
 
 ![success_edit](images/ug/success_find.png =600x)
@@ -657,7 +658,7 @@ Examples:
 
 <box type="info">
 
-**Note:** ClientCare allows you to put up to 550 characters for `REMARK` before characters are truncated in fullscreen.
+**Note:** ClientCare allows you to put up to about 550 characters for `REMARK` before characters are truncated in fullscreen. The limit might vary depending on your screen size, so do check if the remark is fully displayed.
 </box>
 
 **Before Command:**
@@ -683,6 +684,7 @@ Do you want to clear the sample clients from ClientCare or start from scratch?
 You can clear all the clients from the client list with `clear`.
 
 Format: `clear`
+* Extraneous fields will be ignored. For example, `clear all` will be interpreted as `clear`.
 
 <box type="warning" theme="danger" icon=":warning:">
 
@@ -714,7 +716,7 @@ Want to see all your VIP clients first? You can sort the client list with `sort`
 Format: `sort CRITERIA o/ORDER`
 
 * Sorts the client list by the specified `CRITERIA`. Sorting `CRITERIA` is *case-insensitive*.
-* Sortng `CRITERIA` can be `name`, `birthday`, `priority`.
+* Sorting `CRITERIA` can be `name`, `birthday`, `priority`.
 * Sorting `ORDER` is specified by `ORDER` and can be `asc` for ascending or `desc` for descending. Sorting `ORDER` is *case-insensitive*
 
 Examples:
@@ -747,7 +749,7 @@ of your clients' birthday!
 
 ![Reminders panel'](images/ug/reminders.png =600x)
 
-**Last Met Display:** Shows you the list of clients you have not met in a while (that do not have an active schedule). You can set the overdue period using [`set`](#setting-last-met-overdue-period-set), by default is 90 days.
+**Last Met Display:** Shows you the list of clients you have not met in a while (that do not have an active schedule). You can set the overdue period using [`set`](#setting-last-met-overdue-period-set), which by default is 90 days.
 
 **Schedule Display:** Shows you the list of clients you have an appointment with.
 
@@ -850,7 +852,7 @@ ClientCare shows a success message in the Feedback Display too.
 
 ### Scheduling appointments : `schedule`
 
-Got a new appointment or a reschedule is needed?
+Got a new appointment or a rescheduling is needed?
 You can schedule an appointment date and time you have with your client with `schedule`.
 
 Format: `schedule INDEX d/DATETIME`
@@ -950,7 +952,7 @@ in ascending order, and clicking again will sort in descending order.
 
 <box type="info">
 
-**Note:** Sorting for both "Policy ID" and "Policy Name" will follow lexigraphical order.
+**Note:** Sorting for both "Policy ID" and "Policy Name" will follow lexicographical order.
 </box>
 
 
@@ -987,7 +989,7 @@ numbering schemes.
 <box type="info">
 
 **Note:** Although most policy IDs will be up to 25 digits, 
-ClientCare allows you to put up to 40 digits long before values are truncated in fullscreen.
+ClientCare allows you to put up to about 40 digits long before values are truncated in fullscreen. The limit might vary depending on your screen size, so do check if the remark is fully displayed.
 </box>
 
 **Before Command:**
@@ -1110,8 +1112,8 @@ This means the last met duration must be 91 days or more.
 **A** : As of now, no. ClientCare is only supported on Desktop devices that can run Java. Not to worry, mobile device support is currently in development!
 
 
-**Q** : Why can ClientCare only be found on Github?<br/>
-**A** : Github allows ClientCare to be vetted by other users and programmers too. This ensures ClientCare to be up for public scrutiny, so you know ClientCare can be trusted.
+**Q** : Why can ClientCare only be found on GitHub?<br/>
+**A** : GitHub allows ClientCare to be vetted by other users and programmers too. This ensures ClientCare to be up for public scrutiny, so you know ClientCare can be trusted.
 
 
 **Q** : I tried following the guides for `schedule` and `met`. I encountered errors telling me that the dates are invalid.<br/>
