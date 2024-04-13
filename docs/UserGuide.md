@@ -539,7 +539,6 @@ You have updated James' name! ClientCare shows a success message in the Feedback
 
 ![success_edit](images/ug/success_edit.png =600x)
 
-<div style="page-break-after: always;"></div>
 
 ### Listing all clients : `list`
 
