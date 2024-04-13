@@ -8,7 +8,7 @@
 # ClientCare User Guide
 This user guide is meant for ClientCare Version `v1.4`.
 
-Too many clients to keep track off? Not sure when is your next appointment?
+Too many clients to keep track of? Not sure when is your next appointment?
 Fret not! ClientCare is a **desktop application for assisting insurance agents in managing their client relationships and follow-ups effectively.**
 Built with your needs in mind, ClientCare is here to help you manage all your clients, appointments and policies, **all in one place**!
 
@@ -419,7 +419,7 @@ Format: `add n/NAME c/PHONE_NUMBER e/EMAIL a/ADDRESS d/BIRTHDAY p/PRIORITY [t/TA
 <box type="info">
 
 **Note:** A client can have any number of tags (including 0). For example, `t/owesMoney t/friends` is allowed.<br/>
-All other fields (with the exception of tags) cannot have duplicate fields. For example, `c/1234567 c/7654321` is **not** allowed.
+All other fields (except for tags) cannot have duplicate fields. For example, `c/1234567 c/7654321` is **not** allowed.
 </box>
 
 <box type="info">
@@ -516,7 +516,7 @@ Format: `edit INDEX [n/NAME] [c/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDAY] [p/PRI
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
 * You can remove all the client’s tags by typing `t/` without
   specifying any tags after it.
 * Refer to the [Adding a client](#adding-a-client-add) section for the usage of the fields.
@@ -716,7 +716,7 @@ Want to see all your VIP clients first? You can sort the client list with `sort`
 Format: `sort CRITERIA o/ORDER`
 
 * Sorts the client list by the specified `CRITERIA`. Sorting `CRITERIA` is *case-insensitive*.
-* Sortng `CRITERIA` can be `name`, `birthday`, `priority`.
+* Sorting `CRITERIA` can be `name`, `birthday`, `priority`.
 * Sorting `ORDER` is specified by `ORDER` and can be `asc` for ascending or `desc` for descending. Sorting `ORDER` is *case-insensitive*
 
 Examples:
@@ -852,7 +852,7 @@ ClientCare shows a success message in the Feedback Display too.
 
 ### Scheduling appointments : `schedule`
 
-Got a new appointment or a reschedule is needed?
+Got a new appointment or a rescheduling is needed?
 You can schedule an appointment date and time you have with your client with `schedule`.
 
 Format: `schedule INDEX d/DATETIME`
@@ -952,7 +952,7 @@ in ascending order, and clicking again will sort in descending order.
 
 <box type="info">
 
-**Note:** Sorting for both "Policy ID" and "Policy Name" will follow lexigraphical order.
+**Note:** Sorting for both "Policy ID" and "Policy Name" will follow lexicographical order.
 </box>
 
 
@@ -1112,8 +1112,8 @@ This means the last met duration must be 91 days or more.
 **A** : As of now, no. ClientCare is only supported on Desktop devices that can run Java. Not to worry, mobile device support is currently in development!
 
 
-**Q** : Why can ClientCare only be found on Github?<br/>
-**A** : Github allows ClientCare to be vetted by other users and programmers too. This ensures ClientCare to be up for public scrutiny, so you know ClientCare can be trusted.
+**Q** : Why can ClientCare only be found on GitHub?<br/>
+**A** : GitHub allows ClientCare to be vetted by other users and programmers too. This ensures ClientCare to be up for public scrutiny, so you know ClientCare can be trusted.
 
 
 **Q** : I tried following the guides for `schedule` and `met`. I encountered errors telling me that the dates are invalid.<br/>
