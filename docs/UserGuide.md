@@ -402,7 +402,7 @@ ClientCare offers the following commands to help you manage your clients:
 * [Listing all clients: `list`](#listing-all-clients-list)
 * [Viewing a client: `view`](#viewing-a-client-view)
 * [Finding a client: `find`](#finding-client-by-name-find)
-* [Adding notes to a client: `remark`](#adding-notes-to-clients-remark)
+* [Adding notes to a client: `remark`](#adding-notes-to-a-client-remark)
 * [Clearing all clients: `clear`](#clearing-all-entries-clear)
 * [Sorting your clients: `sort`](#sorting-the-client-list-sort)
 <br/>
@@ -1287,7 +1287,7 @@ If a text is truncated in the display, this means that the full text has been sh
 | [**List**](#listing-all-clients-list)                | `list`                                                                                                                                                                                                           |
 | [**View**](#viewing-a-client-view)                   | `view INDEX`<br/> e.g, `view 1`                                                                                                                                                                                  |
 | [**Find**](#finding-client-by-name-find)             | `find KEYWORD [MORE_KEYWORDS]`<br/> e.g. `find James Jake`                                                                                                                                                       |
-| [**Remark**](#adding-notes-to-clients-remark)        | `remark INDEX [r/REMARK]`<br/> e.g. `remark 3 r/Has 2 school-age children and 1 elderly dependent`                                                                                                               |
+| [**Remark**](#adding-notes-to-a-client-remark)       | `remark INDEX [r/REMARK]`<br/> e.g. `remark 3 r/Has 2 school-age children and 1 elderly dependent`                                                                                                               |
 | [**Clear**](#clearing-all-entries-clear)             | `clear`                                                                                                                                                                                                          |
 | [**Sort**](#sorting-the-client-list-sort)            | `sort CRITERIA o/ORDER` <br/> e.g. `sort priority o/desc`                                                                                                                                                        |
 | [**LastMet**](#updating-last-met-met)                | `met INDEX d/DATE`<br/> e.g. `met 2 d/2023-05-07`                                                                                                                                                                |
