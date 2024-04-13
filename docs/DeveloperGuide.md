@@ -15,7 +15,7 @@
 
 * This project was based on the [AddressBook-Level3 (AB3](https://se-education.org/addressbook-level3/) from [SE-EDU](https://se-education.org/).
 * The `remark` command in this project was implemented with reference to the CS2103T AB3 [Tutorial: Adding a command](https://nus-cs2103-ay2324s2.github.io/tp/tutorials/AddRemark.html).
-
+* The user guide approach in breakdown in sections and header styling was inspired by [ArtBuddy](https://ay2223s1-cs2103t-w11-3.github.io/tp/UserGuide.html)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -818,7 +818,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the app manually. 
+The full guide on the expected outcome and format of the commands can be found in our user guide.
+This appendix will serve to inform users on the assumptions along with a correct and invalid test case.
 
 <box type="info" seamless>
 
@@ -844,9 +846,11 @@ testers are expected to do more *exploratory* testing.
 
 3. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding a client
 
-1. Deleting a person while all persons are being shown
+### Deleting a client
+
+1. Deleting a client while all clients are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -861,6 +865,56 @@ testers are expected to do more *exploratory* testing.
 
 2. _{ more test cases …​ }_
 
+### Editing a client
+
+### Listing client
+
+### Viewing a client
+
+### Finding a client
+
+### Adding notes to a client
+
+### Clearing the client list
+
+### Sorting clients
+
+### Updating last met
+Command Format: `met index d/YYYY-MM-DD`
+Assumptions: Today is 13 April 2024, date chosen must not be in the future.
+Desired Outcome: Updating the last met date of the 3rd client to 11 April 2024.  
+1. Correct Test Case: `met 3 d/2024-04-11`
+2. Invalid Test Case: `met 3 d/11-04-2024` wrong date format
+
+### Scheduling an appointment
+Command Format: `schedule index d/YYYY-MM-DD HH:mm`
+Assumptions: Today is 13 April 2024, date chosen must not be in the past.
+Desired Outcome: Creating an appointment with the 3rd client on 18 April 2024 2pm.
+1. Correct Test Case: `schedule 3 d/2024-04-18 14:00`
+2. Invalid Test Case: `schedule 3 d/18-04-2024 14:00` wrong dateTime format
+3. Invalid Test Case: `schedule 3 d/2024-04-18` missing time
+
+### Marking an appointment as complete
+Command Format: `mark index`
+Assumptions: An open appointment is present with an existing client.
+Desired Outcome: Marking an appointment with the 3rd client.
+1. Correct Test Case: `mark 3`
+2. Invalid Test Case: `mark 3` if client does not exist or appointment is done
+3. Invalid Test Case: `mark three` index should be a positive integer
+
+### Set the last met overdue duration
+Command Format: `mark integer`
+Assumptions: Nil
+Desired Outcome: Setting the duration to 45 days.
+1. Correct Test Case: `set 45`
+2. Invalid Test Case: `set 45.3` value must be non-negative integer
+3. Invalid Test Case: `set forty five` value must be a non-negative integer
+
+### Adding a policy
+
+### Deleting a policy
+
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -872,11 +926,13 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
+Team Size: 4
+
 1. **Feature Flaw** - Currently, users can only schedule one appointment per client. In future versions, we will support multiple appointments per client.
 2. **Feature Flaw** - Currently, names are case-sensitive. `John` and `john` are regarded as different clients. In future versions, names will be case-insensitive.
 3. **Feature Flaw** - Currently, tags only allow alphanumeric values. Spaces and special characters are not allowed. In future versions, we will support the use of spaces and special characters for tags.
 4. **Feature Flaw** - Currently, users are not allowed to use special characters like `/` when adding or editing the client name. In future versions, we will support the use of special characters like `/` for names.
-5. **Feature Flaw** - Currently, users must fulfill all compulsory parameters to add a person. In future versions, we will make more parameters optional.
+5. **Feature Flaw** - Currently, users must fulfill all compulsory parameters to add a client. In future versions, we will make more parameters optional.
 6. **Feature Flaw** - Currently, users must re-sort the client list after adding, editing or updating clients. Client List does not auto update or re-sort itself upon adding/editing or updating. In future versions, we will support the auto sorting when clients are updated.
 7. **UI Bug** - Currently, the policy name and policy id may get truncated if there are too many characters. In future versions, we will support the wrapping of fields in the Policy Display.
 8. **UI Bug** - Currently, the phone number and remark may get truncated if they are too long. In future versions, we will support the wrapping of all fields in the Client View Display.
@@ -884,5 +940,19 @@ testers are expected to do more *exploratory* testing.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
+
+1. Scheduling Features
+`met`, `schedule`, `mark` and `set` commands help the user manage his scheduling matters. As these 4 commands directly affect each other, the difficulty comes in thinking what and how
+their respective class methods should interact with each other, especially with what date format to choose as this directly affects our auto-sort implemented for scheduling. It is also difficult to test for extreme cases that may cause these commands to misbehave.
+We decided to simplify the process by restricting the user to 1 appointment per client as our initial beta version faced multiple bugs due to higher number of classes and functions when supporting multiple appointments per client.
+
+`set` is also saved in a separate txt file as it is not related to client traits. Hence, additional testing is needed to ensure the value that `set` updates is saved correctly and is able to handle
+invalid values if the txt file is edited wrongly.
+
+2. Policies Features
+
+3. Additional Client Traits and Features
+
+4. GUI
 
 --------------------------------------------------------------------------------------------------------------------
