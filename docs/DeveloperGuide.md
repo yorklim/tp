@@ -953,6 +953,9 @@ testers are expected to do more *exploratory* testing.
    7. Test Case (Future Date, Invalid Date): `met 3 d/2024-04-20`
       Expected: Similar to previous
    
+   8. Test Case (Invalid Date): `schedule 3 d/2024-02-31`
+      Expected: Similar to previous
+   
 ### Scheduling an appointment
 
 1. Scheduling an appointment with a client while all clients are being shown
@@ -975,6 +978,9 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous
 
    7. Test Case (Non-Future DateTime, Invalid DateTime): `schedule 3 d/2024-04-10 12:00`, `schedule 3 d/2024-04-13 14:00`
+      Expected: Similar to previous
+   
+   8. Test Case (Invalid DateTime): `schedule 3 d/2024-02-31 12:00`
       Expected: Similar to previous
 
 ### Marking an appointment as complete
@@ -1013,6 +1019,9 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous
    
    6. Test Case (Negative Integer, Invalid Parameter): `set -6`<br>
+      Expected: Similar to previous
+   
+   7. Test Case (Value Above Integer Limit): `set 1234567890098765432112345564354345324343124134211232132131231`
       Expected: Similar to previous
    
 ### Adding a policy
