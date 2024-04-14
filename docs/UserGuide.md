@@ -205,7 +205,7 @@ Let's learn the language that ClientCare speaks in.
 <br/>
 
 ### ClientCare commands
-A ClientCare command has the following parts:
+A ClientCare command can be made up of the following parts:
 
 ![Command Structure](images/ug/commandStructure.png =450x)
 
@@ -430,15 +430,15 @@ All other fields (except for tags) cannot have duplicate fields. For example, `c
 
 Fields usage for client details:
 
-| Field            | Usage                                                                                         | Example                               |
-|------------------|-----------------------------------------------------------------------------------------------|---------------------------------------|
-| 'n/NAME'         | All names in the system must be unique and names are case sensitive                           | `n/John Doe`                          |
-| 'c/PHONE_NUMBER' | Phone numbers should only contain numbers, and it should be at least 3 digits long            | `c/98765432`                          |
-| 'e/EMAIL'        | Email should be in the format of `local-part@domain`                                          | `e/johndoe@email.com`                 |
-| 'a/ADDRESS'      | Address can take any text value                                                               | `a/311, Clementi Ave 2, #02-25`       |
-| 'd/BIRTHDAY'     | Birthday should be in the format of `YYYY-MM-DD`                                              | `d/1990-01-01`                        |
-| 'p/PRIORITY'     | Priority can be `low`, `medium`, `high`, `vip`, or `l`, `m`, `h`, `v` <br/>(Case Insensitive) | `p/medium`, `p/MEDIUM` ,`p/m`, `p/M`  |
-| 't/TAG'          | Tags can be any text value                                                                    | `t/friends`                           |
+| Field            | Usage                                                                                         | Example                              |
+|------------------|-----------------------------------------------------------------------------------------------|--------------------------------------|
+| 'n/NAME'         | All names in the system must be unique and names are case sensitive                           | `n/John Doe`                         |
+| 'c/PHONE_NUMBER' | Phone numbers should only contain numbers, and it should be at least 3 digits long            | `c/98765432`                         |
+| 'e/EMAIL'        | Email should be in the format of `local-part@domain`                                          | `e/johndoe@email.com`                |
+| 'a/ADDRESS'      | Address can take any text value                                                               | `a/311, Clementi Ave 2, #02-25`      |
+| 'd/BIRTHDAY'     | Birthday should be in the format of `YYYY-MM-DD`                                              | `d/1990-01-01`                       |
+| 'p/PRIORITY'     | Priority can be `low`, `medium`, `high`, `vip`, or `l`, `m`, `h`, `v` <br/>(Case Insensitive) | `p/medium`, `p/MEDIUM`, `p/m`, `p/M` |
+| 't/TAG'          | Tags can be any text value                                                                    | `t/friends`                          |
 
 Examples:
 * `add n/John Doe c/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/1990-01-01 p/low t/friends t/owesMoney`
@@ -474,7 +474,7 @@ You have now added James Wee to our Client List! ClientCare shows a success mess
 
 <div style="page-break-after: always;"></div>
 
-### Deleting a client : `delete`
+### Deleting a client: `delete`
 
 While you can have new clients, it is also possible to lose existing clients. Hopefully, that does not happen often!
 You can delete a specified client from the client list with `delete`.
@@ -507,7 +507,7 @@ You have now removed David Li from our client list! ClientCare shows a success m
 
 <div style="page-break-after: always;"></div>
 
-### Editing a client : `edit`
+### Editing a client: `edit`
 
 Client information is always changing! If you ever need to update your client's particulars, you can edit an existing client with `edit`.
 
@@ -540,7 +540,7 @@ You have updated James' name! ClientCare shows a success message in the Feedback
 ![success_edit](images/ug/success_edit.png =600x)
 
 
-### Listing all clients : `list`
+### Listing all clients: `list`
 
 After applying certain filter or finding commands, you can see all your clients again with `list`.
 
@@ -565,7 +565,7 @@ All your clients are now listed on the client list! ClientCare shows a success m
 
 <div style="page-break-after: always;"></div>
 
-### Viewing a client : `view`
+### Viewing a client: `view`
 
 There are times when you would want to view a client's details and his policies in detail. You can do so with `view`.
 
@@ -677,7 +677,7 @@ ClientCare shows a success message in the Feedback Display too.
 
 <div style="page-break-after: always;"></div>
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Do you want to clear the sample clients from ClientCare or start from scratch?
 You can clear all the clients from the client list with `clear`.
@@ -708,7 +708,7 @@ ClientCare shows a success message in the Feedback Display too.
 
 <div style="page-break-after: always;"></div>
 
-### Sorting the client list : `sort`
+### Sorting the client list: `sort`
 
 Want to see all your VIP clients first? You can sort the client list with `sort`:
 
@@ -767,7 +767,7 @@ ClientCare offers the following commands to help you manage your schedule:
 
 <div style="page-break-after: always;"></div>
 
-### Updating last met : `met`
+### Updating last met: `met`
 
 Just met up with a client? You can update the last met date you had with your client with `met`.
 
@@ -818,7 +818,7 @@ ClientCare shows a success message in the Feedback Display too.
 
 <div style="page-break-after: always;"></div>
 
-### Setting last met overdue period : `set`
+### Setting last met overdue period: `set`
 
 Feel that 90 days is too short or long of a period? You can set your own desired overdue duration with `set`.
 
@@ -849,7 +849,7 @@ ClientCare shows a success message in the Feedback Display too.
 
 <div style="page-break-after: always;"></div>
 
-### Scheduling appointments : `schedule`
+### Scheduling appointments: `schedule`
 
 Got a new appointment or a rescheduling is needed?
 You can schedule an appointment date and time you have with your client with `schedule`.
@@ -900,7 +900,7 @@ ClientCare shows a success message in the Feedback Display too.
 
 <div style="page-break-after: always;"></div>
 
-### Marking appointments : `mark`
+### Marking appointments: `mark`
 
 Done with or need to cancel an appointment?
 You can mark an appointment as completed with `mark`.
@@ -963,7 +963,7 @@ ClientCare offers the following commands to help you manage your clients' polici
 <br/>
 <div style="page-break-after: always;"></div>
 
-### Adding a policy : `addpolicy`
+### Adding a policy: `addpolicy`
 
 Just closed a deal?
 You can add a policy to a client with `addpolicy`.
@@ -1008,7 +1008,7 @@ Roy's new policy has been added! ClientCare shows a success message in the Feedb
 
 <div style="page-break-after: always;"></div>
 
-### Deleting a policy : `deletepolicy`
+### Deleting a policy: `deletepolicy`
 
 Wrong policy or a policy just matured?
 You can delete a policy from a client with `deletepolicy`.
@@ -1041,7 +1041,7 @@ Roy's policy with ID 4123 has been deleted! ClientCare shows a success message i
 
 ## Miscellaneous
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 You can look for help by typing `help`.
 You will see a message explaining how to access the help page.
@@ -1053,7 +1053,7 @@ Format: `help`
 <br/>
 <br/>
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Done with all your work? You can exit the program with `exit`.
 
@@ -1076,7 +1076,7 @@ ClientCare data is automatically saved as a file `[ClientCare file location]/dat
 
 <box type="warning" theme="danger" icon=":warning:">
 
-**CAUTION**: If your changes to the data file makes its format invalid, ClientCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br/>
+**CAUTION**: If your changes to the data file makes its format invalid, ClientCare will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br/>
 Furthermore, certain edits can cause the ClientCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -1230,7 +1230,7 @@ This is the number which is assigned to a particular Client. For example, the 3r
 8. **Integer**
 
 This is a whole number. No decimal or fractions is allowed.
--7 , -1, 0, 7, 14 are all integers. 3.14 or 5/8 are not integers.
+-7, -1, 0, 7, 14 are all integers. 3.14 or 5/8 are not integers.
 
 9. **Address**
 
@@ -1292,8 +1292,8 @@ If a text is truncated in the display, this means that the full text has been sh
 | [**Sort**](#sorting-the-client-list-sort)            | `sort CRITERIA o/ORDER` <br/> e.g. `sort priority o/desc`                                                                                                                                                        |
 | [**LastMet**](#updating-last-met-met)                | `met INDEX d/DATE`<br/> e.g. `met 2 d/2023-05-07`                                                                                                                                                                |
 | [**Set**](#setting-last-met-overdue-period-set)      | `set NUMBER_OF_DAYS`<br/> e.g. `set 5`                                                                                                                                                                           |
-| [**Schedule**](#scheduling-appointments-schedule)    | `schedule INDEX d/DATETIME`<br/> e.g. `schedule 2 d/2023-05-07 22:00`                                                                                                                                            |                                                                                                                               |
-| [**Mark**](#marking-appointments-mark)               | `mark INDEX`<br/> e.g. `mark 2`                                                                                                                                                                                  |                                                                                                                               |
+| [**Schedule**](#scheduling-appointments-schedule)    | `schedule INDEX d/DATETIME`<br/> e.g. `schedule 2 d/2023-05-07 22:00`                                                                                                                                            | 
+| [**Mark**](#marking-appointments-mark)               | `mark INDEX`<br/> e.g. `mark 2`                                                                                                                                                                                  | 
 | [**Add Policy**](#adding-a-policy-addpolicy)         | `addpolicy INDEX n/POLICY_NAME i/POLICY_ID` <br/> e.g. `addpolicy 1 n/Life i/1`                                                                                                                                  |
 | [**Delete Policy**](#deleting-a-policy-deletepolicy) | `deletepolicy INDEX i/POLICY_ID` <br/> e.g. `deletepolicy 1 i/1`                                                                                                                                                 |
 | [**Help**](#viewing-help-help)                       | `help`                                                                                                                                                                                                           |
