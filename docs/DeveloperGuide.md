@@ -606,6 +606,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1a1-1a3 are repeated until the data entered are correct.<br>
     Use case resumes at step 2.
 
+
 **Use case: UC05 - View client details and policies**
 
 **MSS**
@@ -624,7 +625,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. ClientCare detects that the client does not exist.
   * 1b1. ClientCare shows an error message.<br>
     Use case ends.
-
 
 
 **Use case: UC06 - Find a client by name**
@@ -646,6 +646,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. ClientCare detects that there is no matching name found.
   * 1b1. ClientCare lets user know that the list is empty.<br>
     Use case ends.
+
 
 **Use case: UC07 - Adding notes to a client**
 
@@ -688,12 +689,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1a1-1a3 are repeated until the data entered are correct.<br>
     Use case resumes at step 2.
 
+
 **Use case: UC09 - Sort clients**
 
 **MSS**
-1. PLACEHOLDER
+1.  User requests to sort clients by `CRITERIA` and `ORDER`.
+2. ClientCare sorts the clients by the specified criteria and order.
+3. ClientCare shows a success message to the user.<br>
+   Use case ends.
 
 **Extensions**
+* 1a. ClientCare detects that the given command is invalid.
+  * 1a1. ClientCare shows an error message.
+    Use case ends.
+* 1b. ClientCare detects that the given `CRITERIA` is invalid.
+  * 1b1. ClientCare shows an error message.
+    Use case ends.
+* 1c. ClientCare detects that the given `ORDER` is invalid.
+  * 1c1. ClientCare shows an error message.
+    Use case ends.
 
 
 **Use case: UC10 - Update client as met**
@@ -717,6 +731,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c1. ClientCare shows an error message.<br>
     Use case ends.
 
+
 **Use case: UC11 - Update last met overdue duration**
 
 **MSS**
@@ -735,7 +750,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. ClientCare detects that the given input entered is not a non-negative integer.
   * 1b1. ClientCare shows an error message.<br>
     Use case ends.
-      
+ 
+
 **Use case: UC12 - Schedule an appointment with client**
 
 **MSS**
@@ -781,6 +797,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c1. ClientCare shows an error message.<br>
     Use case ends.
 
+
 **Use case: UC14 - Add policies to client**
 
 **MSS**
@@ -803,6 +820,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c1. ClientCare shows an error message.<br>
     Use case ends.
 
+
 **Use case: UC15 - Delete policies from client**
 
 **MSS**
@@ -824,6 +842,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. ClientCare detects that the client does not exist.
   * 1c1. ClientCare shows an error message.<br>
     Use case ends.
+
 
 ### Non-Functional Requirements
 
@@ -1040,6 +1059,54 @@ testers are expected to do more *exploratory* testing.
    Expected: Similar to previous.
 
 ### Sorting clients
+
+1. Sorting clients by priority
+
+   1. Prerequisites: Multiple clients in the client list.
+
+   2. Test case (valid descending): `sort priority o/desc`<br>
+      Expected: Clients are sorted by priority in descending order. Success message shown in the status message.
+
+   3. Test case (valid ascending): `sort priority o/asc`<br>
+      Expected: Clients are sorted by priority in ascending order. Success message shown in the status message.
+
+   4. Test case (invalid order): `sort priority o/invalid`<br>
+      Expected: Clients are not sorted. Error message shown in the status message.
+
+   5. Test case (invalid criteria): `sort invalid o/asc`<br>
+      Expected: Similar to previous.
+
+2. Sorting clients by name
+
+   1. Prerequisites: Multiple clients in the client list.
+
+   2. Test case (valid ascending): `sort name o/asc`<br>
+      Expected: Clients are sorted by name in ascending order. Success message shown in the status message.
+
+   3. Test case (valid descending): `sort name o/desc`<br>
+      Expected: Clients are sorted by name in descending order. Success message shown in the status message.
+
+   4. Test case (invalid order): `sort name o/invalid`<br>
+      Expected: Clients are not sorted. Error message shown in the status message.
+
+   5. Test case (invalid criteria): `sort invalid o/asc`<br>
+      Expected: Similar to previous.
+
+3. Sorting clients by birthday
+
+   1. Prerequisites: Multiple clients in the client list.
+    
+   2. Test case (valid ascending): `sort birthday o/asc`<br>
+    Expected: Clients are sorted by birthday in ascending order. Success message shown in the status message.
+    
+   3. Test case (valid descending): `sort birthday o/desc`<br>
+    Expected: Clients are sorted by birthday in descending order. Success message shown in the status message.
+    
+   4. Test case (invalid order): `sort birthday o/invalid`<br>
+    Expected: Clients are not sorted. Error message shown in the status message.
+    
+   5. Test case (invalid criteria): `sort invalid o/asc`<br>
+    Expected: Similar to previous.
 
 ### Updating last met
 
@@ -1292,6 +1359,12 @@ Additional testing was needed to ensure that the policies are saved correctly an
 As to keep the `Person` object immutable, we had to create a new `Person` object with the updated policy list when adding or deleting a policy. This made testing for the `addpolicy` and `deletepolicy` commands more difficult as the `addressbook` object prevents us from directly updating the `Person` object. Thus, more methods have to be implemented in `ModelManger` class to enable proper updating of the expected `AddressBook` object when testing.
 
 **3. Additional Client Traits and Features**<br>
+Difficulty Level: 3/5<br>
+Effort Required: 3/5<br>
+Challenges faced: When implementing sorting of clients, the challenge was understanding the design principles behind how `ModelManager#filteredPersons` was implemented in AB3. Since this is an iterative project, we had to ensure that the principles were consistent.
+For instance, we recognised that `ModelManager#filteredPersons` was an immutable list, and thus our initial implementation of removing the `final` keyword from the `filteredPersons` field was incorrect and broke the design principles. We had to revert this change and design an alternative solution that adhered to the design principles.
+This took some time to understand and implement correctly. `Birthday` and `Priority` are extensions of the `Person` model and required classes of their own. `DateUtil` and `DateTimeUtil` classes were additionally created to handle dates and times, which was used widely, and thus had to be well-designed to ensure utility and prevent bugs.
+Testing for most features were very extensive, with multiple edge cases and invalid inputs. Quality of design was ensured and priorities over shortcut alternatives. For instance, data structures like `HashMap` was utilised to map string inputs to `PriorityValue` enums. All these quality design required time and effort.
 
 **4. GUI**<br>
 Difficulty Level: 3/5<br>
