@@ -855,15 +855,14 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First client is deleted from the list. Details of the deleted contact shown in the status message.
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case (Missing Index): `delete`<br>
+   Expected: No client is deleted. Error details shown in the status message.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   4. Test case (Invalid Index): `delete x`(where x is smaller or larger than the list size)<br>
+   Expected: similar to previous.
 
-2. _{ more test cases …​ }_
 
 ### Editing a client
 
@@ -874,10 +873,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple clients in the client list.
 
    2. Test case: `list`<br>
-      Expected: All clients are shown in the list view. Success message shown in the status message.
+   Expected: All clients are shown in the list view. Success message shown in the status message.
 
    3. Test case: `list 1`, `list asdsad`, `list n/Jones` or any command with extra characters supplied<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
 
 
 ### Viewing a client
@@ -887,16 +886,16 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list.
 
    2. Test case: `view 1`<br>
-      Expected: First client's details are shown in the client details view and policy details view. Success message shown in the status message.
+   Expected: First client's details are shown in the client details view and policy details view. Success message shown in the status message.
 
    3. Test case (Missing Index): `view`<br>
-      Expected: Client details view and Policy details view not updated. Error message shown in the status message.
+   Expected: Client details view and Policy details view not updated. Error details shown in the status message.
 
    4. Test case (Invalid Index): `view x` (where x is smaller or larger than the list size)<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
 
    6. Test case (Extra Characters): `view 1 asd`, `view 1 n/Jones` or any command with extra characters supplied<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
 
 ### Finding a client
 
@@ -905,13 +904,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all client using the `list` command. Multiple clients in the client list. Ensure there is a client with the name "Jones".
 
    2. Test case: `find Jones`<br>
-      Expected: Client list update to show all clients with the name "Jones". Success message shown in the status message.
+   Expected: Client list update to show all clients with the name "Jones". Success message shown in the status message.
 
    3. Test case (Multiple keywords): `find Jones Brown`<br>
-      Expected: Client list update to show all clients with the name "Jones" or the name "Brown" (if any). Success message shown in the status message.
+   Expected: Client list update to show all clients with the name "Jones" or the name "Brown" (if any). Success message shown in the status message.
 
    4. Test case (Missing keyword): `find`<br>
-      Expected: No client is found. Error message shown in the status message.
+   Expected: No client is found. Error details shown in the status message.
    
 ### Adding notes to a client
 
@@ -922,10 +921,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple clients in the client list.
 
    2. Test case: `clear`<br>
-      Expected: All clients are removed from the list. Success message shown in the status message.
+   Expected: All clients are removed from the list. Success message shown in the status message.
 
    3. Test case: `clear 1`, `clear asdsad`, `clear n/Jones` or any command with extra characters supplied<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
 
 ### Sorting clients
 
@@ -962,34 +961,34 @@ Desired Outcome: Setting the duration to 45 days.<br>
 
 ### Adding a policy
 
-1. Adding a policy to a patient while all clients are being shown
+1. Adding a policy to a client while all clients are being shown
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the first client does not have the policy number "123".<br>
    
    2. Test case: `addpolicy 1 n/Health i/123`<br>
-      Expected: Policy successfully added to first client. Success message shown in the status message.
+   Expected: Policy successfully added to first client. Success message shown in the status message.
 
    3. Test case (Missing Index): `addpolicy n/Health i/123`<br>
-      Expected: Policy not added to any client. Error message shown in the status message.
+   Expected: Policy not added to any client. Error details shown in the status message.
 
    4. Test case (Missing Parameters): `addpolicy 1 n/Health`, `addpolicy 1 i/123` or any command with missing parameters<br>
-      Expected: Similar to previous
+   Expected: Similar to previous
    
    5. Test case (Invalid Index): `addpolicy x n/Health i/123` (where x is smaller or larger than the list size)<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
    
    6. Test case (Invalid Policy Name): `addpolicy 1 n/#Health i/123`<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
 
    7. Test case (Invalid Policy Number): `addpolicy 1 n/Health i/abc`<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
    
    8. Test case (Repeated Parameters): `addpolicy 1 n/Health i/123 n/Health` or any command with repeated parameter<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
 
 ### Deleting a policy
 
-1. Deleting a policy from a patient while all clients are being shown
+1. Deleting a policy from a client while all clients are being shown
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the first client has the policy number "123".<br>
 
@@ -997,19 +996,19 @@ Desired Outcome: Setting the duration to 45 days.<br>
    Expected: Policy successfully added to first client. Success message shown in the status message.
 
    3. Test case (Missing Index): `deletepolicy i/123`<br>
-     Expected: Policy not added to any client. Error message shown in the status message.
+   Expected: Policy not added to any client. Error details shown in the status message.
 
    4. Test case (Missing Parameters): `deletepolicy 1 `<br>
-     Expected: Similar to previous
+   Expected: Similar to previous
 
    5. Test case (Invalid Index): `deletepolicy x i/123` (where x is smaller or larger than the list size)<br>
-     Expected: Similar to previous.
+   Expected: Similar to previous.
 
    6. Test case (Invalid Policy Number): `deletepolicy 1 i/abc`<br>
-       Expected: Similar to previous.
+   Expected: Similar to previous.
 
    7. Test case (Repeated Parameters): `deletepolicy 1 i/123 i/123`<br>
-       Expected: Similar to previous.
+   Expected: Similar to previous.
 
 ### Saving data
 
