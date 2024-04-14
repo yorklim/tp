@@ -224,8 +224,6 @@ The functionality to `sort` clients is implemented in the `SortCommand` class. T
 
 The `SortCommandParser` class parses the input arguments by storing the prefixes of their respective values in a `ArgumentMultimap` object, and create a new `SortCommand` object with the parsed `SortCriteria` and `SortOrder`.
 
-The `SortCommand` object then creates a `Comparator<Person>` object using `SortCriteria` and `SortOrder` objects, and communicates with the `Model` component to update the `Comparator<Person>` used to sort the list of persons.
-
 The `SortCommand` object does the following:
 - `PersonComparator#getComparator(SortCriteria, SortOrder)` is used to get the `Comparator<Person>` object using the `SortCriteria` and `SortOrder`.
 - `Model#updateSortPersonComparator(Comparator<Person>)` - Updates the `Comparator<Person>` object used to sort the list of persons in the `Model` component.
@@ -366,7 +364,7 @@ The following sequence diagram shows the addpolicy operation:
 
 The add birthday and edit birthday features allow users to add and edit the birthday of a client. Birthdays support the birthday reminders feature. The birthday is stored in the `Birthday` class, which contains the birthday details such as day, month, and year. The `Birthday` class is part of the `Person` object in the `Model` component.
 
-The add priority and edit priority features allow users to add and edit the priority of a client. Priority supports the sort by priority feature, and helps optimise client management. The priority is stored in the `Priority` class, which contains the priority details such as priority value. The priority value are enumerated, and can be one of the following: LOW, MEDIUM, HIGH, VIP. The `Priority` class is part of the `Person` object in the `Model` component.
+The add priority and edit priority features allow users to add and edit the priority of a client. Priority supports the sort by priority feature, and helps optimise client management. The priority is stored in the `Priority` class, which contains the priority details such as priority value. The priority value are enumerated, and can be one of the following: `LOW`, `MEDIUM`, `HIGH`, `VIP`. The `Priority` class is part of the `Person` object in the `Model` component.
 
 #### Implementation
 
@@ -374,7 +372,7 @@ The functionality to add and edit birthday and priority is implemented in the `A
 
 The `AddCommandParser` and `EditCommandParser` classes parse the input arguments by storing the prefixes of their respective values in a `ArgumentMultimap` object, and create a new `AddCommand` or `EditCommand` object with the parsed birthday or priority, amongst other fields.
 
-The `AddCommand` and `EditCommand` objects then communicate with the `Model` component to add or edit the birthday or priority of the client. The `Model` component then updates the `Person` object with the new birthday or priority, amongst other fields.
+The `AddCommand` and `EditCommand` objects then communicate with the `Model` component to add or edit the birthday or priority of the client. The `Model` component then adds or edits the `Person` object with the new birthday or priority, amongst other fields.
 
 The `AddCommand` object then communicates with the `Model` component to add a person.
 - `Model#addPerson(Person)` - Adds the new client to the existing client list.
@@ -386,20 +384,20 @@ The following object diagram illustrates the above:
 The following sequence diagram shows the `add` operation:
 <puml src="diagrams/AddPersonSequenceDiagram.puml" width="900" />
 
-More on birthday class
+More on `Birthday` class
 * Birthday is immutable and stores the day, month and year as a `LocalDate` object, as time is not relevant for birthday.
 * The message constraints for birthday utilise the `DateUtil` common class to ensure that the date is valid and in the correct format.
 * `DateUtil` class is used to validate (conforms to `DateUtil` date format and is parsable) and parse the string to a `LocalDate` object. `DateUtil` is also used to ensure that the date is not in the future.
 * Refer to the `DateUtil` class for more information on the date format and parsing.
 
-More on priority class
+More on `Priority` class
 * Priority is immutable and stores the priority value as a `PriorityValue` object, which is an enumerated type, to ensure that priority value is a valid type.
 * The message constraints for priority utilise the `PriorityValue` enum class which should be responsible for the `toString()` logic for display.
 * `PriorityValue` enum class is used to validate the priority value, which is responsible for the possible valid priority values.
 * Refer to the `PriorityValue` enum class for more information on the priority values.
 
-More on priority value enum class
-* `PriorityValue` is an enumerated type that contains the possible valid priority values: LOW, MEDIUM, HIGH, VIP.
+More on `PriorityValue` enum class
+* `PriorityValue` is an enumerated type that contains the possible valid priority values: `LOW`, `MEDIUM`, `HIGH`, `VIP`.
 * When parsing from a string and displaying as a string, the `PriorityValue` allows full form values (`low`, `medium`, `high`, `vip`) and short form values (`l`, `m`, `h`, `v`) to be used interchangeably.
 * Parsing from a string to a `PriorityValue` object is case-insensitive, and is handled by `getPriority`.
 * Obtaining the all available full form and short form of the `PriorityValue` object is handled by `getFullPriorities()` and `getShortPriorities()` respectively.
