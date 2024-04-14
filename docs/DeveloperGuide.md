@@ -1002,36 +1002,100 @@ testers are expected to do more *exploratory* testing.
 ### Sorting clients
 
 ### Updating last met
-Command Format: `met index d/YYYY-MM-DD`<br>
-Assumptions: Today is 13 April 2024, date chosen must not be in the future.<br>
-Desired Outcome: Updating the last met date of the 3rd client to 11 April 2024.<br>
-1. Correct Test Case: `met 3 d/2024-04-11`
-2. Invalid Test Case: `met 3 d/11-04-2024` wrong date format
 
+1. Updating the last met of a client while all clients are being shown
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the date chosen is not in the future.
+   For the test cases, we assume that today is 13 April 2024.
+
+   2. Test case: `met 1 d/2024-04-11`<br>
+      Expected: Last met successfully updated for first client. Success message shown in the status message.
+   
+   3. Test case (Invalid Date Format): `met 3 d/11-04-2024`<br>
+      Expected: Last met not updated for any client. Error details in status message.
+   
+   4. Test case (Missing Parameters): `met d/2024-04-11`, `met 3` or any command with missing parameters<br>
+      Expected: Similar to previous.
+   
+   5. Test case (Repeated Parameters): `met 3 d/2024-04-11 d/2024-04-11` or any command with repeated parameter<br>
+      Expected: Similar to previous.
+   
+   6. Test case (Invalid Index): `met x d/2024-04-11` (where x is smaller or larger than the list size)<br>
+      Expected: Similar to previous.
+   
+   7. Test Case (Future Date, Invalid Date): `met 3 d/2025-04-20`
+      Expected: Similar to previous.
+   
+   8. Test Case (Invalid Date): `schedule 3 d/2024-02-31`
+      Expected: Similar to previous.
+   
 ### Scheduling an appointment
-Command Format: `schedule index d/YYYY-MM-DD HH:mm`<br>
-Assumptions: Today is 13 April 2024, date chosen must not be in the past.<br>
-Desired Outcome: Creating an appointment with the 3rd client on 18 April 2024 2pm.<br>
-1. Correct Test Case: `schedule 3 d/2024-04-18 14:00`
-2. Invalid Test Case: `schedule 3 d/18-04-2024 14:00` wrong dateTime format
-3. Invalid Test Case: `schedule 3 d/2024-04-18` missing time
+
+1. Scheduling an appointment with a client while all clients are being shown
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the date chosen is in the future.
+     For the test cases, we assume that today is 13 April 2024 and the time is 2pm.
+
+   2. Test case: `schedule 1 d/2025-04-18 18:00`<br>
+      Expected: Schedule successfully updated for first client. Success message shown in the status message.
+
+   3. Test case (Invalid DateTime Format): `schedule 3 d/18-04-2025`<br>
+      Expected: Schedule not updated for any client. Error details in status message.
+
+   4. Test case (Missing Parameters): `schedule d/2025-04-18 18:00`, `schedule 3` or any command with missing parameters<br>
+      Expected: Similar to previous.
+
+   5. Test case (Repeated Parameters): `schedule 3 d/2025-04-18 18:00 d/2025-05-17 13:15` or any command with repeated parameter<br>
+      Expected: Similar to previous.
+
+   6. Test case (Invalid Index): `schedule x d/2025-04-18 13:00` (where x is smaller or larger than the list size)<br>
+      Expected: Similar to previous.
+
+   7. Test Case (Non-Future DateTime, Invalid DateTime): `schedule 3 d/2024-04-10 12:00`, `schedule 3 d/2024-04-13 14:00`
+      Expected: Similar to previous.
+   
+   8. Test Case (Invalid DateTime): `schedule 3 d/2025-02-31 12:00`
+      Expected: Similar to previous.
 
 ### Marking an appointment as complete
-Command Format: `mark index`<br>
-Assumptions: An open appointment is present with an existing client.<br>
-Desired Outcome: Marking an appointment with the 3rd client.<br>
-1. Correct Test Case: `mark 3`
-2. Invalid Test Case: `mark 3` if client does not exist or appointment is done
-3. Invalid Test Case: `mark three` index should be a positive integer
+1. Updating an appointment with a client as completed while all clients are being shown
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure there is an open appointment with an existing client.
+
+   2. Test case: `mark 1`<br>
+      Expected: Appointment with the first client is successfully updated as completed. Success message shown in the status message.
+
+   3. Test case (No Open Appointment with existing client): `mark 2`<br>
+      Expected: Appointment not updated for any client. Error details in status message.
+
+   4. Test case (Missing Parameters): `mark`<br>
+      Expected: Similar to previous.
+
+   5. Test case (Repeated Parameters): `schedule 3 3`<br>
+      Expected: Similar to previous.
+
+   6. Test case (Invalid Index): `mark x` (where x is smaller or larger than the list size)<br>
+      Expected: Similar to previous.
 
 ### Set the last met overdue duration
-Command Format: `set integer`<br>
-Assumptions: Nil<br>
-Desired Outcome: Setting the duration to 45 days.<br>
-1. Correct Test Case: `set 45`
-2. Invalid Test Case: `set 45.3` value must be non-negative integer
-3. Invalid Test Case: `set forty five` value must be a non-negative integer
+1. Setting a new last met overdue duration
+   1. Prerequisites: Nil
 
+   2. Test case: `set 45`<br>
+      Expected: Sets the new last met overdue duration to 45 days. Success message shown in the status message.
+   
+   3. Test case (Missing Parameters): `set`<br>
+      Expected: Last met overdue duration remains unchanged. Error details in status message.
+   
+   4. Test Case (Non-numerical, Invalid Parameter): `set abc`<br>
+      Expected: Similar to previous.
+   
+   5. Test Case (Non-Integer, Invalid Parameter): `set 64.6`<br>
+      Expected: Similar to previous.
+   
+   6. Test Case (Negative Integer, Invalid Parameter): `set -6`<br>
+      Expected: Similar to previous.
+   
+   7. Test Case (Value Above Integer Limit): `set 1234567890098765432112345564354345324343124134211232132131231`
+      Expected: Similar to previous.
+   
 ### Adding a policy
 
 1. Adding a policy to a patient while all clients are being shown
@@ -1045,7 +1109,7 @@ Desired Outcome: Setting the duration to 45 days.<br>
       Expected: Policy not added to any client. Error message shown in the status message.
 
    4. Test case (Missing Parameters): `addpolicy 1 n/Health`, `addpolicy 1 i/123` or any command with missing parameters<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
    
    5. Test case (Invalid Index): `addpolicy x n/Health i/123` (where x is smaller or larger than the list size)<br>
       Expected: Similar to previous.
@@ -1072,7 +1136,7 @@ Desired Outcome: Setting the duration to 45 days.<br>
      Expected: Policy not added to any client. Error message shown in the status message.
 
    4. Test case (Missing Parameters): `deletepolicy 1 `<br>
-     Expected: Similar to previous
+     Expected: Similar to previous.
 
    5. Test case (Invalid Index): `deletepolicy x i/123` (where x is smaller or larger than the list size)<br>
      Expected: Similar to previous.
@@ -1118,7 +1182,13 @@ Desired Outcome: Setting the duration to 45 days.<br>
    3. Test case: Empty setvalue.txt file.<br>
    Expected: Similar to previous.
 
-   4. Test case: Add non-digit characters to json file.<br>
+   4. Test case: Add non-digit characters to setvalue.txt file.<br>
+   Expected: Similar to previous.
+   
+   5. Test case: Add non-integer values to setvalue.txt file.<br>
+   Expected: Similar to previous.
+   
+   6. Test Case: Add negative integer values to setvalue.txt file.<br>
    Expected: Similar to previous.
 
 4. Dealing with wrongly edit setvalue.txt
@@ -1132,6 +1202,9 @@ Desired Outcome: Setting the duration to 45 days.<br>
     Expected: Similar to previous.
     
     4. Test case: Edit value to be negative.<br>
+    Expected: Similar to previous.
+   
+    5. Test case: Edit value to be non-integer.<br>
     Expected: Similar to previous.
 
 ## **Appendix: Planned Enhancements**
