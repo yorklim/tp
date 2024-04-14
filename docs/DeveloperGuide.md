@@ -702,6 +702,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. ClientCare detects that the given command is invalid.
   * 1a1. ClientCare shows an error message.
     Use case ends.
+* 1b. ClientCare detects that the given `CRITERIA` is invalid.
+  * 1b1. ClientCare shows an error message.
+    Use case ends.
+* 1c. ClientCare detects that the given `ORDER` is invalid.
+  * 1c1. ClientCare shows an error message.
+    Use case ends.
 
 
 **Use case: UC10 - Update client as met**
