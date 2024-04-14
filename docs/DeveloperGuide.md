@@ -160,7 +160,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 
-### View Client feature
+### Viewing client feature
 
 The `view` command allows users to view the details of a client on the GUI using their `INDEX`. Other commands will also affect the client display in the GUI. This includes information not included in the client list cards, such as their last met and policy list.
 
@@ -189,6 +189,7 @@ The sequence diagram below shows the execution of `view 1` to view the details o
   * In this implementation, `DisplayClient` would simply be a `Person` set by `CommandResult`, similar to the current `feedbackToUser` implementation.
   * However, this means `DisplayClient` can only be set after a command, which does not allow us to set `DisplayClient` on application startup.
 
+
 ### Adding notes to client feature
 
 The `remark` command allows users to add an optional note to a client.
@@ -199,7 +200,7 @@ The `remark` command was implemented according to [Tutorial: Adding a command](h
 
 #### Design Considerations
 
-**Aspect: Behaviour of `r/` prefix if more than one is used.
+**Aspect: Behaviour of `r/` prefix if more than one is used.**
 
 * Current: Only the last one is used to update `Remark`.
   * For example, `remark 1 r/typo r/corrected` will only capture `corrected`.
@@ -212,7 +213,35 @@ The `remark` command was implemented according to [Tutorial: Adding a command](h
   * While this might make it easier to type, it will also make fixing typos slower, like mentioned in the current behaviour.
   * It also means that a separate way of parsing has to be used, instead of `ArgumentMultimap`, deviating from other commands.
 
+
 ### Sorting clients feature
+
+The `sort` command allows users to sort the client list by a specified `sort criteria` that can be `name`, `priority` or `birthday`, and a `sort order` that can be `asc` or `desc`.
+
+#### Implementation
+
+The functionality to `sort` clients is implemented in the `SortCommand` class. The `SortCommandParser` class is responsible for parsing the user input and creating a `SortCommand` object.
+
+The `SortCommandParser` class parses the input arguments by storing the prefixes of their respective values in a `ArgumentMultimap` object, and create a new `SortCommand` object with the parsed `SortCriteria` and `SortOrder`.
+
+The `SortCommand` object does the following:
+- `PersonComparator#getComparator(SortCriteria, SortOrder)` is used to get the `Comparator<Person>` object using the `SortCriteria` and `SortOrder`.
+- `Model#updateSortPersonComparator(Comparator<Person>)` - Updates the `Comparator<Person>` object used to sort the list of persons in the `Model` component.
+- `Model#setDisplayClientAsFirstInSortedFilteredPersonList()` - Updates the displayed client in the UI to the first client in the sorted list of persons.
+
+The following object diagram illustrates the above:
+<puml src="diagrams/SortPersonsObjectDiagram.puml" width="600" />
+
+The following sequence diagram shows the `sort` operation:
+<puml src="diagrams/SortPersonsSequenceDiagram.puml" width="900" />
+
+#### Design Considerations
+
+In order to keep `ModelManager#filteredPersons` as an immutable `final` field, we have decided not to modify the `filteredPersons` directly. Instead, we do the following:
+- we store the `Comparator<Person>` object in `ModelManager#personComparator`, which can be updated by `ModelManager#updateSortPersonComparator(Comparator<Person>)`.
+- When a sorted list of persons is needed, we call `ModelManager#getSortedFilteredPersonList()` which returns a new sorted list of persons sorted using the `ModelManager#personComparator`.
+
+This way, the original order of `ModelManager#filteredPersons` is preserved, and we can get a sorted list of persons when needed.
 
 
 ### Updating last met feature
@@ -327,100 +356,92 @@ The following object diagram illustrates the above:
 The following sequence diagram shows the addpolicy operation:
 <puml src="diagrams/AddPolicySequenceDiagram.puml" width="900" />
 
+The following activity diagram shows what happens when a user adds a policy:
+<puml src="diagrams/AddPolicyActivityDiagram.puml" width="900" />
+
 
 ### Deleting policy feature
+The delete policy feature allows users to delete a policy from a client. The `Policy` object corresponding to the specified policy in the `PolicyList` object stored within the specified `Person` object in the `Model` component is removed.
 
+#### Implementation
 
-### \[Proposed\] Undo/redo feature
+The delete policy command mechanism is facilitated by the `DeletePolicyCommandParser` class which is created by the `AddressBookParser`.
 
-#### Proposed Implementation
+The `DeletePolicyCommandParser` class is responsible for parsing the user input and creating a `DeletePolicyCommand` object.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The `DeletePolicyCommandParser#parse()` overrides `Parser#parse()` in the `Parser` interface.
+- `DeletePolicyCommandParser#parse()` - Parses the input arguments by storing the prefixes of it respective values in a `ArgumentMultimap` object, and creates a new `DeletePolicyCommand` object with the parsed policy ID.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The `DeletePolicyCommand` object is then executed by the `Logic` component.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The `DeletePolicyCommand` object then communicates with the `Model` component to delete the policy from the client. The `Model` component then updates the `Person` object with the policy removed.
+- `Model#setPerson(Person, Person)` - Sets the client in the existing client list to the new `Person` object which has been edited by the `DeletePolicyCommand#execute()` which has the policy removed.
+- `Model#setDisplayClient(Person)` - Updates the displayed client in the UI to the client that has been edited with the policy removed.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+The method `DeletePolicyCommand#execute()` returns a CommandResult object which contains the success message to be displayed to the user.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+The following object diagram illustrates the above:
+<puml src="diagrams/DeletePolicyObjectDiagram.puml" width="600" />
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+The following sequence diagram shows the deletepolicy operation:
+<puml src="diagrams/DeletePolicySequenceDiagram.puml" width="900" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+#### Design Considerations
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+** Aspect: Deleting a policy using PolicyID instead of PolicyName.**
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+* Current: Deleting a policy using PolicyID.
+  * The user can delete a policy using the PolicyID.
+  * This allows user to delete the policy without having to type in the whole name of the policy which can be complicated and long.
+  * This will allow the user to delete the policy using the PolicyID which is unique to each policy.
 
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+* Alternative (not taken): Deleting a policy using PolicyName.
+  * The user can delete a policy using the PolicyName.
+  * This will cause the user to need to type in the whole policy name to delete the policy, which can be slower and more error-prone.
+  * This will also result in the need for policy names saved within the client to be unique which may not be the case in real-world scenarios, different policies can have the same name.
 
-<box type="info" seamless>
+### Extensions to add command and edit command: Add birthday, edit birthday, add priority, edit priority features
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+The add birthday and edit birthday features allow users to add and edit the birthday of a client. Birthdays support the birthday reminders feature. The birthday is stored in the `Birthday` class, which contains the birthday details such as day, month, and year. The `Birthday` class is part of the `Person` object in the `Model` component.
 
-</box>
+The add priority and edit priority features allow users to add and edit the priority of a client. Priority supports the sort by priority feature, and helps optimise client management. The priority is stored in the `Priority` class, which contains the priority details such as priority value. The priority value are enumerated, and can be one of the following: `LOW`, `MEDIUM`, `HIGH`, `VIP`. The `Priority` class is part of the `Person` object in the `Model` component.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+#### Implementation
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+The functionality to add and edit birthday and priority is implemented in the `AddCommand` and `EditCommand` classes. The `AddCommandParser` and `EditCommandParser` classes are responsible for parsing the user input and creating an `AddCommand` or `EditCommand` object respectively.
 
+The `AddCommandParser` and `EditCommandParser` classes parse the input arguments by storing the prefixes of their respective values in a `ArgumentMultimap` object, and create a new `AddCommand` or `EditCommand` object with the parsed birthday or priority, amongst other fields.
 
-<box type="info" seamless>
+The `AddCommand` and `EditCommand` objects then communicate with the `Model` component to add or edit the birthday or priority of the client. The `Model` component then adds or edits the `Person` object with the new birthday or priority, amongst other fields.
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+The `AddCommand` object then communicates with the `Model` component to add a person.
+- `Model#addPerson(Person)` - Adds the new client to the existing client list.
+- `Model#setDisplayClient(Person)` - Updates the displayed client in the UI to the client that has been added.
 
-</box>
+The following object diagram illustrates the above:
+<puml src="diagrams/AddPersonObjectDiagram.puml" width="600" />
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+The following sequence diagram shows the `add` operation:
+<puml src="diagrams/AddPersonSequenceDiagram.puml" width="900" />
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+More on `Birthday` class
+* Birthday is immutable and stores the day, month and year as a `LocalDate` object, as time is not relevant for birthday.
+* The message constraints for birthday utilise the `DateUtil` common class to ensure that the date is valid and in the correct format.
+* `DateUtil` class is used to validate (conforms to `DateUtil` date format and is parsable) and parse the string to a `LocalDate` object. `DateUtil` is also used to ensure that the date is not in the future.
+* Refer to the `DateUtil` class for more information on the date format and parsing.
 
-<box type="info" seamless>
+More on `Priority` class
+* Priority is immutable and stores the priority value as a `PriorityValue` object, which is an enumerated type, to ensure that priority value is a valid type.
+* The message constraints for priority utilise the `PriorityValue` enum class which should be responsible for the `toString()` logic for display.
+* `PriorityValue` enum class is used to validate the priority value, which is responsible for the possible valid priority values.
+* Refer to the `PriorityValue` enum class for more information on the priority values.
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+More on `PriorityValue` enum class
+* `PriorityValue` is an enumerated type that contains the possible valid priority values: `LOW`, `MEDIUM`, `HIGH`, `VIP`.
+* When parsing from a string and displaying as a string, the `PriorityValue` allows full form values (`low`, `medium`, `high`, `vip`) and short form values (`l`, `m`, `h`, `v`) to be used interchangeably.
+* Parsing from a string to a `PriorityValue` object is case-insensitive, and is handled by `getPriority`.
+* Obtaining the all available full form and short form of the `PriorityValue` object is handled by `getFullPriorities()` and `getShortPriorities()` respectively.
+* The mapping of the full form strings and short form strings to the enum values is handled through `HashMap<String, PriorityValue> FULL_PRIORITY_MAP` and `HashMap<String, PriorityValue> SHORT_PRIORITY_MAP`, which has a constant time complexity.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -494,7 +515,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | manager         | view all my subordinates' clients                     | be aware of their progress and client base                            |
 | `*`      | insurance agent | get reminders of client birthday                      | send birthday message                                                 |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -627,12 +647,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b1. ClientCare lets user know that the list is empty.<br>
     Use case ends.
 
-**Use case: UC07 - Adding remark to client**
+**Use case: UC07 - Adding notes to a client**
 
 **MSS**
-1. PLACEHOLDER
+1.  User requests to <u>list all clients (UC04)</u> or <u>find client by name (UC06)</u>.
+2.  ClientCare shows a list of clients.
+3.  User requests to add a note to a specific client in the list by index.
+4.  ClientCare adds a note to the client.<br>
+5.  ClientCare shows the client's details and success message to the user.<br>
+    Use case ends.
 
 **Extensions**
+* 2a. User sees that the list is empty.
+  * 2a1. User stops as there is no client to add a note to.
+    Use case ends.
+* 3a. ClientCare detects that the given command is invalid.
+  * 3a1. ClientCare shows an error message.
+  * 3a2. ClientCare requests for the correct input.
+  * 3a3. User enters new data.<br>
+    Steps 3a1-3a3 are repeated until the data entered are correct.<br>
+    Use case resumes at step 4.
+* 3b. ClientCare detects that the client does not exist.
+  * 3b1. ClientCare shows an error message.<br>
+    Use case ends.
 
 
 **Use case: UC08 - Clear all client**
@@ -844,28 +881,65 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
 
 ### Adding a client
+
+1. Adding a client while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+   2. Test case: `add n/John Doe c/12345678 e/john-doe@example.com a/123 Tampines Street 42 t/friends p/high d/1987-02-02`<br>
+   Expected: John Doe is added to the end of the list. Details of the added person are shown in the status message.
+
+   3. Test case (Missing Compulsory Parameter): `add n/John Doe e/john-doe@example.com a/123 Tampines Street 42 t/friends p/high d/1987-02-02`<br>
+   Expected: No client is added to the list. Error details shown in the status message.
+
+   4. Test case (Invalid Parameter): `add n/John Doe c/12345678 e/john-doe.example a/123 Tampines Street 42 t/friends p/high d/1987-02-02` <br>
+   Expected: Similar to previous.
+
+2. Adding a client that is already in list
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. There is a client with name `John Doe` already in the list.
+   
+   2. Test case: `add n/John Doe c/12345678 e/john-doe@example.com a/123 Tampines Street 42 t/friends p/high d/1987-02-02`<br>
+      Expected: No client is added to the list. Error details shown in the status message.
 
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First client is deleted from the list. Details of the deleted contact shown in the status message.
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case (Missing Index): `delete`<br>
+   Expected: No client is deleted. Error details shown in the status message.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-2. _{ more test cases …​ }_
+   4. Test case (Invalid Index): `delete x`(where x is smaller or larger than the list size)<br>
+   Expected: similar to previous.
 
 ### Editing a client
+
+1. Editing a client while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+   2. Test case: `edit 1 n/John Doe`<br>
+     Expected: First client's name is edited to John Doe. Details of the added person are shown in the status message.
+
+   3. Test case (Missing Index): `edit n/John Doe`<br>
+      Expected: No client is edited. Error details shown in the status message.
+   
+   4. Test case (Invalid Index): `edit x n/John Doe` (where x is smaller or larger than the list size)<br>
+     Expected: Similar to previous.
+
+   5. Test case (Missing Parameters): `edit 2`<br>
+     Expected: Similar to previous.
+   
+   6. Test case (Invalid Parameter): `edit e/john-doe.example`<br>
+     Expected: Similar to previous.
+
 
 ### Listing client
 
@@ -874,10 +948,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple clients in the client list.
 
    2. Test case: `list`<br>
-      Expected: All clients are shown in the list view. Success message shown in the status message.
+   Expected: All clients are shown in the list view. Success message shown in the status message.
 
    3. Test case: `list 1`, `list asdsad`, `list n/Jones` or any command with extra characters supplied<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
 
 
 ### Viewing a client
@@ -886,17 +960,33 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list.
 
-   2. Test case: `view 1`<br>
-      Expected: First client's details are shown in the client details view and policy details view. Success message shown in the status message.
+
+   2. Test case: `view 2`<br>
+   Expected: Second client's details are shown in the client details view and policy details view. Success message shown in the status message.
 
    3. Test case (Missing Index): `view`<br>
-      Expected: Client details view and Policy details view not updated. Error message shown in the status message.
+   Expected: Client details view and Policy details view not updated. Error details shown in the status message.
 
    4. Test case (Invalid Index): `view x` (where x is smaller or larger than the list size)<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
 
    6. Test case (Extra Characters): `view 1 asd`, `view 1 n/Jones` or any command with extra characters supplied<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
+
+
+2. Viewing a client while clients are filtered by name `John`
+
+   1. Prerequisites: Multiple clients with similar name (e.g. `John Doe`, `John Yu`) in client list. Filter the clients using the `find john` command.
+   
+   2. Test case: `view 2`<br>
+      Expected: Second client's details are show in the client details view and policy details view. Success message shown in the status message.
+
+3. Viewing a client while clients are sorted by priority in ascending order
+
+   1. Prerequisites: Multiple clients with different priorities in client list. Sort the clients using the `sort priority o/asc`.
+   
+   2. Test case: `view 2`<br>
+      Expected: Second client's details are shown in the client details view and policy details view. Success message shown in the status message.
 
 ### Finding a client
 
@@ -905,15 +995,37 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all client using the `list` command. Multiple clients in the client list. Ensure there is a client with the name "Jones".
 
    2. Test case: `find Jones`<br>
-      Expected: Client list update to show all clients with the name "Jones". Success message shown in the status message.
+   Expected: Client list update to show all clients with the name "Jones". Success message shown in the status message.
 
    3. Test case (Multiple keywords): `find Jones Brown`<br>
-      Expected: Client list update to show all clients with the name "Jones" or the name "Brown" (if any). Success message shown in the status message.
+   Expected: Client list update to show all clients with the name "Jones" or the name "Brown" (if any). Success message shown in the status message.
 
    4. Test case (Missing keyword): `find`<br>
-      Expected: No client is found. Error message shown in the status message.
+   Expected: No client is found. Error details shown in the status message.
    
 ### Adding notes to a client
+
+1. Adding a note to a client while client does not have existing note
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the first client does not have a note.<br>
+
+   2. Test case: `remark 1 r/Prefers emails`<br>
+     Expected: Note successfully added to first client. Success message shown in the status message.
+
+   3. Test case (Empty Parameter): `remark 1 r/`<br> 
+     Expected: Note successfully removed from first client. Success message show in the status message.
+
+   4. Test case (Repeated Parameters): `remark 1 r/Preeeffers emaiis r/Prefers emails`<br>
+     Expected: Note from last parameter successfully added to first client. Success message shown in the status message.
+
+   5. Test case (No Parameter): `remark 1`<br>
+     Expected: Note successfully removed from first client. Success message show in the status message.
+
+   6. Test case (Missing Index): `remark r/Prefers emails`<br>
+     Expected: Note not added to any client. Error details shown in the status message.
+
+   7. Test case (Invalid Index): `remark x r/Prefers emails` (where x is smaller or larger than the list size)<br>
+     Expected: Similar to previous.
 
 ### Clearing the client list
 
@@ -922,10 +1034,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple clients in the client list.
 
    2. Test case: `clear`<br>
-      Expected: All clients are removed from the list. Success message shown in the status message.
+   Expected: All clients are removed from the list. Success message shown in the status message.
 
    3. Test case: `clear 1`, `clear asdsad`, `clear n/Jones` or any command with extra characters supplied<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
 
 ### Sorting clients
 
@@ -978,66 +1090,134 @@ testers are expected to do more *exploratory* testing.
     Expected: Similar to previous.
 
 ### Updating last met
-Command Format: `met index d/YYYY-MM-DD`<br>
-Assumptions: Today is 13 April 2024, date chosen must not be in the future.<br>
-Desired Outcome: Updating the last met date of the 3rd client to 11 April 2024.<br>
-1. Correct Test Case: `met 3 d/2024-04-11`
-2. Invalid Test Case: `met 3 d/11-04-2024` wrong date format
 
+1. Updating the last met of a client while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the date chosen is not in the future.
+   For the test cases, we assume that today is 13 April 2024.
+
+   2. Test case: `met 1 d/2024-04-11`<br>
+   Expected: Last met successfully updated for first client. Success message shown in the status message.
+   
+   3. Test case (Invalid Date Format): `met 3 d/11-04-2024`<br>
+   Expected: Last met not updated for any client. Error details in status message.
+   
+   4. Test case (Missing Parameters): `met 3` <br>
+   Expected: Similar to previous.
+   
+   5. Test case (Repeated Parameters): `met 3 d/2024-04-11 d/2024-04-11` or any command with repeated parameter<br>
+   Expected: Similar to previous.
+   
+   6. Test case (Missing Index): `met d/2024-04-11`<br>
+    Expected: Similar to previous.
+   
+   7. Test case (Invalid Index): `met x d/2024-04-11` (where x is smaller or larger than the list size)<br>
+   Expected: Similar to previous.
+   
+   8. Test Case (Future Date, Invalid Date): `met 3 d/2025-04-20`<br>
+   Expected: Similar to previous.
+   
+   9. Test Case (Invalid Date): `met 3 d/2024-02-31`<br>
+   Expected: Similar to previous.
+   
 ### Scheduling an appointment
-Command Format: `schedule index d/YYYY-MM-DD HH:mm`<br>
-Assumptions: Today is 13 April 2024, date chosen must not be in the past.<br>
-Desired Outcome: Creating an appointment with the 3rd client on 18 April 2024 2pm.<br>
-1. Correct Test Case: `schedule 3 d/2024-04-18 14:00`
-2. Invalid Test Case: `schedule 3 d/18-04-2024 14:00` wrong dateTime format
-3. Invalid Test Case: `schedule 3 d/2024-04-18` missing time
+
+1. Scheduling an appointment with a client while all clients are being shown
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the date chosen is in the future.
+     For the test cases, we assume that today is 13 April 2024 and the time is 2pm.
+
+   2. Test case: `schedule 1 d/2025-04-18 18:00`<br>
+      Expected: Schedule successfully updated for first client. Success message shown in the status message.
+
+   3. Test case (Invalid DateTime Format): `schedule 3 d/18-04-2025`<br>
+      Expected: Schedule not updated for any client. Error details in status message.
+
+   4. Test case (Missing Parameters): `schedule 3`<br>
+      Expected: Similar to previous.
+
+   5. Test case (Repeated Parameters): `schedule 3 d/2025-04-18 18:00 d/2025-05-17 13:15` or any command with repeated parameter<br>
+      Expected: Similar to previous.
+
+   6. Test case (Missing Index): `schedule d/2025-04-18 18:00`<br>
+      Expected: Similar to previous.
+
+   7. Test case (Invalid Index): `schedule x d/2025-04-18 18:00` (where x is smaller or larger than the list size)<br>
+      Expected: Similar to previous.
+
+   8. Test Case (Non-Future DateTime, Invalid DateTime): `schedule 3 d/2024-04-10 12:00`, `schedule 3 d/2024-04-13 14:00`<br>
+      Expected: Similar to previous.
+   
+   9. Test Case (Invalid DateTime): `schedule 3 d/2025-02-31 12:00`<br>
+      Expected: Similar to previous.
 
 ### Marking an appointment as complete
-Command Format: `mark index`<br>
-Assumptions: An open appointment is present with an existing client.<br>
-Desired Outcome: Marking an appointment with the 3rd client.<br>
-1. Correct Test Case: `mark 3`
-2. Invalid Test Case: `mark 3` if client does not exist or appointment is done
-3. Invalid Test Case: `mark three` index should be a positive integer
+1. Updating an appointment with a client as completed while all clients are being shown
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure there is an open appointment with the first client and no open appointment with the second client.
+
+   2. Test case: `mark 1`<br>
+      Expected: Appointment with the first client is successfully updated as completed. Success message shown in the status message.
+
+   3. Test case (No Open Appointment with existing client): `mark 2`<br>
+      Expected: Appointment not updated for any client. Error details in status message.
+
+   4. Test case (Missing Index): `mark`<br>
+      Expected: Similar to previous.
+
+   5. Test case (Invalid Index): `mark x` (where x is smaller or larger than the list size)<br>
+      Expected: Similar to previous.
 
 ### Set the last met overdue duration
-Command Format: `set integer`<br>
-Assumptions: Nil<br>
-Desired Outcome: Setting the duration to 45 days.<br>
-1. Correct Test Case: `set 45`
-2. Invalid Test Case: `set 45.3` value must be non-negative integer
-3. Invalid Test Case: `set forty five` value must be a non-negative integer
+1. Setting a new last met overdue duration
+   1. Prerequisites: Nil
 
+   2. Test case: `set 45`<br>
+      Expected: Sets the new last met overdue duration to 45 days. Success message shown in the status message.
+   
+   3. Test case (Missing Parameters): `set`<br>
+      Expected: Last met overdue duration remains unchanged. Error details in status message.
+   
+   4. Test Case (Non-numerical, Invalid Parameter): `set abc`<br>
+      Expected: Similar to previous.
+   
+   5. Test Case (Non-Integer, Invalid Parameter): `set 64.6`<br>
+      Expected: Similar to previous.
+   
+   6. Test Case (Negative Integer, Invalid Parameter): `set -6`<br>
+      Expected: Similar to previous.
+   
+   7. Test Case (Value Above Integer Limit): `set 1234567890098765432112345564354345324343124134211232132131231`<br>
+      Expected: Similar to previous.
+   
 ### Adding a policy
 
-1. Adding a policy to a patient while all clients are being shown
+1. Adding a policy to a client while all clients are being shown
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the first client does not have the policy number "123".<br>
    
    2. Test case: `addpolicy 1 n/Health i/123`<br>
-      Expected: Policy successfully added to first client. Success message shown in the status message.
+   Expected: Policy successfully added to first client. Success message shown in the status message.
 
    3. Test case (Missing Index): `addpolicy n/Health i/123`<br>
-      Expected: Policy not added to any client. Error message shown in the status message.
+   Expected: Policy not added to any client. Error details shown in the status message.
 
    4. Test case (Missing Parameters): `addpolicy 1 n/Health`, `addpolicy 1 i/123` or any command with missing parameters<br>
-      Expected: Similar to previous
+   Expected: Similar to previous.
    
    5. Test case (Invalid Index): `addpolicy x n/Health i/123` (where x is smaller or larger than the list size)<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
    
    6. Test case (Invalid Policy Name): `addpolicy 1 n/#Health i/123`<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
 
    7. Test case (Invalid Policy Number): `addpolicy 1 n/Health i/abc`<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
    
    8. Test case (Repeated Parameters): `addpolicy 1 n/Health i/123 n/Health` or any command with repeated parameter<br>
-      Expected: Similar to previous.
+   Expected: Similar to previous.
 
 ### Deleting a policy
 
-1. Deleting a policy from a patient while all clients are being shown
+1. Deleting a policy from a client while all clients are being shown
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the first client has the policy number "123".<br>
 
@@ -1045,19 +1225,19 @@ Desired Outcome: Setting the duration to 45 days.<br>
    Expected: Policy successfully added to first client. Success message shown in the status message.
 
    3. Test case (Missing Index): `deletepolicy i/123`<br>
-     Expected: Policy not added to any client. Error message shown in the status message.
+   Expected: Policy not added to any client. Error details shown in the status message.
 
    4. Test case (Missing Parameters): `deletepolicy 1 `<br>
-     Expected: Similar to previous
+   Expected: Similar to previous.
 
    5. Test case (Invalid Index): `deletepolicy x i/123` (where x is smaller or larger than the list size)<br>
-     Expected: Similar to previous.
+   Expected: Similar to previous.
 
    6. Test case (Invalid Policy Number): `deletepolicy 1 i/abc`<br>
-       Expected: Similar to previous.
+   Expected: Similar to previous.
 
    7. Test case (Repeated Parameters): `deletepolicy 1 i/123 i/123`<br>
-       Expected: Similar to previous.
+   Expected: Similar to previous.
 
 ### Saving data
 
@@ -1094,7 +1274,13 @@ Desired Outcome: Setting the duration to 45 days.<br>
    3. Test case: Empty setvalue.txt file.<br>
    Expected: Similar to previous.
 
-   4. Test case: Add non-digit characters to json file.<br>
+   4. Test case: Add non-digit characters to setvalue.txt file.<br>
+   Expected: Similar to previous.
+   
+   5. Test case: Add non-integer values to setvalue.txt file.<br>
+   Expected: Similar to previous.
+   
+   6. Test Case: Add negative integer values to setvalue.txt file.<br>
    Expected: Similar to previous.
 
 4. Dealing with wrongly edit setvalue.txt
@@ -1109,42 +1295,63 @@ Desired Outcome: Setting the duration to 45 days.<br>
     
     4. Test case: Edit value to be negative.<br>
     Expected: Similar to previous.
+   
+    5. Test case: Edit value to be non-integer.<br>
+    Expected: Similar to previous.
 
 ## **Appendix: Planned Enhancements**
 
 Team Size: 4
 
-1. **Feature Flaw** - Currently, users can only schedule one appointment per client. In future versions, we will support multiple appointments per client.
-2. **Feature Flaw** - Currently, names are case-sensitive. `John` and `john` are regarded as different clients. In future versions, names will be case-insensitive.
-3. **Feature Flaw** - Currently, tags only allow alphanumeric values. Spaces and special characters are not allowed. In future versions, we will support the use of spaces and special characters for tags.
-4. **Feature Flaw** - Currently, users are not allowed to use special characters like `/` when adding or editing the client name. In future versions, we will support the use of special characters like `/` for names.
-5. **Feature Flaw** - Currently, users must fulfill all compulsory parameters to add a client. In future versions, we will make more parameters optional.
-6. **Feature Flaw** - Currently, users must re-sort the client list after adding, editing or updating clients. Client List does not auto update or re-sort itself upon adding/editing or updating. In future versions, we will support the auto sorting when clients are updated.
-7. **UI Bug** - Currently, the policy name and policy id may get truncated if there are too many characters. In future versions, we will support the wrapping of fields in the Policy Display.
-8. **UI Bug** - Currently, the phone number and remark may get truncated if they are too long. In future versions, we will support the wrapping of all fields in the Client View Display.
+1. **Add Scheduling Multiple Appointments Per Client** - Currently, users can only schedule one appointment per client. In future versions, we will support multiple appointments per client.
+2. **Make Names Case-insensitive** - Currently, names are case-sensitive. `John` and `john` are regarded as different clients. In future versions, names will be case-insensitive.
+3. **Allow Special Characters For Tags** - Currently, tags only allow alphanumeric values. Spaces and special characters are not allowed. In future versions, we will support the use of spaces and special characters for tags.
+4. **Allow Special Characters For Names** - Currently, users are not allowed to use special characters like `/` when adding or editing the client name. In future versions, we will support the use of special characters like `/` for names.
+5. **Make Parameters For Adding Clients Optional** - Currently, users must fulfill all compulsory parameters to add a client. In future versions, we will make more parameters optional.
+6. **Retain Sorting Order After Commands** - Currently, users must re-sort the client list after adding, editing or updating clients. Client List does not auto update or re-sort itself upon adding/editing or updating. In future versions, we will support the auto sorting when clients are updated.
+7. **Fix Text Truncation In Policy Table** - Currently, the policy name and policy id may get truncated if there are too many characters. In future versions, we will support the wrapping of fields in the Policy Display.
+8. **Fix Text Truncation In Client Details** - Currently, the name, tags, phone number, address, email and remark may get truncated if they are too long. In future versions, we will support the wrapping of all fields in the Client View Display.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
 
-1. Scheduling Features
-`met`, `schedule`, `mark` and `set` commands help the user manage his scheduling matters. As these 4 commands directly affect each other, the difficulty comes in thinking what and how
+**1. Scheduling Features**<br>
+Difficulty Level: 3/5<br>
+Effort Required: 3/5<br>
+Challenges faced: `met`, `schedule`, `mark` and `set` commands help the user manage his scheduling matters. As these 4 commands directly affect each other, the difficulty comes in thinking what and how
 their respective class methods should interact with each other, especially with what date format to choose as this directly affects our auto-sort implemented for scheduling. It is also difficult to test for extreme cases that may cause these commands to misbehave.
 We decided to simplify the process by restricting the user to 1 appointment per client as our initial beta version faced multiple bugs due to higher number of classes and functions when supporting multiple appointments per client.
+
+To implement the Reminders feature, we had to get the list of clients, so that we are able to filter out the clients that have appointments/ met is overdue/ or have upcoming birthdays, so that we can display them in the reminders panel. 
+However, the prior implementation in the `AddressBook` class of the method `getPersonList()` returns a unmodifiable list, which means that we are unable to use that list to get the new list of filtered out the clients that have appointments/ met is overdue/ or have upcoming birthdays.
+Thus, we had to create methods within the `UniquePersonList` class to get the list of clients that have appointments/ met is overdue/ or have upcoming birthdays, so that we can display them in the reminders panel. Furthermore, we had to sort this new list so that the reminders will be displayed in the correct order.
 
 `set` is also saved in a separate txt file as it is not related to client traits. Hence, additional testing is needed to ensure the value that `set` updates is saved correctly and is able to handle
 invalid values if the txt file is edited wrongly.
 
-2. Policies Features
+**2. Policies Features**<br>
+Difficulty Level: 3.5/5<br>
+Effort Required: 3.5/5<br>
+Challenged faced: `addpolicy` and `deletepolicy` commands help the user manage his client's policies. The difficulty comes thinking of how to save the policies into storage and how to retrieve them.
+Although `Tag` which was already implemented in AB3 was similar and could be used as a reference, the `Policy` feature was more complex as it required the saving of 2 different values (`policyName` and `policy ID`), instead of just 1 in the case of tags, and thus policies cannot be just saved in the same way and have to be parsed differently
+Additional testing was needed to ensure that the policies are saved correctly and are able to handle invalid values if the json file is edited wrongly.
 
-3. Additional Client Traits and Features
+As to keep the `Person` object immutable, we had to create a new `Person` object with the updated policy list when adding or deleting a policy. This made testing for the `addpolicy` and `deletepolicy` commands more difficult as the `addressbook` object prevents us from directly updating the `Person` object. Thus, more methods have to be implemented in `ModelManger` class to enable proper updating of the expected `AddressBook` object when testing.
+
+**3. Additional Client Traits and Features**<br>
 Difficulty Level: 3/5<br>
 Effort Required: 3/5<br>
-Challenges faced: When implementing sorting of clients, the challenge was understanding the design principles behind how `ModelManager#filteredPersons` was implemented in AB3. Since this is an iterative project, we had to ensure that the principles were consistent. 
-For instance, we recognised that `ModelManager#filteredPersons` was an immutable list, and thus our initial implementation of removing the `final` keyword from the `filteredPersons` field was incorrect and broke the design principles. We had to revert this change and design an alternative solution that adhered to the design principles. 
-This took some time to understand and implement correctly. `Birthday` and `Priority` are extensions of the `Person` model and required classes of their own. `DateUtil` and `DateTimeUtil` classes were additionally created to handle dates and times, which was used widely, and thus had to be well-designed to ensure utility and prevent bugs. 
+Challenges faced: When implementing sorting of clients, the challenge was understanding the design principles behind how `ModelManager#filteredPersons` was implemented in AB3. Since this is an iterative project, we had to ensure that the principles were consistent.
+For instance, we recognised that `ModelManager#filteredPersons` was an immutable list, and thus our initial implementation of removing the `final` keyword from the `filteredPersons` field was incorrect and broke the design principles. We had to revert this change and design an alternative solution that adhered to the design principles.
+This took some time to understand and implement correctly. `Birthday` and `Priority` are extensions of the `Person` model and required classes of their own. `DateUtil` and `DateTimeUtil` classes were additionally created to handle dates and times, which was used widely, and thus had to be well-designed to ensure utility and prevent bugs.
 Testing for most features were very extensive, with multiple edge cases and invalid inputs. Quality of design was ensured and priorities over shortcut alternatives. For instance, data structures like `HashMap` was utilised to map string inputs to `PriorityValue` enums. All these quality design required time and effort.
 
-4. GUI
+**4. GUI**<br>
+Difficulty Level: 3/5<br>
+Effort Required: 3/5<br>
+Challenges faced: Some challenges arose in the designing of changes to the GUI to present all the details we wanted. This included the placement of the various panels so that they fit together well without feeling cluttered. There was also considerable time spent on the Reminders panel on the right in particular, as we were not sure at first how we wanted to show all three types of reminders (last met, birthdays, schedules) without overcrowding. Originally, all three were to be shown together in one "Reminders This Week", but we felt that it would be hard to read for the user.
+
+There was also some consideration on how we wanted to handle refreshing the various panels, e.g. viewing the client details as explained in [Viewing client feature](#viewing-client-feature).
 
 --------------------------------------------------------------------------------------------------------------------
