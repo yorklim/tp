@@ -606,6 +606,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1a1-1a3 are repeated until the data entered are correct.<br>
     Use case resumes at step 2.
 
+
 **Use case: UC05 - View client details and policies**
 
 **MSS**
@@ -624,7 +625,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. ClientCare detects that the client does not exist.
   * 1b1. ClientCare shows an error message.<br>
     Use case ends.
-
 
 
 **Use case: UC06 - Find a client by name**
@@ -646,6 +646,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. ClientCare detects that there is no matching name found.
   * 1b1. ClientCare lets user know that the list is empty.<br>
     Use case ends.
+
 
 **Use case: UC07 - Adding notes to a client**
 
@@ -688,12 +689,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1a1-1a3 are repeated until the data entered are correct.<br>
     Use case resumes at step 2.
 
+
 **Use case: UC09 - Sort clients**
 
 **MSS**
-1. PLACEHOLDER
+1.  User requests to sort clients by `CRITERIA` and `ORDER`.
+2. ClientCare sorts the clients by the specified criteria and order.
+3. ClientCare shows a success message to the user.<br>
+   Use case ends.
 
 **Extensions**
+* 1a. ClientCare detects that the given command is invalid.
+  * 1a1. ClientCare shows an error message.
+    Use case ends.
 
 
 **Use case: UC10 - Update client as met**
@@ -717,6 +725,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c1. ClientCare shows an error message.<br>
     Use case ends.
 
+
 **Use case: UC11 - Update last met overdue duration**
 
 **MSS**
@@ -735,7 +744,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. ClientCare detects that the given input entered is not a non-negative integer.
   * 1b1. ClientCare shows an error message.<br>
     Use case ends.
-      
+ 
+
 **Use case: UC12 - Schedule an appointment with client**
 
 **MSS**
@@ -781,6 +791,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c1. ClientCare shows an error message.<br>
     Use case ends.
 
+
 **Use case: UC14 - Add policies to client**
 
 **MSS**
@@ -803,6 +814,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c1. ClientCare shows an error message.<br>
     Use case ends.
 
+
 **Use case: UC15 - Delete policies from client**
 
 **MSS**
@@ -824,6 +836,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. ClientCare detects that the client does not exist.
   * 1c1. ClientCare shows an error message.<br>
     Use case ends.
+
 
 ### Non-Functional Requirements
 
