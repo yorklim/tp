@@ -1014,19 +1014,19 @@ testers are expected to do more *exploratory* testing.
       Expected: Last met not updated for any client. Error details in status message.
    
    4. Test case (Missing Parameters): `met d/2024-04-11`, `met 3` or any command with missing parameters<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
    
    5. Test case (Repeated Parameters): `met 3 d/2024-04-11 d/2024-04-11` or any command with repeated parameter<br>
       Expected: Similar to previous.
    
    6. Test case (Invalid Index): `met x d/2024-04-11` (where x is smaller or larger than the list size)<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
    
    7. Test Case (Future Date, Invalid Date): `met 3 d/2025-04-20`
-      Expected: Similar to previous
+      Expected: Similar to previous.
    
    8. Test Case (Invalid Date): `schedule 3 d/2024-02-31`
-      Expected: Similar to previous
+      Expected: Similar to previous.
    
 ### Scheduling an appointment
 
@@ -1041,19 +1041,19 @@ testers are expected to do more *exploratory* testing.
       Expected: Schedule not updated for any client. Error details in status message.
 
    4. Test case (Missing Parameters): `schedule d/2025-04-18 18:00`, `schedule 3` or any command with missing parameters<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
    5. Test case (Repeated Parameters): `schedule 3 d/2025-04-18 18:00 d/2025-05-17 13:15` or any command with repeated parameter<br>
       Expected: Similar to previous.
 
    6. Test case (Invalid Index): `schedule x d/2025-04-18 13:00` (where x is smaller or larger than the list size)<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
    7. Test Case (Non-Future DateTime, Invalid DateTime): `schedule 3 d/2024-04-10 12:00`, `schedule 3 d/2024-04-13 14:00`
-      Expected: Similar to previous
+      Expected: Similar to previous.
    
    8. Test Case (Invalid DateTime): `schedule 3 d/2025-02-31 12:00`
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
 ### Marking an appointment as complete
 1. Updating an appointment with a client as completed while all clients are being shown
@@ -1066,13 +1066,13 @@ testers are expected to do more *exploratory* testing.
       Expected: Appointment not updated for any client. Error details in status message.
 
    4. Test case (Missing Parameters): `mark`<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
    5. Test case (Repeated Parameters): `schedule 3 3`<br>
       Expected: Similar to previous.
 
    6. Test case (Invalid Index): `mark x` (where x is smaller or larger than the list size)<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
 
 ### Set the last met overdue duration
 1. Setting a new last met overdue duration
@@ -1085,16 +1085,16 @@ testers are expected to do more *exploratory* testing.
       Expected: Last met overdue duration remains unchanged. Error details in status message.
    
    4. Test Case (Non-numerical, Invalid Parameter): `set abc`<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
    
    5. Test Case (Non-Integer, Invalid Parameter): `set 64.6`<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
    
    6. Test Case (Negative Integer, Invalid Parameter): `set -6`<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
    
    7. Test Case (Value Above Integer Limit): `set 1234567890098765432112345564354345324343124134211232132131231`
-      Expected: Similar to previous
+      Expected: Similar to previous.
    
 ### Adding a policy
 
@@ -1109,7 +1109,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Policy not added to any client. Error message shown in the status message.
 
    4. Test case (Missing Parameters): `addpolicy 1 n/Health`, `addpolicy 1 i/123` or any command with missing parameters<br>
-      Expected: Similar to previous
+      Expected: Similar to previous.
    
    5. Test case (Invalid Index): `addpolicy x n/Health i/123` (where x is smaller or larger than the list size)<br>
       Expected: Similar to previous.
@@ -1136,7 +1136,7 @@ testers are expected to do more *exploratory* testing.
      Expected: Policy not added to any client. Error message shown in the status message.
 
    4. Test case (Missing Parameters): `deletepolicy 1 `<br>
-     Expected: Similar to previous
+     Expected: Similar to previous.
 
    5. Test case (Invalid Index): `deletepolicy x i/123` (where x is smaller or larger than the list size)<br>
      Expected: Similar to previous.
