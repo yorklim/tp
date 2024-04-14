@@ -929,6 +929,54 @@ testers are expected to do more *exploratory* testing.
 
 ### Sorting clients
 
+1. Sorting clients by priority
+
+   1. Prerequisites: Multiple clients in the client list.
+
+   2. Test case (valid descending): `sort priority o/desc`<br>
+      Expected: Clients are sorted by priority in descending order. Success message shown in the status message.
+
+   3. Test case (valid ascending): `sort priority o/asc`<br>
+      Expected: Clients are sorted by priority in ascending order. Success message shown in the status message.
+
+   4. Test case (invalid order): `sort priority o/invalid`<br>
+      Expected: Clients are not sorted. Error message shown in the status message.
+
+   5. Test case (invalid criteria): `sort invalid o/asc`<br>
+      Expected: Similar to previous.
+
+2. Sorting clients by name
+
+   1. Prerequisites: Multiple clients in the client list.
+
+   2. Test case (valid ascending): `sort name o/asc`<br>
+      Expected: Clients are sorted by name in ascending order. Success message shown in the status message.
+
+   3. Test case (valid descending): `sort name o/desc`<br>
+      Expected: Clients are sorted by name in descending order. Success message shown in the status message.
+
+   4. Test case (invalid order): `sort name o/invalid`<br>
+      Expected: Clients are not sorted. Error message shown in the status message.
+
+   5. Test case (invalid criteria): `sort invalid o/asc`<br>
+      Expected: Similar to previous.
+
+3. Sorting clients by birthday
+
+   1. Prerequisites: Multiple clients in the client list.
+    
+   2. Test case (valid ascending): `sort birthday o/asc`<br>
+    Expected: Clients are sorted by birthday in ascending order. Success message shown in the status message.
+    
+   3. Test case (valid descending): `sort birthday o/desc`<br>
+    Expected: Clients are sorted by birthday in descending order. Success message shown in the status message.
+    
+   4. Test case (invalid order): `sort birthday o/invalid`<br>
+    Expected: Clients are not sorted. Error message shown in the status message.
+    
+   5. Test case (invalid criteria): `sort invalid o/asc`<br>
+    Expected: Similar to previous.
+
 ### Updating last met
 Command Format: `met index d/YYYY-MM-DD`<br>
 Assumptions: Today is 13 April 2024, date chosen must not be in the future.<br>
@@ -1090,6 +1138,12 @@ invalid values if the txt file is edited wrongly.
 2. Policies Features
 
 3. Additional Client Traits and Features
+Difficulty Level: 3/5<br>
+Effort Required: 3/5<br>
+Challenges faced: When implementing sorting of clients, the challenge was understanding the design principles behind how `ModelManager#filteredPersons` was implemented in AB3. Since this is an iterative project, we had to ensure that the principles were consistent. 
+For instance, we recognised that `ModelManager#filteredPersons` was an immutable list, and thus our initial implementation of removing the `final` keyword from the `filteredPersons` field was incorrect and broke the design principles. We had to revert this change and design an alternative solution that adhered to the design principles. 
+This took some time to understand and implement correctly. `Birthday` and `Priority` are extensions of the `Person` model and required classes of their own. `DateUtil` and `DateTimeUtil` classes were additionally created to handle dates and times, which was used widely, and thus had to be well-designed to ensure utility and prevent bugs. 
+Testing for most features were very extensive, with multiple edge cases and invalid inputs. Quality of design was ensured and priorities over shortcut alternatives. For instance, data structures like `HashMap` was utilised to map string inputs to `PriorityValue` enums. All these quality design required time and effort.
 
 4. GUI
 
