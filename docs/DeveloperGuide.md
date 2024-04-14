@@ -950,7 +950,7 @@ testers are expected to do more *exploratory* testing.
    6. Test case (Invalid Index): `met x d/2024-04-11` (where x is smaller or larger than the list size)<br>
       Expected: Similar to previous
    
-   7. Test Case (Future Date, Invalid Date): `met 3 d/2024-04-20`
+   7. Test Case (Future Date, Invalid Date): `met 3 d/2025-04-20`
       Expected: Similar to previous
    
    8. Test Case (Invalid Date): `schedule 3 d/2024-02-31`
@@ -962,25 +962,25 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the date chosen is in the future.
      For the test cases, we assume that today is 13 April 2024 and the time is 2pm.
 
-   2. Test case: `schedule 1 d/2024-04-18 18:00`<br>
+   2. Test case: `schedule 1 d/2025-04-18 18:00`<br>
       Expected: Schedule successfully updated for first client. Success message shown in the status message.
 
-   3. Test case (Invalid DateTime Format): `schedule 3 d/18-04-2024`<br>
+   3. Test case (Invalid DateTime Format): `schedule 3 d/18-04-2025`<br>
       Expected: Schedule not updated for any client. Error details in status message.
 
-   4. Test case (Missing Parameters): `schedule d/2024-04-18 18:00`, `schedule 3` or any command with missing parameters<br>
+   4. Test case (Missing Parameters): `schedule d/2025-04-18 18:00`, `schedule 3` or any command with missing parameters<br>
       Expected: Similar to previous
 
-   5. Test case (Repeated Parameters): `schedule 3 d/2024-04-18 18:00 d/2024-05-17 13:15` or any command with repeated parameter<br>
+   5. Test case (Repeated Parameters): `schedule 3 d/2025-04-18 18:00 d/2025-05-17 13:15` or any command with repeated parameter<br>
       Expected: Similar to previous.
 
-   6. Test case (Invalid Index): `schedule x d/18-04-2024 13:00` (where x is smaller or larger than the list size)<br>
+   6. Test case (Invalid Index): `schedule x d/2025-04-18 13:00` (where x is smaller or larger than the list size)<br>
       Expected: Similar to previous
 
    7. Test Case (Non-Future DateTime, Invalid DateTime): `schedule 3 d/2024-04-10 12:00`, `schedule 3 d/2024-04-13 14:00`
       Expected: Similar to previous
    
-   8. Test Case (Invalid DateTime): `schedule 3 d/2024-02-31 12:00`
+   8. Test Case (Invalid DateTime): `schedule 3 d/2025-02-31 12:00`
       Expected: Similar to previous
 
 ### Marking an appointment as complete
