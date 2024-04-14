@@ -41,7 +41,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/reganchoy.md)]
 
 * Role: Deliverables + Deadline + Scheduling
-* Responsibilities: Model
+* Responsibilities: Model, Documentation
 
 ### Solomon Ng
 
