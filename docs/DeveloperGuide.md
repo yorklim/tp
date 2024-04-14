@@ -15,7 +15,7 @@
 
 * This project was based on the [AddressBook-Level3 (AB3](https://se-education.org/addressbook-level3/) from [SE-EDU](https://se-education.org/).
 * The `remark` command in this project was implemented with reference to the CS2103T AB3 [Tutorial: Adding a command](https://nus-cs2103-ay2324s2.github.io/tp/tutorials/AddRemark.html).
-
+* The user guide approach in breakdown in sections and header styling was inspired by [ArtBuddy](https://ay2223s1-cs2103t-w11-3.github.io/tp/UserGuide.html)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -892,7 +892,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the app manually. 
+The full guide on the expected outcome and format of the commands can be found in our user guide.
+This appendix will serve to inform users on the assumptions along with a correct and invalid test case.
 
 <box type="info" seamless>
 
@@ -918,9 +920,11 @@ testers are expected to do more *exploratory* testing.
 
 3. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding a client
 
-1. Deleting a person while all persons are being shown
+### Deleting a client
+
+1. Deleting a client while all clients are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -935,22 +939,212 @@ testers are expected to do more *exploratory* testing.
 
 2. _{ more test cases …​ }_
 
+### Editing a client
+
+### Listing client
+
+1. Listing all clients
+
+   1. Prerequisites: Multiple clients in the client list.
+
+   2. Test case: `list`<br>
+      Expected: All clients are shown in the list view. Success message shown in the status message.
+
+   3. Test case: `list 1`, `list asdsad`, `list n/Jones` or any command with extra characters supplied<br>
+      Expected: Similar to previous.
+
+
+### Viewing a client
+
+1. Viewing a client while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list.
+
+   2. Test case: `view 1`<br>
+      Expected: First client's details are shown in the client details view and policy details view. Success message shown in the status message.
+
+   3. Test case (Missing Index): `view`<br>
+      Expected: Client details view and Policy details view not updated. Error message shown in the status message.
+
+   4. Test case (Invalid Index): `view x` (where x is smaller or larger than the list size)<br>
+      Expected: Similar to previous.
+
+   6. Test case (Extra Characters): `view 1 asd`, `view 1 n/Jones` or any command with extra characters supplied<br>
+      Expected: Similar to previous.
+
+### Finding a client
+
+1. Finding a client with a given name `Jones`
+
+   1. Prerequisites: List all client using the `list` command. Multiple clients in the client list. Ensure there is a client with the name "Jones".
+
+   2. Test case: `find Jones`<br>
+      Expected: Client list update to show all clients with the name "Jones". Success message shown in the status message.
+
+   3. Test case (Multiple keywords): `find Jones Brown`<br>
+      Expected: Client list update to show all clients with the name "Jones" or the name "Brown" (if any). Success message shown in the status message.
+
+   4. Test case (Missing keyword): `find`<br>
+      Expected: No client is found. Error message shown in the status message.
+   
+### Adding notes to a client
+
+### Clearing the client list
+
+1. Clearing the client list
+
+   1. Prerequisites: Multiple clients in the client list.
+
+   2. Test case: `clear`<br>
+      Expected: All clients are removed from the list. Success message shown in the status message.
+
+   3. Test case: `clear 1`, `clear asdsad`, `clear n/Jones` or any command with extra characters supplied<br>
+      Expected: Similar to previous.
+
+### Sorting clients
+
+### Updating last met
+Command Format: `met index d/YYYY-MM-DD`<br>
+Assumptions: Today is 13 April 2024, date chosen must not be in the future.<br>
+Desired Outcome: Updating the last met date of the 3rd client to 11 April 2024.<br>
+1. Correct Test Case: `met 3 d/2024-04-11`
+2. Invalid Test Case: `met 3 d/11-04-2024` wrong date format
+
+### Scheduling an appointment
+Command Format: `schedule index d/YYYY-MM-DD HH:mm`<br>
+Assumptions: Today is 13 April 2024, date chosen must not be in the past.<br>
+Desired Outcome: Creating an appointment with the 3rd client on 18 April 2024 2pm.<br>
+1. Correct Test Case: `schedule 3 d/2024-04-18 14:00`
+2. Invalid Test Case: `schedule 3 d/18-04-2024 14:00` wrong dateTime format
+3. Invalid Test Case: `schedule 3 d/2024-04-18` missing time
+
+### Marking an appointment as complete
+Command Format: `mark index`<br>
+Assumptions: An open appointment is present with an existing client.<br>
+Desired Outcome: Marking an appointment with the 3rd client.<br>
+1. Correct Test Case: `mark 3`
+2. Invalid Test Case: `mark 3` if client does not exist or appointment is done
+3. Invalid Test Case: `mark three` index should be a positive integer
+
+### Set the last met overdue duration
+Command Format: `set integer`<br>
+Assumptions: Nil<br>
+Desired Outcome: Setting the duration to 45 days.<br>
+1. Correct Test Case: `set 45`
+2. Invalid Test Case: `set 45.3` value must be non-negative integer
+3. Invalid Test Case: `set forty five` value must be a non-negative integer
+
+### Adding a policy
+
+1. Adding a policy to a patient while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the first client does not have the policy number "123".<br>
+   
+   2. Test case: `addpolicy 1 n/Health i/123`<br>
+      Expected: Policy successfully added to first client. Success message shown in the status message.
+
+   3. Test case (Missing Index): `addpolicy n/Health i/123`<br>
+      Expected: Policy not added to any client. Error message shown in the status message.
+
+   4. Test case (Missing Parameters): `addpolicy 1 n/Health`, `addpolicy 1 i/123` or any command with missing parameters<br>
+      Expected: Similar to previous
+   
+   5. Test case (Invalid Index): `addpolicy x n/Health i/123` (where x is smaller or larger than the list size)<br>
+      Expected: Similar to previous.
+   
+   6. Test case (Invalid Policy Name): `addpolicy 1 n/#Health i/123`<br>
+      Expected: Similar to previous.
+
+   7. Test case (Invalid Policy Number): `addpolicy 1 n/Health i/abc`<br>
+      Expected: Similar to previous.
+   
+   8. Test case (Repeated Parameters): `addpolicy 1 n/Health i/123 n/Health` or any command with repeated parameter<br>
+      Expected: Similar to previous.
+
+### Deleting a policy
+
+1. Deleting a policy from a patient while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the first client has the policy number "123".<br>
+
+   2. Test case: `deletepolicy 1 i/123`<br>
+   Expected: Policy successfully added to first client. Success message shown in the status message.
+
+   3. Test case (Missing Index): `deletepolicy i/123`<br>
+     Expected: Policy not added to any client. Error message shown in the status message.
+
+   4. Test case (Missing Parameters): `deletepolicy 1 `<br>
+     Expected: Similar to previous
+
+   5. Test case (Invalid Index): `deletepolicy x i/123` (where x is smaller or larger than the list size)<br>
+     Expected: Similar to previous.
+
+   6. Test case (Invalid Policy Number): `deletepolicy 1 i/abc`<br>
+       Expected: Similar to previous.
+
+   7. Test case (Repeated Parameters): `deletepolicy 1 i/123 i/123`<br>
+       Expected: Similar to previous.
+
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted clientcare.json
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: The clientcare.json file exists in the data directory.
 
-2. _{ more test cases …​ }_
+   2. Test case: Delete the clientcare.json file.<br>
+   Expected: The app launches successfully, populated with the sample data.
 
+   3. Test case: Delete contents of clientcare.json file.<br>
+   Expected: The app launches successfully, populated with no data.
+
+   4. Test case: Add random characters to json file that affects the formatting of the file.<br>
+    Expected: Similar to previous.
+
+2. Dealing with wrongly edit clientcare.json
+
+   1. Prerequisites: The clientcare.json file exists in the data directory.
+
+   2. Test case: Remove fields from clients.<br>
+   Expected: The app launches successfully, populated with no data.
+
+   3. Test case: Reorder of fields in client.<br>
+   Expected: Similar to previous.
+
+3. Dealing with missing/corrupted setvalue.txt
+
+   1. Prerequisites: The setvalue.txt file exists in the data directory.
+
+   2. Test case: Delete the setvalue.txt file.<br>
+   Expected: The app launches successfully, with the default overdue period value.
+
+   3. Test case: Empty setvalue.txt file.<br>
+   Expected: Similar to previous.
+
+   4. Test case: Add non-digit characters to json file.<br>
+   Expected: Similar to previous.
+
+4. Dealing with wrongly edit setvalue.txt
+   
+    1. Prerequisites: The setvalue.txt file exists in the data directory.
+    
+    2. Test case: Edit value to be over integer limit.<br>
+    Expected: The app launches successfully, with the default overdue period value.
+    
+    3. Test case: Add non-digit characters to the file.<br>
+    Expected: Similar to previous.
+    
+    4. Test case: Edit value to be negative.<br>
+    Expected: Similar to previous.
 
 ## **Appendix: Planned Enhancements**
+
+Team Size: 4
 
 1. **Feature Flaw** - Currently, users can only schedule one appointment per client. In future versions, we will support multiple appointments per client.
 2. **Feature Flaw** - Currently, names are case-sensitive. `John` and `john` are regarded as different clients. In future versions, names will be case-insensitive.
 3. **Feature Flaw** - Currently, tags only allow alphanumeric values. Spaces and special characters are not allowed. In future versions, we will support the use of spaces and special characters for tags.
 4. **Feature Flaw** - Currently, users are not allowed to use special characters like `/` when adding or editing the client name. In future versions, we will support the use of special characters like `/` for names.
-5. **Feature Flaw** - Currently, users must fulfill all compulsory parameters to add a person. In future versions, we will make more parameters optional.
+5. **Feature Flaw** - Currently, users must fulfill all compulsory parameters to add a client. In future versions, we will make more parameters optional.
 6. **Feature Flaw** - Currently, users must re-sort the client list after adding, editing or updating clients. Client List does not auto update or re-sort itself upon adding/editing or updating. In future versions, we will support the auto sorting when clients are updated.
 7. **UI Bug** - Currently, the policy name and policy id may get truncated if there are too many characters. In future versions, we will support the wrapping of fields in the Policy Display.
 8. **UI Bug** - Currently, the phone number and remark may get truncated if they are too long. In future versions, we will support the wrapping of all fields in the Client View Display.
@@ -958,5 +1152,19 @@ testers are expected to do more *exploratory* testing.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
+
+1. Scheduling Features
+`met`, `schedule`, `mark` and `set` commands help the user manage his scheduling matters. As these 4 commands directly affect each other, the difficulty comes in thinking what and how
+their respective class methods should interact with each other, especially with what date format to choose as this directly affects our auto-sort implemented for scheduling. It is also difficult to test for extreme cases that may cause these commands to misbehave.
+We decided to simplify the process by restricting the user to 1 appointment per client as our initial beta version faced multiple bugs due to higher number of classes and functions when supporting multiple appointments per client.
+
+`set` is also saved in a separate txt file as it is not related to client traits. Hence, additional testing is needed to ensure the value that `set` updates is saved correctly and is able to handle
+invalid values if the txt file is edited wrongly.
+
+2. Policies Features
+
+3. Additional Client Traits and Features
+
+4. GUI
 
 --------------------------------------------------------------------------------------------------------------------
