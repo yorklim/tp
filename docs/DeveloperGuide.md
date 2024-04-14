@@ -974,7 +974,7 @@ testers are expected to do more *exploratory* testing.
    6. Test case (Invalid Index): `schedule x d/18-04-2024 13:00` (where x is smaller or larger than the list size)<br>
       Expected: Similar to previous
 
-   7. Test Case (Past DateTime, Invalid DateTime): `schedule 3 d/2024-04-10 12:00`, `schedule 3 d/2024-04-13 14:00`
+   7. Test Case (Non-Future DateTime, Invalid DateTime): `schedule 3 d/2024-04-10 12:00`, `schedule 3 d/2024-04-13 14:00`
       Expected: Similar to previous
 
 ### Marking an appointment as complete
@@ -1009,7 +1009,7 @@ testers are expected to do more *exploratory* testing.
    4. Test Case (Non-numerical, Invalid Parameter): `set abc`<br>
       Expected: Similar to previous
    
-   5. Test Case (Decimal, Invalid Parameter): `set 64.6`<br>
+   5. Test Case (Non-Integer, Invalid Parameter): `set 64.6`<br>
       Expected: Similar to previous
    
    6. Test Case (Negative Integer, Invalid Parameter): `set -6`<br>
