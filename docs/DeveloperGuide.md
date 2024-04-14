@@ -852,10 +852,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    2. Test case: `add n/John Doe c/12345678 e/john-doe@example.com a/123 Tampines Street 42 t/friends p/high d/1987-02-02`<br>
-     Expected: John Doe is added to the end of the list. Details of the added person are shown in the status message. Timestamp in the status bar is updated.
+     Expected: John Doe is added to the end of the list. Details of the added person are shown in the status message.
 
    3. Test case (Missing Compulsory Parameter): `add n/John Doe e/john-doe@example.com a/123 Tampines Street 42 t/friends p/high d/1987-02-02`<br>
-     Expected: No client is added to the list. Error details shown in the status message. Timestamp in the status bar is updated. Status bar remains the same.
+     Expected: No client is added to the list. Error details shown in the status message.
 
    4. Test case (Invalid Parameter): `add n/John Doe c/12345678 e/john-doe.example a/123 Tampines Street 42 t/friends p/high d/1987-02-02` <br>
      Expected: Similar to previous.
@@ -865,7 +865,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. There is a client with name `John Doe` already in the list.
    
    2. Test case: `add n/John Doe c/12345678 e/john-doe@example.com a/123 Tampines Street 42 t/friends p/high d/1987-02-02`<br>
-      Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar remains the same.
+      Expected: No client is added to the list. Error details shown in the status message.
 
 ### Deleting a client
 
@@ -874,10 +874,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    3. Test case (Missing Index): `delete`<br>
-      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details shown in the status message.
 
    4. Test case (Invalid Index): `delete x` (where x is smaller or larger than the list size)<br>
       Expected: Similar to previous.
@@ -890,10 +890,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    2. Test case: `edit 1 n/John Doe`<br>
-     Expected: First client's name is edited to John Doe. Details of the added person are shown in the status message. Timestamp in the status bar is updated.
+     Expected: First client's name is edited to John Doe. Details of the added person are shown in the status message.
 
    3. Test case (Missing Index): `edit n/John Doe`<br>
-      Expected: No client is edited. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is edited. Error details shown in the status message.
    
    4. Test case (Invalid Index): `edit x n/John Doe` (where x is smaller or larger than the list size)<br>
      Expected: Similar to previous.
