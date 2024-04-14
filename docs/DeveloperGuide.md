@@ -869,60 +869,198 @@ testers are expected to do more *exploratory* testing.
 
 ### Listing client
 
+1. Listing all clients
+
+   1. Prerequisites: Multiple clients in the client list.
+
+   2. Test case: `list`<br>
+      Expected: All clients are shown in the list view. Success message shown in the status message.
+
+   3. Test case: `list 1`, `list asdsad`, `list n/Jones` or any command with extra characters supplied<br>
+      Expected: Similar to previous.
+
+
 ### Viewing a client
+
+1. Viewing a client while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list.
+
+   2. Test case: `view 1`<br>
+      Expected: First client's details are shown in the client details view and policy details view. Success message shown in the status message.
+
+   3. Test case (Missing Index): `view`<br>
+      Expected: Client details view and Policy details view not updated. Error message shown in the status message.
+
+   4. Test case (Invalid Index): `view x` (where x is smaller or larger than the list size)<br>
+      Expected: Similar to previous.
+
+   6. Test case (Extra Characters): `view 1 asd`, `view 1 n/Jones` or any command with extra characters supplied<br>
+      Expected: Similar to previous.
 
 ### Finding a client
 
+1. Finding a client with a given name `Jones`
+
+   1. Prerequisites: List all client using the `list` command. Multiple clients in the client list. Ensure there is a client with the name "Jones".
+
+   2. Test case: `find Jones`<br>
+      Expected: Client list update to show all clients with the name "Jones". Success message shown in the status message.
+
+   3. Test case (Multiple keywords): `find Jones Brown`<br>
+      Expected: Client list update to show all clients with the name "Jones" or the name "Brown" (if any). Success message shown in the status message.
+
+   4. Test case (Missing keyword): `find`<br>
+      Expected: No client is found. Error message shown in the status message.
+   
 ### Adding notes to a client
 
 ### Clearing the client list
 
+1. Clearing the client list
+
+   1. Prerequisites: Multiple clients in the client list.
+
+   2. Test case: `clear`<br>
+      Expected: All clients are removed from the list. Success message shown in the status message.
+
+   3. Test case: `clear 1`, `clear asdsad`, `clear n/Jones` or any command with extra characters supplied<br>
+      Expected: Similar to previous.
+
 ### Sorting clients
 
 ### Updating last met
-Command Format: `met index d/YYYY-MM-DD`
-Assumptions: Today is 13 April 2024, date chosen must not be in the future.
-Desired Outcome: Updating the last met date of the 3rd client to 11 April 2024.  
+Command Format: `met index d/YYYY-MM-DD`<br>
+Assumptions: Today is 13 April 2024, date chosen must not be in the future.<br>
+Desired Outcome: Updating the last met date of the 3rd client to 11 April 2024.<br>
 1. Correct Test Case: `met 3 d/2024-04-11`
 2. Invalid Test Case: `met 3 d/11-04-2024` wrong date format
 
 ### Scheduling an appointment
-Command Format: `schedule index d/YYYY-MM-DD HH:mm`
-Assumptions: Today is 13 April 2024, date chosen must not be in the past.
-Desired Outcome: Creating an appointment with the 3rd client on 18 April 2024 2pm.
+Command Format: `schedule index d/YYYY-MM-DD HH:mm`<br>
+Assumptions: Today is 13 April 2024, date chosen must not be in the past.<br>
+Desired Outcome: Creating an appointment with the 3rd client on 18 April 2024 2pm.<br>
 1. Correct Test Case: `schedule 3 d/2024-04-18 14:00`
 2. Invalid Test Case: `schedule 3 d/18-04-2024 14:00` wrong dateTime format
 3. Invalid Test Case: `schedule 3 d/2024-04-18` missing time
 
 ### Marking an appointment as complete
-Command Format: `mark index`
-Assumptions: An open appointment is present with an existing client.
-Desired Outcome: Marking an appointment with the 3rd client.
+Command Format: `mark index`<br>
+Assumptions: An open appointment is present with an existing client.<br>
+Desired Outcome: Marking an appointment with the 3rd client.<br>
 1. Correct Test Case: `mark 3`
 2. Invalid Test Case: `mark 3` if client does not exist or appointment is done
 3. Invalid Test Case: `mark three` index should be a positive integer
 
 ### Set the last met overdue duration
-Command Format: `mark integer`
-Assumptions: Nil
-Desired Outcome: Setting the duration to 45 days.
+Command Format: `set integer`<br>
+Assumptions: Nil<br>
+Desired Outcome: Setting the duration to 45 days.<br>
 1. Correct Test Case: `set 45`
 2. Invalid Test Case: `set 45.3` value must be non-negative integer
 3. Invalid Test Case: `set forty five` value must be a non-negative integer
 
 ### Adding a policy
 
+1. Adding a policy to a patient while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the first client does not have the policy number "123".<br>
+   
+   2. Test case: `addpolicy 1 n/Health i/123`<br>
+      Expected: Policy successfully added to first client. Success message shown in the status message.
+
+   3. Test case (Missing Index): `addpolicy n/Health i/123`<br>
+      Expected: Policy not added to any client. Error message shown in the status message.
+
+   4. Test case (Missing Parameters): `addpolicy 1 n/Health`, `addpolicy 1 i/123` or any command with missing parameters<br>
+      Expected: Similar to previous
+   
+   5. Test case (Invalid Index): `addpolicy x n/Health i/123` (where x is smaller or larger than the list size)<br>
+      Expected: Similar to previous.
+   
+   6. Test case (Invalid Policy Name): `addpolicy 1 n/#Health i/123`<br>
+      Expected: Similar to previous.
+
+   7. Test case (Invalid Policy Number): `addpolicy 1 n/Health i/abc`<br>
+      Expected: Similar to previous.
+   
+   8. Test case (Repeated Parameters): `addpolicy 1 n/Health i/123 n/Health` or any command with repeated parameter<br>
+      Expected: Similar to previous.
+
 ### Deleting a policy
 
+1. Deleting a policy from a patient while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the first client has the policy number "123".<br>
+
+   2. Test case: `deletepolicy 1 i/123`<br>
+   Expected: Policy successfully added to first client. Success message shown in the status message.
+
+   3. Test case (Missing Index): `deletepolicy i/123`<br>
+     Expected: Policy not added to any client. Error message shown in the status message.
+
+   4. Test case (Missing Parameters): `deletepolicy 1 `<br>
+     Expected: Similar to previous
+
+   5. Test case (Invalid Index): `deletepolicy x i/123` (where x is smaller or larger than the list size)<br>
+     Expected: Similar to previous.
+
+   6. Test case (Invalid Policy Number): `deletepolicy 1 i/abc`<br>
+       Expected: Similar to previous.
+
+   7. Test case (Repeated Parameters): `deletepolicy 1 i/123 i/123`<br>
+       Expected: Similar to previous.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted clientcare.json
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: The clientcare.json file exists in the data directory.
 
-2. _{ more test cases …​ }_
+   2. Test case: Delete the clientcare.json file.<br>
+   Expected: The app launches successfully, populated with the sample data.
 
+   3. Test case: Delete contents of clientcare.json file.<br>
+   Expected: The app launches successfully, populated with no data.
+
+   4. Test case: Add random characters to json file that affects the formatting of the file.<br>
+    Expected: Similar to previous.
+
+2. Dealing with wrongly edit clientcare.json
+
+   1. Prerequisites: The clientcare.json file exists in the data directory.
+
+   2. Test case: Remove fields from clients.<br>
+   Expected: The app launches successfully, populated with no data.
+
+   3. Test case: Reorder of fields in client.<br>
+   Expected: Similar to previous.
+
+3. Dealing with missing/corrupted setvalue.txt
+
+   1. Prerequisites: The setvalue.txt file exists in the data directory.
+
+   2. Test case: Delete the setvalue.txt file.<br>
+   Expected: The app launches successfully, with the default overdue period value.
+
+   3. Test case: Empty setvalue.txt file.<br>
+   Expected: Similar to previous.
+
+   4. Test case: Add non-digit characters to json file.<br>
+   Expected: Similar to previous.
+
+4. Dealing with wrongly edit setvalue.txt
+   
+    1. Prerequisites: The setvalue.txt file exists in the data directory.
+    
+    2. Test case: Edit value to be over integer limit.<br>
+    Expected: The app launches successfully, with the default overdue period value.
+    
+    3. Test case: Add non-digit characters to the file.<br>
+    Expected: Similar to previous.
+    
+    4. Test case: Edit value to be negative.<br>
+    Expected: Similar to previous.
 
 ## **Appendix: Planned Enhancements**
 
