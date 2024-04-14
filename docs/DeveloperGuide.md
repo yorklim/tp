@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# ClientCare
+# ClientCare Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -15,7 +15,7 @@
 
 * This project was based on the [AddressBook-Level3 (AB3](https://se-education.org/addressbook-level3/) from [SE-EDU](https://se-education.org/).
 * The `remark` command in this project was implemented with reference to the CS2103T AB3 [Tutorial: Adding a command](https://nus-cs2103-ay2324s2.github.io/tp/tutorials/AddRemark.html).
-* The user guide approach in breakdown in sections and header styling was inspired by [ArtBuddy](https://ay2223s1-cs2103t-w11-3.github.io/tp/UserGuide.html)
+* The user guide approach in breakdown of sections and header styling was inspired by [ArtBuddy](https://ay2223s1-cs2103t-w11-3.github.io/tp/UserGuide.html)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -65,6 +65,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -82,6 +83,7 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -115,6 +117,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S2-CS2103T-W12-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -137,6 +140,7 @@ The `Model` component,
 
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -154,6 +158,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -212,7 +217,7 @@ The `remark` command was implemented according to [Tutorial: Adding a command](h
   * With this, the command format will be `remark INDEX REMARK` instead.
   * While this might make it easier to type, it will also make fixing typos slower, like mentioned in the current behaviour.
   * It also means that a separate way of parsing has to be used, instead of `ArgumentMultimap`, deviating from other commands.
-
+<div style="page-break-after: always;"></div>
 
 ### Sorting clients feature
 
@@ -242,7 +247,7 @@ In order to keep `ModelManager#filteredPersons` as an immutable `final` field, w
 - When a sorted list of persons is needed, we call `ModelManager#getSortedFilteredPersonList()` which returns a new sorted list of persons sorted using the `ModelManager#personComparator`.
 
 This way, the original order of `ModelManager#filteredPersons` is preserved, and we can get a sorted list of persons when needed.
-
+<div style="page-break-after: always;"></div>
 
 ### Updating last met feature
 The last met feature allows users to keep track and update their last interaction with their clients.
@@ -268,7 +273,7 @@ The following object diagram illustrates the above:
 
 The following sequence diagram shows the lastmet operation:
 <puml src="diagrams/LastMetSequenceDiagram.puml" width="900" />
-
+<div style="page-break-after: always;"></div>
 
 ### Setting last met overdue duration feature
 The setting last met overdue duration feature allows users to choose the number of days before clients show up in the Last Met Display.
@@ -288,7 +293,7 @@ Upon updating the new lastMetDuration value, the `SetCommand` object then calls 
 to update the `isOverdue` boolean in all the `Person` objects. The Last Met Display then shows all the updated `Person` objects with `isOverdue` equals to `true`.
 
 The method `SetCommand#execute()` returns a CommandResult object which contains the success message to be displayed to the user.
-
+<div style="page-break-after: always;"></div>
 
 ### Adding schedule feature
 The adding schedule feature allows users to make appointments to track all their upcoming appointments with clients.
@@ -308,7 +313,7 @@ The `ScheduleCommand` object then communicates with the `Model` component to upd
 - `Model#setDisplayClient(Person)` - Updates the displayed client in the UI to the client that has been edited with the new Schedule.
 
 The method `ScheduleCommand#execute()` returns a CommandResult object which contains the success message to be displayed to the user.
-
+<div style="page-break-after: always;"></div>
 
 ### Marking schedule feature
 The marking schedule feature allows users to close upcoming appointments to track all their upcoming appointments with clients.
@@ -328,7 +333,7 @@ The `MarkCommand` object then communicates with the `Model` component to update 
 - `Model#setDisplayClient(Person)` - Updates the displayed client in the UI to the client that has been edited with the new Schedule.
 
 The method `MarkCommand#execute()` returns a CommandResult object which contains the success message to be displayed to the user.
-
+<div style="page-break-after: always;"></div>
 
 ### Add policy feature
 The add policy feature allows users to add a policy to a client. The policy is stored in the `Policy` class, which contains the policy details such as policy name, policy id. The `Policy` class is then added to the `PolicyList` object stored within the `Person` object in the `Model` component.
@@ -358,7 +363,7 @@ The following sequence diagram shows the addpolicy operation:
 
 The following activity diagram shows what happens when a user adds a policy:
 <puml src="diagrams/AddPolicyActivityDiagram.puml" width="900" />
-
+<div style="page-break-after: always;"></div>
 
 ### Deleting policy feature
 The delete policy feature allows users to delete a policy from a client. The `Policy` object corresponding to the specified policy in the `PolicyList` object stored within the specified `Person` object in the `Model` component is removed.
@@ -388,7 +393,7 @@ The following sequence diagram shows the deletepolicy operation:
 
 #### Design Considerations
 
-** Aspect: Deleting a policy using PolicyID instead of PolicyName.**
+**Aspect: Deleting a policy using PolicyID instead of PolicyName.**
 
 * Current: Deleting a policy using PolicyID.
   * The user can delete a policy using the PolicyID.
@@ -399,6 +404,7 @@ The following sequence diagram shows the deletepolicy operation:
   * The user can delete a policy using the PolicyName.
   * This will cause the user to need to type in the whole policy name to delete the policy, which can be slower and more error-prone.
   * This will also result in the need for policy names saved within the client to be unique which may not be the case in real-world scenarios, different policies can have the same name.
+<div style="page-break-after: always;"></div>
 
 ### Extensions to add command and edit command: Add birthday, edit birthday, add priority, edit priority features
 
@@ -444,6 +450,7 @@ More on `PriorityValue` enum class
 * The mapping of the full form strings and short form strings to the enum values is handled through `HashMap<String, PriorityValue> FULL_PRIORITY_MAP` and `HashMap<String, PriorityValue> SHORT_PRIORITY_MAP`, which has a constant time complexity.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -515,6 +522,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | manager         | view all my subordinates' clients                     | be aware of their progress and client base                            |
 | `*`      | insurance agent | get reminders of client birthday                      | send birthday message                                                 |
 
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -563,7 +571,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b. ClientCare detects that the client does not exist.
   * 3b1. ClientCare shows an error message.<br>
     Use case ends.
-
+<div style="page-break-after: always;"></div>
 
 **Use case: UC03 - Edit client**
 
@@ -625,7 +633,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. ClientCare detects that the client does not exist.
   * 1b1. ClientCare shows an error message.<br>
     Use case ends.
-
+<div style="page-break-after: always;"></div>
 
 **Use case: UC06 - Find a client by name**
 
@@ -688,7 +696,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a3. User enters new data.<br>
     Steps 1a1-1a3 are repeated until the data entered are correct.<br>
     Use case resumes at step 2.
-
+<div style="page-break-after: always;"></div>
 
 **Use case: UC09 - Sort clients**
 
@@ -750,7 +758,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. ClientCare detects that the given input entered is not a non-negative integer.
   * 1b1. ClientCare shows an error message.<br>
     Use case ends.
- 
+ <div style="page-break-after: always;"></div>
 
 **Use case: UC12 - Schedule an appointment with client**
 
@@ -796,7 +804,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. ClientCare detects that the client does not exist.
   * 1c1. ClientCare shows an error message.<br>
     Use case ends.
-
+<div style="page-break-after: always;"></div>
 
 **Use case: UC14 - Add policies to client**
 
@@ -842,7 +850,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. ClientCare detects that the client does not exist.
   * 1c1. ClientCare shows an error message.<br>
     Use case ends.
-
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -853,7 +861,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5.  The user interface should be intuitive and easy to use, even for users with limited technical knowledge. This includes providing clear and concise instructions, organizing information logically, and offering helpful error messages and tooltips.
 6.  The codebase should be well-structured, modular, and documented to facilitate future maintenance and enhancements. This includes adhering to coding standards, using version control, and providing comprehensive developer documentation.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -871,6 +878,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Help**: A feature of the ClientCare application that provides assistance, guidance, or instructions to users on how to use the application
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -937,6 +945,7 @@ testers are expected to do more *exploratory* testing.
 
    4. Test case (Invalid Index): `delete x`(where x is smaller or larger than the list size)<br>
    Expected: similar to previous.
+<div style="page-break-after: always;"></div>
 
 ### Editing a client
 
@@ -979,7 +988,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list.
 
-
    2. Test case: `view 2`<br>
    Expected: Second client's details are shown in the client details view and policy details view. Success message shown in the status message.
 
@@ -989,9 +997,8 @@ testers are expected to do more *exploratory* testing.
    4. Test case (Invalid Index): `view x` (where x is smaller or larger than the list size)<br>
    Expected: Similar to previous.
 
-   6. Test case (Extra Characters): `view 1 asd`, `view 1 n/Jones` or any command with extra characters supplied<br>
+   5. Test case (Extra Characters): `view 1 asd`, `view 1 n/Jones` or any command with extra characters supplied<br>
    Expected: Similar to previous.
-
 
 2. Viewing a client while clients are filtered by name `John`
 
@@ -1006,6 +1013,7 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `view 2`<br>
       Expected: Second client's details are shown in the client details view and policy details view. Success message shown in the status message.
+<div style="page-break-after: always;"></div>
 
 ### Finding a client
 
@@ -1057,6 +1065,7 @@ testers are expected to do more *exploratory* testing.
 
    3. Test case: `clear 1`, `clear asdsad`, `clear n/Jones` or any command with extra characters supplied<br>
    Expected: Similar to previous.
+<div style="page-break-after: always;"></div>
 
 ### Sorting clients
 
@@ -1107,6 +1116,7 @@ testers are expected to do more *exploratory* testing.
     
    5. Test case (invalid criteria): `sort invalid o/asc`<br>
     Expected: Similar to previous.
+<div style="page-break-after: always;"></div>
 
 ### Updating last met
 
@@ -1168,6 +1178,7 @@ testers are expected to do more *exploratory* testing.
    
    9. Test Case (Invalid DateTime): `schedule 3 d/2025-02-31 12:00`<br>
       Expected: Similar to previous.
+<div style="page-break-after: always;"></div>
 
 ### Marking an appointment as complete
 1. Updating an appointment with a client as completed while all clients are being shown
@@ -1257,6 +1268,7 @@ testers are expected to do more *exploratory* testing.
 
    7. Test case (Repeated Parameters): `deletepolicy 1 i/123 i/123`<br>
    Expected: Similar to previous.
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
@@ -1317,6 +1329,7 @@ testers are expected to do more *exploratory* testing.
    
     5. Test case: Edit value to be non-integer.<br>
     Expected: Similar to previous.
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 
@@ -1332,12 +1345,13 @@ Team Size: 4
 8. **Fix Text Truncation In Client Details** - Currently, the name, tags, phone number, address, email and remark may get truncated if they are too long. In future versions, we will support the wrapping of all fields in the Client View Display.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
 
 **1. Scheduling Features**<br>
-Difficulty Level: 3/5<br>
-Effort Required: 3/5<br>
+Difficulty Level: 3.5/5<br>
+Effort Required: 3.5/5<br>
 Challenges faced: `met`, `schedule`, `mark` and `set` commands help the user manage his scheduling matters. As these 4 commands directly affect each other, the difficulty comes in thinking what and how
 their respective class methods should interact with each other, especially with what date format to choose as this directly affects our auto-sort implemented for scheduling. It is also difficult to test for extreme cases that may cause these commands to misbehave.
 We decided to simplify the process by restricting the user to 1 appointment per client as our initial beta version faced multiple bugs due to higher number of classes and functions when supporting multiple appointments per client.
