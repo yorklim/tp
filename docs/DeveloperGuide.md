@@ -1088,7 +1088,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Marking an appointment as complete
 1. Updating an appointment with a client as completed while all clients are being shown
-   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure there is an open appointment with the first client and no open appoint with the second client.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure there is an open appointment with the first client and no open appointment with the second client.
 
    2. Test case: `mark 1`<br>
       Expected: Appointment with the first client is successfully updated as completed. Success message shown in the status message.
