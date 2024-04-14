@@ -160,7 +160,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 
-### View Client feature
+### Viewing client feature
 
 The `view` command allows users to view the details of a client on the GUI using their `INDEX`. Other commands will also affect the client display in the GUI. This includes information not included in the client list cards, such as their last met and policy list.
 
@@ -844,28 +844,66 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
 
 ### Adding a client
+
+1. Adding a client while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+   2. Test case: `add n/John Doe c/12345678 e/john-doe@example.com a/123 Tampines Street 42 t/friends p/high d/1987-02-02`<br>
+     Expected: John Doe is added to the end of the list. Details of the added person are shown in the status message. Timestamp in the status bar is updated.
+
+   3. Test case (Missing Compulsory Parameter): `add n/John Doe e/john-doe@example.com a/123 Tampines Street 42 t/friends p/high d/1987-02-02`<br>
+     Expected: No client is added to the list. Error details shown in the status message. Timestamp in the status bar is updated. Status bar remains the same.
+
+   4. Test case (Invalid Parameter): `add n/John Doe c/12345678 e/john-doe.example a/123 Tampines Street 42 t/friends p/high d/1987-02-02` <br>
+     Expected: Similar to previous.
+
+2. Adding a client that is already in list
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list. There is a client with name `John Doe` already in the list.
+   
+   2. Test case: `add n/John Doe c/12345678 e/john-doe@example.com a/123 Tampines Street 42 t/friends p/high d/1987-02-02`<br>
+      Expected: Error details shown in the status message. Timestamp in the status bar is updated. Status bar remains the same.
 
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case (Missing Index): `delete`<br>
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Test case (Invalid Index): `delete x` (where x is smaller or larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
 
 ### Editing a client
+
+1. Editing a client while all clients are being shown
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+   2. Test case: `edit 1 n/John Doe`<br>
+     Expected: First client's name is edited to John Doe. Details of the added person are shown in the status message. Timestamp in the status bar is updated.
+
+   3. Test case (Missing Index): `edit n/John Doe`<br>
+      Expected: No client is edited. Error details shown in the status message. Status bar remains the same.
+   
+   4. Test case (Invalid Index): `edit x n/John Doe` (where x is smaller or larger than the list size)<br>
+     Expected: Similar to previous.
+
+   5. Test case (Missing Parameters): `edit 2`<br>
+     Expected: Similar to previous.
+   
+   6. Test case (Invalid Parameter): `edit e/john-doe.example`<br>
+     Expected: Similar to previous.
+
 
 ### Listing client
 
@@ -886,17 +924,31 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list.
 
-   2. Test case: `view 1`<br>
-      Expected: First client's details are shown in the client details view and policy details view. Success message shown in the status message.
+   2. Test case: `view 2`<br>
+      Expected: Second client's details are shown in the client details view and policy details view. Success message shown in the status message.
 
    3. Test case (Missing Index): `view`<br>
-      Expected: Client details view and Policy details view not updated. Error message shown in the status message.
+      Expected: Client details view and Policy details view not updated. Error details shown in the status message.
 
    4. Test case (Invalid Index): `view x` (where x is smaller or larger than the list size)<br>
       Expected: Similar to previous.
 
-   6. Test case (Extra Characters): `view 1 asd`, `view 1 n/Jones` or any command with extra characters supplied<br>
+   6. Test case (Extra Characters): `view 2 asd`, `view 2 n/Jones` or any command with extra characters supplied<br>
       Expected: Similar to previous.
+
+2. Viewing a client while clients are filtered by name `John`
+
+   1. Prerequisites: Multiple clients with similar name (e.g. `John Doe`, `John Yu`) in client list. Filter the clients using the `find john` command.
+   
+   2. Test case: `view 2`<br>
+      Expected: Second client's details are show in the client details view and policy details view. Success message shown in the status message.
+
+3. Viewing a client while clients are sorted by priority in ascending order
+
+   1. Prerequisites: Multiple clients with different priorities in client list. Sort the clients using the `sort priority o/asc`.
+   
+   2. Test case: `view 2`<br>
+      Expected: Second client's details are shown in the client details view and policy details view. Success message shown in the status message.
 
 ### Finding a client
 
@@ -914,6 +966,28 @@ testers are expected to do more *exploratory* testing.
       Expected: No client is found. Error message shown in the status message.
    
 ### Adding notes to a client
+
+1. Adding a note to a client while client does not have existing note
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the client list. Ensure the first client does not have a note.<br>
+
+   2. Test case: `remark 1 r/Prefers emails`<br>
+     Expected: Note successfully added to first client. Success message shown in the status message.
+
+   3. Test case (Empty Parameter): `remark 1 r/`<br> 
+     Expected: Note successfully removed from first client. Success message show in the status message.
+
+   4. Test case (Repeated Parameters): `remark 1 r/Preeeffers emaiis r/Prefers emails`<br>
+     Expected: Note from last parameter successfully added to first client. Success message shown in the status message.
+
+   5. Test case (No Parameter): `remark 1`<br>
+     Expected: Note successfully removed from first client. Success message show in the status message.
+
+   6. Test case (Missing Index): `remark r/Prefers emails`<br>
+     Expected: Note not added to any client. Error details shown in the status message.
+
+   7. Test case (Invalid Index): `remark x r/Prefers emails` (where x is smaller or larger than the list size)<br>
+     Expected: Similar to previous.
 
 ### Clearing the client list
 
@@ -1079,7 +1153,7 @@ Team Size: 4
 
 ## **Appendix: Effort**
 
-1. Scheduling Features
+**1. Scheduling Features**<br>
 `met`, `schedule`, `mark` and `set` commands help the user manage his scheduling matters. As these 4 commands directly affect each other, the difficulty comes in thinking what and how
 their respective class methods should interact with each other, especially with what date format to choose as this directly affects our auto-sort implemented for scheduling. It is also difficult to test for extreme cases that may cause these commands to misbehave.
 We decided to simplify the process by restricting the user to 1 appointment per client as our initial beta version faced multiple bugs due to higher number of classes and functions when supporting multiple appointments per client.
@@ -1087,10 +1161,13 @@ We decided to simplify the process by restricting the user to 1 appointment per 
 `set` is also saved in a separate txt file as it is not related to client traits. Hence, additional testing is needed to ensure the value that `set` updates is saved correctly and is able to handle
 invalid values if the txt file is edited wrongly.
 
-2. Policies Features
+**2. Policies Features**<br>
 
-3. Additional Client Traits and Features
+**3. Additional Client Traits and Features**<br>
 
-4. GUI
+**4. GUI**<br>
+Some challenges arose in the designing of changes to the GUI to present all the details we wanted. This included the placement of the various panels so that they fit together well without feeling cluttered. There was also considerable time spent on the Reminders panel on the right in particular, as we were not sure at first how we wanted to show all three types of reminders (last met, birthdays, schedules) without overcrowding. Originally, all three were to be shown together in one "Reminders This Week", but we felt that it would be hard to read for the user.
+
+There was also some consideration on how we wanted to handle refreshing the various panels, e.g. viewing the client details as explained in [Viewing client feature](#viewing-client-feature).
 
 --------------------------------------------------------------------------------------------------------------------
