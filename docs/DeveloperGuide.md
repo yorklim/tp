@@ -515,7 +515,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | manager         | view all my subordinates' clients                     | be aware of their progress and client base                            |
 | `*`      | insurance agent | get reminders of client birthday                      | send birthday message                                                 |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -648,12 +647,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1b1. ClientCare lets user know that the list is empty.<br>
     Use case ends.
 
-**Use case: UC07 - Adding remark to client**
+**Use case: UC07 - Adding notes to a client**
 
 **MSS**
-1. PLACEHOLDER
+1.  User requests to <u>list all clients (UC04)</u> or <u>find client by name (UC06)</u>.
+2.  ClientCare shows a list of clients.
+3.  User requests to add a note to a specific client in the list by index.
+4.  ClientCare adds a note to the client.<br>
+5.  ClientCare shows the client's details and success message to the user.<br>
+    Use case ends.
 
 **Extensions**
+* 2a. User sees that the list is empty.
+  * 2a1. User stops as there is no client to add a note to.
+    Use case ends.
+* 3a. ClientCare detects that the given command is invalid.
+  * 3a1. ClientCare shows an error message.
+  * 3a2. ClientCare requests for the correct input.
+  * 3a3. User enters new data.<br>
+    Steps 3a1-3a3 are repeated until the data entered are correct.<br>
+    Use case resumes at step 4.
+* 3b. ClientCare detects that the client does not exist.
+  * 3b1. ClientCare shows an error message.<br>
+    Use case ends.
 
 
 **Use case: UC08 - Clear all client**
@@ -1239,14 +1255,14 @@ testers are expected to do more *exploratory* testing.
 
 Team Size: 4
 
-1. **Feature Flaw** - Currently, users can only schedule one appointment per client. In future versions, we will support multiple appointments per client.
-2. **Feature Flaw** - Currently, names are case-sensitive. `John` and `john` are regarded as different clients. In future versions, names will be case-insensitive.
-3. **Feature Flaw** - Currently, tags only allow alphanumeric values. Spaces and special characters are not allowed. In future versions, we will support the use of spaces and special characters for tags.
-4. **Feature Flaw** - Currently, users are not allowed to use special characters like `/` when adding or editing the client name. In future versions, we will support the use of special characters like `/` for names.
-5. **Feature Flaw** - Currently, users must fulfill all compulsory parameters to add a client. In future versions, we will make more parameters optional.
-6. **Feature Flaw** - Currently, users must re-sort the client list after adding, editing or updating clients. Client List does not auto update or re-sort itself upon adding/editing or updating. In future versions, we will support the auto sorting when clients are updated.
-7. **UI Bug** - Currently, the policy name and policy id may get truncated if there are too many characters. In future versions, we will support the wrapping of fields in the Policy Display.
-8. **UI Bug** - Currently, the phone number and remark may get truncated if they are too long. In future versions, we will support the wrapping of all fields in the Client View Display.
+1. **Add Scheduling Multiple Appointments Per Client** - Currently, users can only schedule one appointment per client. In future versions, we will support multiple appointments per client.
+2. **Make Names Case-insensitive** - Currently, names are case-sensitive. `John` and `john` are regarded as different clients. In future versions, names will be case-insensitive.
+3. **Allow Special Characters For Tags** - Currently, tags only allow alphanumeric values. Spaces and special characters are not allowed. In future versions, we will support the use of spaces and special characters for tags.
+4. **Allow Special Characters For Names** - Currently, users are not allowed to use special characters like `/` when adding or editing the client name. In future versions, we will support the use of special characters like `/` for names.
+5. **Make Parameters For Adding Clients Optional** - Currently, users must fulfill all compulsory parameters to add a client. In future versions, we will make more parameters optional.
+6. **Retain Sorting Order After Commands** - Currently, users must re-sort the client list after adding, editing or updating clients. Client List does not auto update or re-sort itself upon adding/editing or updating. In future versions, we will support the auto sorting when clients are updated.
+7. **Fix Text Truncation In Policy Table** - Currently, the policy name and policy id may get truncated if there are too many characters. In future versions, we will support the wrapping of fields in the Policy Display.
+8. **Fix Text Truncation In Client Details** - Currently, the name, tags, phone number, address, email and remark may get truncated if they are too long. In future versions, we will support the wrapping of all fields in the Client View Display.
 
 --------------------------------------------------------------------------------------------------------------------
 
