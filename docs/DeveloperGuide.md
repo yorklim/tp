@@ -1253,7 +1253,9 @@ Team Size: 4
 ## **Appendix: Effort**
 
 **1. Scheduling Features**<br>
-`met`, `schedule`, `mark` and `set` commands help the user manage his scheduling matters. As these 4 commands directly affect each other, the difficulty comes in thinking what and how
+Difficulty Level: 3/5<br>
+Effort Required: 3/5<br>
+Challenges faced: `met`, `schedule`, `mark` and `set` commands help the user manage his scheduling matters. As these 4 commands directly affect each other, the difficulty comes in thinking what and how
 their respective class methods should interact with each other, especially with what date format to choose as this directly affects our auto-sort implemented for scheduling. It is also difficult to test for extreme cases that may cause these commands to misbehave.
 We decided to simplify the process by restricting the user to 1 appointment per client as our initial beta version faced multiple bugs due to higher number of classes and functions when supporting multiple appointments per client.
 
@@ -1265,7 +1267,9 @@ Thus, we had to create methods within the `UniquePersonList` class to get the li
 invalid values if the txt file is edited wrongly.
 
 **2. Policies Features**<br>
-`addpolicy` and `deletepolicy` commands help the user manage his client's policies. The difficulty comes thinking of how to save the policies into storage and how to retrieve them.
+Difficulty Level: 3.5/5<br>
+Effort Required: 3.5/5<br>
+Challenged faced: `addpolicy` and `deletepolicy` commands help the user manage his client's policies. The difficulty comes thinking of how to save the policies into storage and how to retrieve them.
 Although `Tag` which was already implemented in AB3 was similar and could be used as a reference, the `Policy` feature was more complex as it required the saving of 2 different values (`policyName` and `policy ID`), instead of just 1 in the case of tags, and thus policies cannot be just saved in the same way and have to be parsed differently
 Additional testing was needed to ensure that the policies are saved correctly and are able to handle invalid values if the json file is edited wrongly.
 
@@ -1274,7 +1278,9 @@ As to keep the `Person` object immutable, we had to create a new `Person` object
 **3. Additional Client Traits and Features**<br>
 
 **4. GUI**<br>
-Some challenges arose in the designing of changes to the GUI to present all the details we wanted. This included the placement of the various panels so that they fit together well without feeling cluttered. There was also considerable time spent on the Reminders panel on the right in particular, as we were not sure at first how we wanted to show all three types of reminders (last met, birthdays, schedules) without overcrowding. Originally, all three were to be shown together in one "Reminders This Week", but we felt that it would be hard to read for the user.
+Difficulty Level: 3/5<br>
+Effort Required: 3/5<br>
+Challenges faced: Some challenges arose in the designing of changes to the GUI to present all the details we wanted. This included the placement of the various panels so that they fit together well without feeling cluttered. There was also considerable time spent on the Reminders panel on the right in particular, as we were not sure at first how we wanted to show all three types of reminders (last met, birthdays, schedules) without overcrowding. Originally, all three were to be shown together in one "Reminders This Week", but we felt that it would be hard to read for the user.
 
 There was also some consideration on how we wanted to handle refreshing the various panels, e.g. viewing the client details as explained in [Viewing client feature](#viewing-client-feature).
 
