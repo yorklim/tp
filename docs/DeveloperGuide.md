@@ -1244,7 +1244,8 @@ testers are expected to do more *exploratory* testing.
    
    7. Test Case (Value Above Integer Limit): `set 1234567890098765432112345564354345324343124134211232132131231`<br>
       Expected: Similar to previous.
-   
+<div style="page-break-after: always;"></div>
+
 ### Adding a policy
 
 1. Adding a policy to a client while all clients are being shown
