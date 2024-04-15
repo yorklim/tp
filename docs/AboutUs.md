@@ -28,10 +28,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/getsquared)]
 [[portfolio](team/shuqing.md)]
 
-* Role: Integration + Documentation
+* Role: Integration
 * Responsibilities: UI
-
-* Role: Project Advisor
 
 ### Regan Choy
 

@@ -313,6 +313,19 @@ The `ScheduleCommand` object then communicates with the `Model` component to upd
 - `Model#setDisplayClient(Person)` - Updates the displayed client in the UI to the client that has been edited with the new Schedule.
 
 The method `ScheduleCommand#execute()` returns a CommandResult object which contains the success message to be displayed to the user.
+
+#### Design Considerations
+
+**Aspect: Letting users set multiple appointments per client.**
+
+* Current: Only one appointment is allowed per client.
+  * The user can schedule an appointment for each client.
+  * This is to prevent the schedule display from having too many schedules which can overcrowd the display.
+  * This also keeps the command for scheduling and completing appointments simple as there are fewer commands available for the user.
+
+* Alternative (not taken): Multiple appointments per client.
+  * Too many appointments in a single schedule display can make it hard to see for the user.
+  * A much more complex GUI is also needed to support such a feature which will be too much work for the project.
 <div style="page-break-after: always;"></div>
 
 ### Marking schedule feature
@@ -333,6 +346,20 @@ The `MarkCommand` object then communicates with the `Model` component to update 
 - `Model#setDisplayClient(Person)` - Updates the displayed client in the UI to the client that has been edited with the new Schedule.
 
 The method `MarkCommand#execute()` returns a CommandResult object which contains the success message to be displayed to the user.
+
+#### Design Considerations
+
+**Aspect: Marking an appointment updates the last met for the client.**
+
+* Current: Marking an appointment only marks the appointment as closed, last met for the client remains unchanged.
+  * The user can mark a schedule as completed, then use `met` to update the last met of the client separately.
+  * This is to streamline the completion and closing of open appointments to a single command.
+  * Postponing an appointment is also in-built into the `schedule` command.
+
+* Alternative (not taken): Marking an appointment updates the last met for the client automatically.
+  * Users may wish to complete or close an open appointment where they did not meet the client.
+  * As Last Met cannot be updated to a future date that has yet to pass, this can introduce problems where users may want to close future appointments.
+  * To resolve this, we can introduce more commands where completing and closing appointments are different. However, this may increase the complexity of app usage and commands for the user.
 <div style="page-break-after: always;"></div>
 
 ### Add policy feature
@@ -1217,7 +1244,8 @@ testers are expected to do more *exploratory* testing.
    
    7. Test Case (Value Above Integer Limit): `set 1234567890098765432112345564354345324343124134211232132131231`<br>
       Expected: Similar to previous.
-   
+<div style="page-break-after: always;"></div>
+
 ### Adding a policy
 
 1. Adding a policy to a client while all clients are being shown
