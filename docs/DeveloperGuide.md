@@ -746,7 +746,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1c2. User enters new data.<br>
     Steps 1c1-1c2 are repeated until the data entered are correct.<br>
     Use case ends.
-
+<div style="page-break-after: always;"></div>
 
 **Use case: UC10 - Update client as met**
 
