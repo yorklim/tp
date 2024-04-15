@@ -733,12 +733,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 1a. ClientCare detects that the given command is invalid.
   * 1a1. ClientCare shows an error message.
+  * 1a2. User enters new data.<br>
+    Steps 1a1-1a2 are repeated until the data entered are correct.<br>
     Use case ends.
 * 1b. ClientCare detects that the given `CRITERIA` is invalid.
   * 1b1. ClientCare shows an error message.
+  * 1b2. User enters new data.<br>
+    Steps 1b1-1b2 are repeated until the data entered are correct.<br>
     Use case ends.
 * 1c. ClientCare detects that the given `ORDER` is invalid.
   * 1c1. ClientCare shows an error message.
+  * 1c2. User enters new data.<br>
+    Steps 1c1-1c2 are repeated until the data entered are correct.<br>
     Use case ends.
 
 
