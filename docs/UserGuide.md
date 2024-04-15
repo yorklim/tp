@@ -346,7 +346,7 @@ Let's type the following command into the Command Input:
 
 <box type="info">
 
-**Note:** Since you cannot schedule an appointment for a date and time that has passed for that exact moment, 
+**Note:** Since you cannot schedule an appointment for a date and time that has passed or that exact moment, 
 do change the date field as needed.
 
 </box>
@@ -1126,11 +1126,6 @@ You can easily change the dates to a future or past date to suit your needs.
 
 **Q** : A new ClientCare version has been released. Can I use my existing my data on the new version?<br/>
 **A** : Certainly! You just need to copy and overwrite the data folder.
-
-
-**Q** : What happens if I edit the data files directly?<br/>
-**A** : If you have edited the data file and have used valid values and formatting, ClientCare will load with the updated data. However, if invalid values or formatting is detected,
-ClientCare will regard it as data corruption and reset the data by to default state. This means you can lose all your work and data!
 
 
 **Q** : I am not an insurance agent. Is ClientCare still relevant for me?<br/>
