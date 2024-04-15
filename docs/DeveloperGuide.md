@@ -584,7 +584,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 2a. User sees that the list is empty.
-  * 2a1. User stops as there is no client to delete.
+  * 2a1. User stops as there is no client to delete.<br>
     Use case ends.
 * 3a. ClientCare detects that the given command is invalid.
   * 3a1. ClientCare shows an error message.
@@ -692,7 +692,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 2a. User sees that the list is empty.
-  * 2a1. User stops as there is no client to add a note to.
+  * 2a1. User stops as there is no client to add a note to.<br>
     Use case ends.
 * 3a. ClientCare detects that the given command is invalid.
   * 3a1. ClientCare shows an error message.
@@ -725,7 +725,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC09 - Sort clients**
 
 **MSS**
-1.  User requests to sort clients by `CRITERIA` and `ORDER`.
+1. User requests to sort clients by `CRITERIA` and `ORDER`.
 2. ClientCare sorts the clients by the specified criteria and order.
 3. ClientCare shows a success message to the user.<br>
    Use case ends.
@@ -733,12 +733,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 1a. ClientCare detects that the given command is invalid.
   * 1a1. ClientCare shows an error message.
+  * 1a2. User enters new data.<br>
+    Steps 1a1-1a2 are repeated until the data entered are correct.<br>
     Use case ends.
 * 1b. ClientCare detects that the given `CRITERIA` is invalid.
   * 1b1. ClientCare shows an error message.
+  * 1b2. User enters new data.<br>
+    Steps 1b1-1b2 are repeated until the data entered are correct.<br>
     Use case ends.
 * 1c. ClientCare detects that the given `ORDER` is invalid.
   * 1c1. ClientCare shows an error message.
+  * 1c2. User enters new data.<br>
+    Steps 1c1-1c2 are repeated until the data entered are correct.<br>
     Use case ends.
 
 
