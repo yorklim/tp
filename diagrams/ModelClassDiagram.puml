@@ -11,12 +11,20 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
+Class DisplayClient
+
 
 Class UniquePersonList
 Class Person
 Class Address
+Class Birthday
 Class Email
 Class Name
+Class LastMet
+Class Schedule
+Class Priority
+Class Policy
+Class PolicyList
 Class Phone
 Class Tag
 
@@ -33,7 +41,10 @@ Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager -right-> "1" DisplayClient
 UserPrefs .up.|> ReadOnlyUserPrefs
+
+DisplayClient --> "0..1\n" Person
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
@@ -41,7 +52,15 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Birthday
+Person *--> LastMet
+Person *--> Schedule
+Person *--> Priority
+Person *--> Remark
+Person *--> PolicyList
 Person *--> "*" Tag
+
+PolicyList --> "*" Policy
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
